@@ -23,7 +23,7 @@
 \begin{center}
 
 % Logo
-\resizebox{80mm}{!}{\includegraphics{../img/logoISEL.png}}
+\resizebox{80mm}{!}{\includegraphics{../img/logoISEL}}
 
 \vspace{1cm}
 
@@ -59,87 +59,56 @@ March 2025
 \end{titlepage}
 
 \section*{Introduction}
-The design, development, implementation, and finally, the validation of digital systems require, in addition to simulators, the use of hardware to verify their implementations in real devices. In the current teaching paradigm, in which face-to-face time is reduced and remote and autonomous work is increased, it is necessary to create alternatives to the current model.
+This document provides a overview of the database, entities and attributes and relationships. 
+It also includes implementation decisions.
 
-The Remote Lab project aims to provide a virtual lab with access to remote hardware. This lab consists of a web application running on an embedded system.
-The web application, accessed via a website, aims to provide a dashboard where users can join a laboratory. This is where users can control the remote hardware.
-A hierarchy system will be implemented to provide different roles, each with their own permissions relative to how users can browse the information provided by the web application.
+\section*{Database overview}
+The database has been modeled using an Entity-Relationship (ER) approach.
+This approach allows for a better understading of the relationships between entities. The following section shows a figure with the ER model.
 
-\section*{Requirements}
-\subsection*{Database}
-A database will be used to store the information of the web application.
-This includes the user's information, the laboratories' information and the hardware's information.
-\begin{itemize}
-    \item User information storage
-    \item Laboratory configurations and schedules
-    \item Hardware specifications and status
-\end{itemize}
+The database is implemented with PostgreSQL and tested using fake information in a postgres docker container.
 
-\subsection*{Web API}
-The web API will be a RESTful API that will be used to communicate with the web application.
-It will be responsible for the communication with the database and the hardware.
-\begin{itemize}
-    \item Authentication and authorization endpoints
-    \item Laboratory management endpoints
-    \item Real-time data communication
-\end{itemize}
-
-\subsection*{Authorization}
-The authorization will be implemented with a RBAC (Role-Based Access Control) system.
-This will allow the user to have different roles with different permissions:
-\begin{itemize}
-    \item Student
-	\begin{itemize}
-		\item Enter a laboratory when the professor allows it
-		\item Configure, view and control the hardware on the laboratory
-		\item Schedule laboratory sessions through the calendar
-	\end{itemize}
-	\item Professor
-	\begin{itemize}
-		\item Create, read, update and delete (CRUD) laboratories
-		\item Invite students to join the platform through a unique code
-		\item Invite students to join a laboratory
-		\item See the laboratories' schedules and usage
-		\item Create, read, update and delete (CRUD) hardware on the laboratory
-	\end{itemize}
-	\item Administrator
-	\begin{itemize}
-		\item Has all the other roles' permissions
-		\item Create, read, update and delete (CRUD) users
-	\end{itemize}
-\end{itemize}
-
-\subsection*{Authentication API}
-The authentication API will be a separate RESTful API that will be used to authenticate the user.
-
-\subsection*{Web Application}
-The web application will have a dashboard where the user can join a laboratory.
-This is where the user can control the remote hardware.
-\begin{itemize}
-    \item User-friendly interface
-    \item Real-time hardware monitoring
-    \item Session management
-\end{itemize}
-
-\subsection*{Hardware Integration}
-There will be a hardware integration module that will be responsible for the integration of the hardware into the web application.
-
-\section*{System Architecture}
-The system architecture consists of multiple interconnected components that work together to provide the remote laboratory functionality.
-\begin{figure}[h]
-	\begin{center}
-		\resizebox{16cm}{!}{\includegraphics{../img/SystemInfrastracture.drawio.png}}
-	\end{center}
-	\caption{System Architecture Overview}\label{fig:system-architecture}
+The following section will address the ER model.
+\section*{Entity-Relationship Model}
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=\textwidth]{../img/ERDiagramRL.drawio}
+	\caption{Entity-Relationship Model}
+	\label{fig:ERModel}
 \end{figure}
 
-\section*{Timeline}
-The project will be developed following the timeline shown in Figure \ref{fig:project-plan}, which outlines the main phases and milestones of the development process.
-\begin{figure}[h]
-	\begin{center}
-		\resizebox{16cm}{!}{\includegraphics{../img/RemoteLabPlan.png}}
-	\end{center}
-	\caption{Project Timeline and Milestones}\label{fig:project-plan}
-\end{figure}
+\section*{Entities and Attributes}
+This section provides a comprehensive description of each entity and their attributes.
+\subsection*{User}
+The first important entity is the \textbf{User}. This entity represents a user in the database.
+
+It has a \textbf{user\_id} as primary key and identity column. An identity column is a special column that is generated automatically from an implicit sequence.
+So, whenever a user is inserted in the database it will generate a id. The user\_id is a int data type. 
+
+It also has, as char sequence, \textbf{username}, \textbf{email} and \textbf{password\_validation}. All of them are not null and email is unique. Password\_validation is the hash of the user's password.
+
+Finally has a \textbf{student\_nr} (student number) as Int type and unique and \textbf{created\_at} as a timestamp type and not null.
+The student number can be null. This allows users, like professor or other, to be a user entity in the DB. Is worth mentioning that there is not a descriminator attribute because 
+this descrimination will be implemented in the RBAC system.
+
+\subsection*{Token}
+\textbf{Token} is a weak entity because it cannot be uniquely identified by its attributes alone. This means that a token needs a user\_id to be identified. This way, token requires the user to exist.
+
+Since it is a weak entity, it must have a partial key. This partial key is \textbf{token\_validation}. Token\_validation is a randomly generated hash. It is a char sequence and not null.
+
+The last attributes are \textbf{created\_at} and \textbf{last\_used\_at}. Both are timestamp types and not null. 
+
+\subsection*{App Invite}
+\textbf{App Invite} is a weak entity. For the same reason as the token, this entity requires the user to exist and cannot be uniquely identified. For example an app invite should not exist if the user is deleted.
+
+As partial key, the \textbf{invite\_id} with user\_id uniquely identify an app invite. This invite\_id is generated always as identity and is a int type.
+
+It has an \textbf{invite\_code} attribute as char sequence and not null. This invite code can take up to 255 bytes but, the true dimension is decided by the domain.
+
+It also has a \textbf{created\_at} and \textbf{last\_used\_at} like the token entity.
+
+\nocite{*}
+\bibliographystyle{plain}
+\bibliography{references}
 
 \end{document}

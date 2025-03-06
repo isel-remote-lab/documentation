@@ -1,0 +1,8 @@
+\begin{thebibliography}{1}
+
+\bibitem{postgresql_identity}
+{PostgreSQL Global Development Group}.
+\newblock Identity columns.
+\newblock \url{https://www.postgresql.org/docs/current/ddl-identity-columns.html}.
+
+\end{thebibliography}
