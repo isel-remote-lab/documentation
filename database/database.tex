@@ -152,6 +152,41 @@ It also has an \textbf{ip\_address} and \textbf{hw\_mac\_address}. Both are char
 It has a \textbf{hw\_status} attribute as a char sequence and not null. This attribute indicates the status of the hardware, such as available, occupied, etc.
 
 Finally, it has a \textbf{created\_at} attribute with the same characteristics as the laboratory's created\_at.
+
+\section*{Associations}
+This section provides a comprehensive overview of the associations between entities. This overview should explain how the system will work.
+
+\textbf{User} has associations with:
+\begin{itemize}
+    \item \textbf{Token} - This must be weak association, as explained before. A user has a token and this token is created automatically by the system when is needed. A user can have \textbf{N} token but a token has \textbf{only one} user.
+                           Because of this, the primary key of the user is in the token's table has primary key with the partial key token validation. 
+    \item \textbf{App Invite} - This is a weak association, because of the relationship with the user. A user can create \textbf{N} app invites but a app invite is created \textbf{only by one} user. As the same as the token, the app invite's table will have the primary key of the user.
+    \item \textbf{Group} - User has two associations with group:
+    \begin{itemize}
+        \item The first association is \textbf{creates}. A user can create \textbf{N} groups but a group can only be created \textbf{by one} user.
+        \item The last association is \textbf{belongs}. A user can belonge to \textbf{N} groups and a group can have \textbf{N} users.
+    \end{itemize}
+    \item \textbf{Laboratory} - User has two associations with laboratory:
+    \begin{itemize}
+        \item The first association is \textbf{creates}. A user can create \textbf{N} laboratories but a laboratory is only created by \textbf{one} user. 
+        \item The last association is \textbf{joins}. This association represents a queue to a laboratory. A user can join \textbf{N} laboratories and a laboratory is joined by \textbf{N} users. In practice, this is not true because the app domain is going to have some restrictions, for example, a user cannot join more than one laboratory. But for the database propuses this has to be a relationship \textbf{N} to \textbf{N} so that a user, when finished doing something in a laboratory, can joined other laboratory. Also, this will save the history of the joined laboratories. 
+    \end{itemize}
+    \item \textbf{Lab Session} - This is the last association. This association is weak and represents the session a user has with a laboratory. A user can have \textbf{N} sessions but a session has only \textbf{one} user.
+\end{itemize}
+
+\textbf{App Invite} has only one more association. This association is with group entity. This associations represents the connection a app invite has with a group. This allows that an app invite has a association with a group so that, when used by a user when registering, to be associated immediately.
+An app invite has only \textbf{one} group associated but a group can be associated with \textbf{N} app invites.
+
+\textbf{Group} also has only one more association. Has a association with laboratory representing wich group can enter a laboratory. Only users in the group can join the laboratory. A group is associated with \textbf{N} laboratories and \textbf{N} laboratories are associated with \textbf{N} groups.
+
+\textbf{Laboratory} has the following associations:
+\begin{itemize}
+    \item \textbf{Lab Session} - This association indicates wich laboratory a session is. A laboratory has \textbf{N} sessions but a session is only associated with \textbf{one} laboratory.
+    \item \textbf{Hardware} - The last association is with hardware. This association represents the hardware that is assigned with a laboratory. A laboratory can have \textbf{N} hardware and a hardware can be assigned to \textbf{N} laboratories.
+\end{itemize}
+
+This concludes the associations between entities. Worth mentioning that some restrictions are not mentioned here because is part of the web api. To learn more about some restrictions check the web api documentation. 
+
 \nocite{*}
 \bibliographystyle{plain}
 \bibliography{references}
