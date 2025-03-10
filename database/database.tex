@@ -59,14 +59,14 @@ March 2025
 \end{titlepage}
 
 \section*{Introduction}
-This document provides a overview of the database, entities and attributes and relationships. 
+This document provides an overview of the database, entities, attributes, and relationships. 
 It also includes implementation decisions.
 
 \section*{Database overview}
 The database has been modeled using an Entity-Relationship (ER) approach.
-This approach allows for a better understading of the relationships between entities. The following section shows a figure with the ER model.
+This approach allows for a better understanding of the relationships between entities. The following section shows a figure with the ER model.
 
-The database is implemented with PostgreSQL and tested using fake information in a postgres docker container.
+The database is implemented with PostgreSQL and tested using fake information in a Docker container.
 
 The following section will address the ER model.
 \section*{Entity-Relationship Model}
@@ -83,75 +83,75 @@ This section provides a comprehensive description of each entity and their attri
 The first important entity is the \textbf{User}. This entity represents a user in the database.
 
 It has a \textbf{user\_id} as primary key and identity column. An identity column is a special column that is generated automatically from an implicit sequence.
-So, whenever a user is inserted in the database it will generate a id. The user\_id is a int data type. 
+So, whenever a user is inserted in the database it will generate an id. The user\_id is an int data type. 
 
-It also has, as char sequence, \textbf{username}, \textbf{email} and \textbf{password\_validation}. All of them are not null and email is unique. Password\_validation is the hash of the user's password.
+It also has, as a char sequence, \textbf{username}, \textbf{email}, and \textbf{password\_validation}. All of them are not null and email is unique. The password\_validation attribute stores the hash of the user's password.
 
-Finally has a \textbf{student\_nr} (student number) as Int type and unique and \textbf{created\_at} as a timestamp type and not null.
-The student number can be null. This allows users, like professor or other, to be a user entity in the DB. Is worth mentioning that there is not a descriminator attribute because 
-this descrimination will be implemented in the RBAC system.
+Finally, it has a \textbf{student\_nr} (student number) as an int type and unique and \textbf{created\_at} as a timestamp type and not null.
+The student number can be null. This allows users, like professors or others, to be a user entity in the DB. It is worth mentioning that there is not a discriminator attribute because 
+this distinction will be implemented in the Role-Based Access Control (RBAC) system.
 
 \subsection*{Token}
-\textbf{Token} is a weak entity because it cannot be uniquely identified by its attributes alone. This means that a token needs a user\_id to be identified. This way, token requires the user to exist.
+\textbf{Token} is a weak entity because it cannot be uniquely identified by its attributes alone. This means that a token needs a user\_id to be identified. This way, a token requires the user to exist.
 
-Since it is a weak entity, it must have a partial key. This partial key is \textbf{token\_validation}. Token\_validation is a randomly generated hash. It is a char sequence and not null.
+Since it is a weak entity, it must have a partial key. This partial key is \textbf{token\_validation}. The token\_validation attribute is a randomly generated hash. It is a char sequence and not null.
 
 The last attributes are \textbf{created\_at} and \textbf{last\_used\_at}. Both are timestamp types and not null. 
 
 \subsection*{App Invite}
-\textbf{App Invite} is a weak entity. For the same reason as the token, this entity requires the user to exist and cannot be uniquely identified. For example an app invite should not exist if the user is deleted.
+\textbf{App Invite} is a weak entity. For the same reason as the token, this entity requires the user to exist and cannot be uniquely identified. For example, an app invite should not exist if the user is deleted.
 
-As partial key, the \textbf{invite\_id} with user\_id uniquely identify an app invite. This invite\_id is generated always as identity and is a int type.
+As a partial key, the \textbf{invite\_id} with user\_id uniquely identifies an app invite. This invite\_id is always generated as identity and is an int type.
 
-It has an \textbf{invite\_code} attribute as char sequence and not null. This invite code can take up to 255 bytes but, the true dimension is decided by the application domain.
+It has an \textbf{invite\_code} attribute as a char sequence and not null. This invite code can take up to 255 bytes, but the actual length is determined by the application domain.
 
 It also has a \textbf{created\_at} and \textbf{last\_used\_at} like the token entity.
 
 \subsection*{Group}
-The \textbf{Group} entity represents a group. This group can be a class of students, a work group, professors group, etc...
+The \textbf{Group} entity represents a group. This group can be a class of students, a work group, a professor's group, etc...
 
-It has a \textbf{group\_id} attribute as primary key and uniquely identifies a group. It is generated always as identity and is a int type as well.
+It has a \textbf{group\_id} attribute as primary key and uniquely identifies a group. It is always generated as identity and is an int type as well.
 
-Also has a \textbf{group\_name} as a char sequence and not null. This attribute represents the group name choose by the user.
+Also has a \textbf{group\_name} as a char sequence and not null. This attribute represents the group name chosen by the user.
 
-It has a \textbf{group\_description} as text type. This is a attribute where a user can write something about the group that he likes. It can be null and is a text type.
-A text type has a unlimited length, so that the user does not have a limit.
+It has a \textbf{group\_description} as text type. This is an attribute where a user can write something about the group that they like. It can be null and is a text type.
+A text type has an unlimited length, so that the user does not have a limit.
 
-At last, it has a \textbf{created\_at}. This attribute has the same characteristics like token's created at.
+Lastly, it has a \textbf{created\_at}. This attribute has the same characteristics as the token's created\_at.
 
 \subsection*{Laboratory}
 \textbf{Laboratory}, as the name indicates, represents a laboratory. 
 
-This entity has a \textbf{lab\_id} as primary key. This is the unique identifier and indicates the laboratory id. It is generated always as identity and is a int type.
+This entity has a \textbf{lab\_id} as primary key. This is the unique identifier and indicates the laboratory identifier. It is always generated as identity and is an int type.
 
-It has a \textbf{lab\_name} attribute to respresent the laboratory name. It is a char sequence and not null.
+It has a \textbf{lab\_name} attribute to represent the laboratory name. It is a char sequence and not null.
 
-Finally has a \textbf{lab\_duration} attribute to represent the duration of each lab session. It is a int type and is not null. 
-And it has a \textbf{created\_at} attribute like the group's created at.
+Finally, it has a \textbf{lab\_duration} attribute to represent the duration of each lab session. It is an int type and is not null. 
+And it has a \textbf{created\_at} attribute similar to the group's created\_at.
 
 \subsection*{Lab Session}
-The \textbf{Lab Session} is a weak entity. This session should only exist depending on the user and a laboratory. It represents a lab session, that is, a session where a user can manipulate something in the laboratory.
+The \textbf{Lab Session} is a weak entity. This session should only exist if associated with a user and a laboratory. It represents a lab session, that is, a session where a user can manipulate something in the laboratory.
 
-As attributes has \textbf{session\_id} as partial key. With user id and lab id a lab session can be uniquely identified. It is generated always as identity and is int type.
+As attributes, it has \textbf{session\_id} as a partial key. With user id and lab id, a lab session can be uniquely identified. It is always generated as identity and is an int type.
 
-It has a \textbf{start\_time} and \textbf{end\_time} attributes to represent the date and hour a session start and ends. Both are timestamps and not null.
+It has \textbf{start\_time} and \textbf{end\_time} attributes to represent the date and hour when a session starts and ends. Both are timestamps and not null.
 
-At last it has a \textbf{state} attribute to indicate the session state, that is, if it is active, inactive or scheduled. This attribute is a char sequence and is not null. If necessary this attribute can have more attributes. If it added more states this document should be updated.
+Lastly, it has a \textbf{state} attribute to indicate the session state, that is, if it is active, inactive, or scheduled. This attribute is a char sequence and is not null. If necessary, additional states can be defined for this attribute. If more states are added, this document should be updated.
 
 \subsection*{Hardware}
-The last entity is \textbf{Hardware}. This entity can represent any hardware. For example it can represent a computer or a FPGA.
+The last entity is \textbf{Hardware}. This entity can represent any hardware. For example, it can represent a computer or an FPGA.
 
-As primary key has a \textbf{lab\_id}. It is generated always as identity and is a int type. This attribute uniquely identifies the hardware.
+As primary key, it has a \textbf{hw\_id}. It is always generated as identity and is an int type. This attribute uniquely identifies the hardware.
 
 It has a \textbf{hw\_name} attribute for the hardware name. It is a char sequence and not null. 
 
 It has a \textbf{hw\_serial\_num} attribute that represents the hardware serial number. It is a char sequence and not null. 
 
-It also has a \textbf{ip\_address} and \textbf{hw\_mac\_address}. Both are char sequence and depending on the type of hardware they can be null.
+It also has an \textbf{ip\_address} and \textbf{hw\_mac\_address}. Both are char sequences and depending on the type of hardware, these attributes can be null.
 
-Has a \textbf{hw\_status} attribute as a char sequence and not null. This attribute indicates the status of the hardware. For example if it is available, occupied, etc\dots
+It has a \textbf{hw\_status} attribute as a char sequence and not null. This attribute indicates the status of the hardware, such as available, occupied, etc.
 
-Finnally, it has a \textbf{created\_at} attribute with the same characteristics as laboratory's created at.
+Finally, it has a \textbf{created\_at} attribute with the same characteristics as the laboratory's created\_at.
 \nocite{*}
 \bibliographystyle{plain}
 \bibliography{references}
