@@ -1,10 +1,10 @@
 # Ignore all latex build related files
-!*.aux
-!*.bbl
-!*.blg
-!*.fdb_latexmk
-!*.fls
-!*.log
-!*.out
-!*.toc
-!*.synctex.gz
+*.aux
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.toc
+*.synctex.gz
