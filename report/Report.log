@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025/Arch Linux) (preloaded format=pdflatex 2025.3.11)  12 MAR 2025 16:15
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025/Arch Linux) (preloaded format=pdflatex 2025.3.11)  12 MAR 2025 16:27
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -267,7 +267,7 @@ Package hyperref Info: Link coloring OFF on input line 20.
 \@outlinefile=\write3
 \openout3 = `Report.out'.
 
-<../img/logoISEL.png, id=16, 426.75435pt x 301.6068pt>
+<../img/logoISEL.png, id=56, 426.75435pt x 301.6068pt>
 File: ../img/logoISEL.png Graphic file (type png)
 <use ../img/logoISEL.png>
 Package pdftex.def Info: ../img/logoISEL.png  used on input line 26.
@@ -285,7 +285,7 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}{/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc} <../img/logoISEL.png>]
 
 [2]
-<../img/SystemInfrastracture.drawio.png, id=40, 1152.305pt x 442.65375pt>
+<../img/SystemInfrastracture.drawio.png, id=80, 1152.305pt x 442.65375pt>
 File: ../img/SystemInfrastracture.drawio.png Graphic file (type png)
 <use ../img/SystemInfrastracture.drawio.png>
 Package pdftex.def Info: ../img/SystemInfrastracture.drawio.png  used on input line 131.
@@ -295,7 +295,7 @@ Overfull \hbox (14.23448pt too wide) in paragraph at lines 131--132
  [] 
  []
 
-<../img/RemoteLabPlan.png, id=43, 1300.86pt x 1356.06625pt>
+<../img/RemoteLabPlan.png, id=83, 1300.86pt x 1356.06625pt>
 File: ../img/RemoteLabPlan.png Graphic file (type png)
 <use ../img/RemoteLabPlan.png>
 Package pdftex.def Info: ../img/RemoteLabPlan.png  used on input line 140.
@@ -309,7 +309,7 @@ Overfull \hbox (14.23056pt too wide) in paragraph at lines 140--141
 
 [3 <../img/SystemInfrastracture.drawio.png>] (./user-journeys/user-journey.tex (./user-journeys/roles/general/account-creation.tex
 
-[4 <../img/RemoteLabPlan.png (PNG copy)>]) (./user-journeys/roles/general/login.tex))
+[4 <../img/RemoteLabPlan.png (PNG copy)>]) (./user-journeys/roles/general/login.tex) (./user-journeys/roles/general/dashboard.tex) (./user-journeys/roles/student/dashboard.tex) (./user-journeys/roles/student/laboratory.tex) (./user-journeys/roles/teacher/dashboard.tex) (./user-journeys/roles/teacher/laboratory-creation.tex) (./user-journeys/roles/administrator/dashboard.tex) (./user-journeys/roles/administrator/user-management.tex))
 
 [5] (./Report.aux)
  ***********
@@ -317,21 +317,21 @@ LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-01-18>
  ***********
 Package rerunfilecheck Info: File `Report.out' has not changed.
-(rerunfilecheck)             Checksum: F5192244DA48B5E834AFA69BF89F718A;414.
+(rerunfilecheck)             Checksum: A13307D9AB1A0123DE2C716F8C2AB6A8;2143.
  ) 
 Here is how much of TeX's memory you used:
- 10708 strings out of 475151
- 171929 string characters out of 5766394
- 578155 words of memory out of 5000000
- 33551 multiletter control sequences out of 15000+600000
+ 10784 strings out of 475151
+ 174277 string characters out of 5766394
+ 578170 words of memory out of 5000000
+ 33582 multiletter control sequences out of 15000+600000
  564041 words of font info for 53 fonts, out of 8000000 for 9000
  16 hyphenation exceptions out of 8191
  75i,8n,79p,481b,569s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm1095.pfb>
-Output written on Report.pdf (5 pages, 425825 bytes).
+Output written on Report.pdf (5 pages, 435603 bytes).
 PDF statistics:
- 102 PDF objects out of 1000 (max. 8388607)
- 79 compressed objects within 1 object stream
- 28 named destinations out of 1000 (max. 500000)
- 40 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 163 PDF objects out of 1000 (max. 8388607)
+ 139 compressed objects within 2 object streams
+ 52 named destinations out of 1000 (max. 500000)
+ 120 words of extra memory for PDF output out of 10000 (max. 10000000)
 

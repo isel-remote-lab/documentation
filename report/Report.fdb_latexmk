@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1741796106.38701 "/home/ang3lo/Documents/universidade/3-ano/6-semestre/PS/remote-lab/docs/report/Report.tex" "Report.pdf" "Report" 1741796107.33061 0
+["pdflatex"] 1741796866.67578 "/home/ang3lo/Documents/universidade/3-ano/6-semestre/PS/remote-lab/docs/report/Report.tex" "Report.pdf" "Report" 1741796867.6225 0
   "../img/RemoteLabPlan.png" 1741284047.99386 163926 880c2b40a26450fb8c9724f0ab98b748 ""
   "../img/SystemInfrastracture.drawio.png" 1741284047.99452 40850 03811bd4cedbd16402e7c5f8d4a136b6 ""
   "../img/logoISEL.png" 1741284047.99531 181499 47ea94bca08025eb4108f1dbd23b57f0 ""
@@ -84,12 +84,19 @@
   "/usr/share/texmf-dist/web2c/texmf.cnf" 1741461196 42087 b0f9697c952c8f5a8eede4134282cb0d ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1741703381 5311557 9da84c45f5b388655502706482323571 ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1741703277 2009836 585429caa825729ef69797208efba44c ""
-  "Report.aux" 1741796107.27589 1124 7102dc1e2ed38e8358de6562a5113f98 "pdflatex"
-  "Report.out" 1741796107.2769 414 f5192244da48b5e834afa69bf89f718a "pdflatex"
+  "Report.aux" 1741796867.56807 2448 23f6857a107de22d8bb371674dd8f428 "pdflatex"
+  "Report.out" 1741796867.56907 2143 a13307d9ab1a0123de2c716f8c2ab6a8 "pdflatex"
   "Report.tex" 1741796030.77325 5358 4702c5336d606e8cb875861d3586870f ""
+  "user-journeys/roles/administrator/dashboard.tex" 1741796842.85843 174 09d5f1adddc5ca1b0414b3c8b8a127ea ""
+  "user-journeys/roles/administrator/user-management.tex" 1741796861.01417 202 e29245dc28acb61ee35c9a8473f3e635 ""
   "user-journeys/roles/general/account-creation.tex" 1741796074.55205 254 d572726ea79552881100ebdf38d69825 ""
+  "user-journeys/roles/general/dashboard.tex" 1741796258.83017 147 7dcc020704468039083358d34321e97b ""
   "user-journeys/roles/general/login.tex" 1741796088.03699 184 310d22acf497915effa9e9c93e910048 ""
-  "user-journeys/user-journey.tex" 1741796105.1599 127 6502d41835123b09a973b1d5a341e374 ""
+  "user-journeys/roles/student/dashboard.tex" 1741796379.50759 156 51de7f59edde2695e78e2f7847ed219f ""
+  "user-journeys/roles/student/laboratory.tex" 1741796705.44556 156 1383f314652d9b5b67b0ed62361b117c ""
+  "user-journeys/roles/teacher/dashboard.tex" 1741796748.21486 156 e94cd98d33f197230b200b9e2ff413a3 ""
+  "user-journeys/roles/teacher/laboratory-creation.tex" 1741796740.34499 180 a14f7803662c177b8b7e98cb77f823ae ""
+  "user-journeys/user-journey.tex" 1741796865.4301 641 f69da3f1f819a8403b6746dd50d393a3 ""
   (generated)
   "Report.aux"
   "Report.log"
