@@ -1,19 +1,29 @@
 \section{User Journey}
+This section aims to explain the possible actions a user can take in the system. 
 
 % General User Journey
-\input{user-journeys/roles/general/account-creation.tex}
+\subsection{General}
+This section provides general user journeys, that is journeys that share the same 
+characteristics when the user is a Student, a Professor or an Administrator.
+% \input{user-journeys/roles/general/account-creation.tex}
 \input{user-journeys/roles/general/login.tex}
-\input{user-journeys/roles/general/dashboard.tex}
+\input{user-journeys/roles/general/account-info.tex}
+% \input{user-journeys/roles/general/dashboard.tex}
 
 \subsection{Student User Journey}
+This section provides the student journey.
+\input{user-journeys/roles/student/account-creation.tex}
 \input{user-journeys/roles/student/dashboard.tex}
 \input{user-journeys/roles/student/laboratory.tex}
 
-\subsection{Teacher User Journey}
-\input{user-journeys/roles/teacher/dashboard.tex}
-\input{user-journeys/roles/teacher/laboratory-creation.tex}
+\subsection{Professor User Journey}
+This section provides the teacher journey.
+\input{user-journeys/roles/professor/account-creation.tex}
+\input{user-journeys/roles/professor/dashboard.tex}
+\input{user-journeys/roles/professor/laboratory-creation.tex}
 
 \subsection{Administrator User Journey}
+This section provides the administrator journey.
 \input{user-journeys/roles/administrator/dashboard.tex}
 \input{user-journeys/roles/administrator/user-management.tex}
 
