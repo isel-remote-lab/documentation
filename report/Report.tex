@@ -144,4 +144,13 @@ The project will be developed following the timeline shown in Figure \ref{fig:pr
 
 \input{user-journeys/user-journey.tex}
 
+\section*{Restrictions}
+A user's email must follow the following regex defined in RFC 5322\cite{rfc5322}:
+\begin{verbatim}
+	^[a-zA-Z0-9_!#$%&’*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$
+\end{verbatim}
+
+\bibliographystyle{unsrt}
+\bibliography{references}
+
 \end{document}
