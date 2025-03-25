@@ -81,11 +81,11 @@ This section provides a comprehensive description of each entity and their attri
 \subsection{User}
 The \textbf{User} is a fundamental entity in the database that represents system users.
 
-It has a \textbf{user\_id} as its primary key, implemented as an identity column. An identity column automatically generates values from an implicit sequence.
+It has an \textbf{user\_id} as its primary key, implemented as an identity column. An identity column automatically generates values from an implicit sequence.
 Therefore, whenever a new user is created, a unique id is automatically generated. The user\_id is an integer data type, chosen to simplify database queries by using a simple numeric identifier instead of email or username.
 
-The entity includes character sequence attributes: \textbf{password\_validation}, \textbf{username} and \textbf{email}. All these fields are required (not null), and the email must be unique. The password\_validation attribute stores a hash of the user's password.
-Initially, the username is automatically set to match the user's email during account creation. Users can later modify their username to a preferred value. While usernames are used for display purposes and may not be unique, emails serve as unique identifiers for user searches. The specific constraints for these attributes are defined in the application domain.
+The entity includes character sequence attributes: \textbf{username} and \textbf{email}. All these fields are required (not null), and the email must be unique.
+Initially, the username is automatically set to match the user's username returned by OAuth login. While usernames are used for display purposes and may not be unique, emails serve as unique identifiers for user searches. The specific constraints for these attributes are defined in the application domain.
 
 Additionally, it includes a \textbf{student\_nr} (student number) as a unique integer field and \textbf{created\_at} as a required timestamp.
 The student number is optional, allowing the system to accommodate non-student users such as professors. Notably, there is no discriminator attribute as user type distinctions are handled through the Role-Based Access Control (RBAC) system.

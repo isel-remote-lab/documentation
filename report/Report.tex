@@ -144,13 +144,43 @@ The project will be developed following the timeline shown in Figure \ref{fig:pr
 
 \input{user-journeys/user-journey.tex}
 
-\section*{Restrictions}
-A user's email must follow the following regex defined in RFC 5322\cite{rfc5322}:
-\begin{verbatim}
-	^[a-zA-Z0-9_!#$%&’*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$
-\end{verbatim}
+\section*{Domain Restrictions}
+The \textbf{Invite Code} has the following restrictions:
+\begin{itemize}
+	\item The invitation code has 8 bytes of random characters (includes special characters);
+	\item Invites's Time to Live (TTL) is 7 days;
+	\item The number of usages an invitation can be used is 1 time.
+\end{itemize}
 
-\bibliographystyle{unsrt}
-\bibliography{references}
+The \textbf{Token} has the following restrictions:
+\begin{itemize}
+	\item The token validation size is 32 bytes of random characters;
+	\item The token Time to Live (TTL) is 24 hours and the Rolling Time to Live (TTL) is 1 hour.
+	\item The number of tokens per user is 3.
+\end{itemize}
+
+The \textbf{Group} has the following restrictions:
+\begin{itemize}
+	\item The group name needs to be between 1 and 100 characters of length.
+	\item The group description can have 2048 characters of length.
+\end{itemize}
+
+The \textbf{Laboratory} has the following restrictions:
+\begin{itemize}
+	\item The laboratory name needs to be between 1 and 100 characters of length.
+\end{itemize}
+
+The \textbf{Lab Session} has the following restrictions:
+\begin{itemize}
+	\item The session state can be active, inactive or scheduled.
+\end{itemize}
+
+The \textbf{Hardware} has the following restrictions:
+\begin{itemize}
+	\item The hardware name needs to be between 1 and 100 characters of length.
+	\item The hardware status can be available, occupied or in maintenance.
+\end{itemize}
+
+The \textbf{User's} student number must be only numbers.
 
 \end{document}
