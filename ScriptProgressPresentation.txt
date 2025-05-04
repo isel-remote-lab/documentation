@@ -1,0 +1,19 @@
+﻿Script para apresentação de progresso:
+
+Introdução:
+
+Iniciar a apresentação a mencionar o nome do projeto, licenciatura, alunos e o orientador. 
+De seguida mudar o slide para o sumário e fazer uma breve apresnentação do sumário.
+No slide da introdução explicar os problemas que atualmente. 
+
+→ “Provalmente toda a gente conhece esta placa, mas para quem não sabe, é uma FPGA da marca Intel onde é possível programa-la e manipulá-la. No ISEL, esta é usada em algumas disciplinas como LS e LIC entre outras… E é usada para testar VHDL fisicamente. Dito isto, temos como problemas a resolver a verificação em dispositivos reais. A necessidade de acesso 24/7H é um problema importante devido ao custo elevado da mesma para ser adquirida e nem sempre haver placas para serem requesitadas no ISEL. Por fim o aumento do trabalho remoto é uma realidade, e este projeto visa a entrar nessa metodologia.”
+
+Após a introdução, o slide é mudado para o slide de Objetivos onde o Ângelo explica os objetivos do projeto e como vao ser alcançados.
+
+→ “Para resolver os problemas anteriormente descritos temos como forma de resolver os mesmos com o desenvolvimento de uma plataforma virtual “site” disponivel 24/7 para os alunos. Esta plataforma fornece autenticação com conta microsoft. Algo bastante importante, porque apenas pessoas com conta do ISEL poderão fazer login. Importante mencionar que não exisitirá criação manual de conta. De inicio apenas Oauth da microsoft. Como esta plataforma é destinada a alunos e professores, foram criadas roles para cada utilizador. Portanto, um aluno, ao entrar na plataforma tem a role inicial que é a de aluno. Esta role é a mais “baixa” ou seja a que tem menos privilégios. Esta dá acesso apenas a entrar em laboratórios e manipulá-los. Os professores terão a role de Professor, onde poderão criar grupos de alunos que podem funcionar como turmas ou grupos de trabalho. Podem criar laboratórios e atribuir grupos ao mesmo. 
+Esta plataforma fornecerá laboratórios remotos como dito, onde se o utilizador tiver num dos grupos atribuidos ao laboratorio poderá aceder ao mesmo e manipular a placa. Estes laboratórios terão filas de espera e podem ter várias placas ligadas a eles. “
+
+O Ângelo fala da arquitetura e explica o motivo das tecnologias utilizadas.
+Eu falo do modelo de dados e dou um pequeno overview.
+De seguida falo do ponto de situação, explico que está dito. Menciono também que estamos “atrasados” devido a estarmos a desenvolver a api e o front end ao mesmo tempo e termos o server configurado também. Após isso digo que temos por acabar a api e o frontend. Apos isso começar a pesquisar sobre a FPGA. E após tudo melhorar documentação em certos aspetos e acabar a apresentação.
+
