@@ -1,2 +1,2 @@
-# report
-This repo contains the report for the ISEL Remote Lab project
+# Documentation
+This repo contains the documentation for the ISEL Remote Lab project
