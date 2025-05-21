@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?><project name="Untitled Gantt Project" company="" webLink="http://" view-date="2025-02-01" view-index="0" gantt-divider-location="351" resource-divider-location="300" version="3.3.3316" locale="pt_PT">
+    <description/>
+    <view zooming-state="default:8" id="gantt-chart">
+        <field id="tpd15" name="Notas" width="20" order="-1"/>
+        <field id="tpd3" name="Nome" width="200" order="0"/>
+        <field id="tpd4" name="Data de início" width="75" order="1"/>
+        <field id="tpd5" name="Data de fim" width="75" order="2"/>
+        <option id="filter.completedTasks" value="false"/>
+        <option id="filter.dueTodayTasks" value="false"/>
+        <option id="filter.overdueTasks" value="false"/>
+        <option id="filter.inProgressTodayTasks" value="false"/>
+        <option id="color.recent"><![CDATA[#ff00ff #00ff00 #ff6600 #ff9933 #ff0000 #0033ff]]></option>
+    </view>
+    <view id="resource-table">
+        <field id="0" name="Nome" width="210" order="0"/>
+        <field id="1" name="Função padrão" width="86" order="1"/>
+    </view>
+    <!-- -->
+    <calendars>
+        <day-types>
+            <day-type id="0"/>
+            <day-type id="1"/>
+            <default-week id="1" name="default" sun="1" mon="0" tue="0" wed="0" thu="0" fri="0" sat="1"/>
+            <only-show-weekends value="false"/>
+            <overriden-day-types/>
+            <days/>
+        </day-types>
+    </calendars>
+    <tasks empty-milestones="true">
+        <taskproperties>
+            <taskproperty id="tpd0" name="type" type="default" valuetype="icon"/>
+            <taskproperty id="tpd1" name="priority" type="default" valuetype="icon"/>
+            <taskproperty id="tpd2" name="info" type="default" valuetype="icon"/>
+            <taskproperty id="tpd3" name="name" type="default" valuetype="text"/>
+            <taskproperty id="tpd4" name="begindate" type="default" valuetype="date"/>
+            <taskproperty id="tpd5" name="enddate" type="default" valuetype="date"/>
+            <taskproperty id="tpd6" name="duration" type="default" valuetype="int"/>
+            <taskproperty id="tpd7" name="completion" type="default" valuetype="int"/>
+            <taskproperty id="tpd8" name="coordinator" type="default" valuetype="text"/>
+            <taskproperty id="tpd9" name="predecessorsr" type="default" valuetype="text"/>
+        </taskproperties>
+        <task id="0" uid="c384973d81c84643b1580e8d4348706f" name="Documentation" color="#0033ff" meeting="false" start="2025-02-24" duration="110" complete="0" expand="true"/>
+        <task id="1" uid="fed9771ff0de477cab1ecc0f89e3014e" name="Database" color="#ff00ff" meeting="false" start="2025-02-24" duration="10" complete="0" expand="true"/>
+        <task id="2" uid="21241b0f3f034efb8947742479fb147b" name="Web API" color="#ff0000" meeting="false" start="2025-03-03" duration="25" complete="0" expand="true"/>
+        <task id="3" uid="0a54acba091f47319856d68f3b3899b0" name="Web Application" color="#ff6600" meeting="false" start="2025-03-24" duration="15" complete="0" expand="true"/>
+        <task id="4" uid="12ad291b7f1d46ddb753c879176345d0" name="Remote Hardware Integration" color="#00ff00" meeting="false" start="2025-04-21" duration="25" complete="0" expand="true"/>
+        <task id="5" uid="341c53e242314d5898e53a9ff3c81d1b" name="Project Improvements" color="#ff00ff" meeting="false" start="2025-05-26" duration="25" complete="0" expand="true"/>
+    </tasks>
+    <resources/>
+    <allocations/>
+    <vacations/>
+    <previous/>
+    <roles roleset-name="Default"/>
+    <roles roleset-name="SoftwareDevelopment"/>
+</project>
