@@ -3,52 +3,45 @@
 %
 \chapter{Introduction} \label{cap:intro}
 
-This is the beginning of the chapter.
-
-Example of indentation of the second paragraph.
-
 %
 % Secção 1.1
 %
-\section{Nome da secção deste capítulo} \label{sec11}
-
-Texto da secção. Na figura~\ref{fig:logotipo} mostra-se o logótipo do ISEL. Em \cite{wiki:bigdata2019} encontra várias referências para o assunto. O artigo \cite{6547630} é o mais popular conforme indicação do IEEE. Logo a seguir aparece \cite{6824752}. A identificação das referências deve ser melhorada.
-
-% Colocar uma figura
-\begin{figure}[h]
-\begin{center}
-%\resizebox{100mm}{!}{\includegraphics{./figures/logoISELnew3.png}}
-\end{center}
-\caption{Legenda da figura com o logótipo do ISEL.}\label{fig:logotipo}
-\end{figure}
-
-Continuação do texto depois do parágrafo que refere a figura.
-
+\section{Context and Motivation} \label{sec11}
+In recent years, the need for remote access to laboratory resources has grown significantly, driven by the expansion of online education, research collaboration, and the increasing complexity of experimental setups. Traditional laboratories often require physical presence, which can limit accessibility and flexibility for students, researchers, and professionals. The \textbf{Remote Lab} project aims to address these challenges by providing a platform that enables secure, efficient, and user-friendly remote access to laboratory equipment and resources.
 
 %
 % Secção 1.2
 %
-\section{A segunda secção deste capítulo} \label{sec12}
-Na segunda secção deste capítulo, vamos abordar o enquadramento,
-o contexto e as funcionalidades.
-
-%
-% Secção 1.2.1
-%
-\subsection{A primeira sub-secção desta secção} \label{sec121}
-As sub-secções são úteis para mostrar determinados conteúdos de forma
-organizada. Contudo, o seu uso excessivo também não contribui para a facilidade
-de leitura do documento.
-
-%
-% Secção 1.2.2
-%
-\subsection{A segunda sub-secção desta secção} \label{sec122}
-Esta é a segunda sub-secção desta secção, a qual termina aqui.
-
+\section{Objectives} \label{sec12}
+The main objectives of the Remote Lab project are:
+\begin{itemize}
+    \item To design and implement a scalable platform for remote laboratory access.
+    \item To ensure secure authentication and authorization for different user roles.
+    \item To provide an intuitive user interface for managing and scheduling laboratory sessions.
+    \item To support integration with various types of laboratory hardware.
+\end{itemize}
 
 %
 % Secção 1.3
 %
-\section{Organização do documento} \label{sec13}
-O restante relatório encontra-se organizado da seguinte forma.
+\section{Scope} \label{sec13}
+This project focuses on the development of the core platform, including backend services, user management, and basic hardware integration. Advanced features such as real-time data analytics, support for a wide range of laboratory devices, and extensive reporting capabilities are considered out of scope for the current phase.
+
+%
+% Secção 1.4
+%
+\section{Methodology} \label{sec14}
+The project follows a modular and iterative development approach, leveraging modern software engineering practices. The backend is implemented using Kotlin and follows a layered architecture, while the frontend is developed with Next.js to provide a responsive and accessible user experience.
+
+%
+% Secção 1.5
+%
+\section{Structure of the Document} \label{sec15}
+The remainder of this report is organized as follows:
+\begin{itemize}
+    \item \textbf{Chapter 2:} Related Work – Overview of existing solutions and technologies.
+    \item \textbf{Chapter 3:} System Architecture – Description of the overall system design.
+    \item \textbf{Chapter 4:} Implementation – Details of the main components and their interactions.
+    \item \textbf{Chapter 5:} Evaluation – Assessment of the system's performance and usability.
+    \item \textbf{Chapter 6:} Conclusions and Future Work – Summary of achievements and directions for future development.
+\end{itemize}
