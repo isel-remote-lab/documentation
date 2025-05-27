@@ -1,54 +1,57 @@
 %
-% Chapter 2
+% Chapter 3
 %
-\chapter{Proposed Architecture} \label{cap:intro}
+\chapter{Proposed Architecture} \label{cap:proposed-architecture}
 
-This is the beginning of the chapter.
-
-Example of indentation of the second paragraph.
+This chapter presents the proposed architecture for the Remote Lab platform, detailing its main components, their interactions, and the rationale behind the architectural choices.
 
 %
-% Secção 1.1
+% Section 3.1
 %
-\section{Nome da secção deste capítulo} \label{sec11}
+\section{System Overview} \label{sec31}
+The Remote Lab platform is designed as a modular and scalable system, enabling secure and efficient remote access to laboratory equipment. The architecture follows a layered approach, separating concerns between the user interface, application logic, and hardware integration. This separation facilitates maintainability, extensibility, and the integration of new features or laboratory devices.
 
-Texto da secção. Na figura~\ref{fig:logotipo} mostra-se o logótipo do ISEL. Em \cite{wiki:bigdata2019} encontra várias referências para o assunto. O artigo \cite{6547630} é o mais popular conforme indicação do IEEE. Logo a seguir aparece \cite{6824752}. A identificação das referências deve ser melhorada.
+%
+% Section 3.2
+%
+\section{Main Components} \label{sec32}
+The architecture consists of the following main components:
+\begin{itemize}
+    \item \textbf{Frontend:} A web-based user interface developed with Next.js, providing users with access to laboratory resources, session scheduling, and experiment monitoring.
+    \item \textbf{Backend:} Implemented in Kotlin, the backend exposes RESTful APIs for user management, authentication, authorization, and laboratory session control. It also handles business logic and enforces security policies.
+    \item \textbf{Hardware Abstraction Layer:} This layer manages communication with laboratory equipment, abstracting hardware-specific details and providing a unified interface for the backend.
+    \item \textbf{Database:} Stores user data, session information, access logs, and configuration settings. The database ensures data consistency and supports auditing requirements.
+    \item \textbf{Authentication and Authorization:} Ensures secure access to the platform, supporting multiple user roles (e.g., students, professors, administrators) with different permissions.
+\end{itemize}
 
-% Colocar uma figura
+%
+% Section 3.3
+%
+\section{Component Interactions} \label{sec33}
+The components interact as follows:
+\begin{itemize}
+    \item Users interact with the frontend to authenticate, schedule sessions, and access laboratory resources.
+    \item The frontend communicates with the backend via secure API calls.
+    \item The backend processes requests, applies business logic, and interacts with the database and hardware abstraction layer as needed.
+    \item The hardware abstraction layer translates backend commands into device-specific instructions, enabling remote control of laboratory equipment.
+\end{itemize}
+
+%
+% Section 3.4
+%
+\section{Architecture Diagram} \label{sec34}
+Figure~\ref{fig:architecture} illustrates the high-level architecture of the Remote Lab platform.
+
+% Insert architecture diagram here
 \begin{figure}[h]
 \begin{center}
-%\resizebox{100mm}{!}{\includegraphics{./figures/logoISELnew3.png}}
+%\resizebox{100mm}{!}{\includegraphics{./figures/architecture.png}}
 \end{center}
-\caption{Legenda da figura com o logótipo do ISEL.}\label{fig:logotipo}
+\caption{High-level architecture of the Remote Lab platform.}\label{fig:architecture}
 \end{figure}
 
-Continuação do texto depois do parágrafo que refere a figura.
-
-
 %
-% Secção 1.2
+% Section 3.5
 %
-\section{A segunda secção deste capítulo} \label{sec12}
-Na segunda secção deste capítulo, vamos abordar o enquadramento,
-o contexto e as funcionalidades.
-
-%
-% Secção 1.2.1
-%
-\subsection{A primeira sub-secção desta secção} \label{sec121}
-As sub-secções são úteis para mostrar determinados conteúdos de forma
-organizada. Contudo, o seu uso excessivo também não contribui para a facilidade
-de leitura do documento.
-
-%
-% Secção 1.2.2
-%
-\subsection{A segunda sub-secção desta secção} \label{sec122}
-Esta é a segunda sub-secção desta secção, a qual termina aqui.
-
-
-%
-% Secção 1.3
-%
-\section{Organização do documento} \label{sec13}
-O restante relatório encontra-se organizado da seguinte forma.
+\section{Design Rationale} \label{sec35}
+The architectural choices were guided by the need for scalability, security, and ease of integration with diverse laboratory equipment. The use of a layered architecture and standardized interfaces ensures that the platform can evolve to meet future requirements and support additional functionalities.
