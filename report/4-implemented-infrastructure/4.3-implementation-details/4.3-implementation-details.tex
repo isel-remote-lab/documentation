@@ -3,17 +3,28 @@
 Key implementation decisions and details include:
 
 \begin{itemize}
-    \item \textbf{Containerization:} All major components (frontend, backend, database) are containerized using Docker, ensuring consistent environments across development and production.
-    \item \textbf{Orchestration:} Docker Compose is used to manage multi-container deployments, networking, and environment configuration.
-    \item \textbf{Backend:} The backend uses JDBI for type-safe database access and is configured via environment variables for flexibility and security.
-    \item \textbf{Frontend:} The frontend is built with Next.js, providing a modern, responsive interface and integrating with the backend via RESTful APIs.
     \item \textbf{Authentication:} Microsoft OAuth (via NextAuth) is used for secure authentication, enabling university login. The system is designed to be flexible, so other OAuth providers or even an internal login mechanism could be used if required.
     \item \textbf{Role-based Access Control:} The system enforces permissions based on user roles, ensuring secure and appropriate access to resources.
+    \item \textbf{Frontend:} The frontend is built with Next.js, providing a modern, responsive interface and integrating with the backend via RESTful APIs.
+    \item \textbf{Backend:} The backend uses JDBI for type-safe database access and is configured via environment variables for flexibility and security.
     \item \textbf{Hardware Abstraction:} The backend abstracts hardware-specific details, allowing for easy extension to new laboratory equipment.
+    \item \textbf{Containerization:} All major components (frontend, backend, database) are containerized using Docker, ensuring consistent environments across development and production.
+    \item \textbf{Orchestration:} Docker Compose is used to manage multi-container deployments, networking, and environment configuration.
     \item \textbf{Automation:} The \texttt{start.sh} script automates the bootstrap process, starting all necessary services with a single command.
+    \item \textbf{Cloudflare Tunneling:} Cloudflare tunneling is used to securely expose local development environments to the internet, enabling remote access and testing without requiring direct network configuration or public IP addresses.
 \end{itemize}
 
-\subsection*{Role-Based Access Control (RBAC)}
+These choices ensure the platform is robust, extensible, and easy to deploy or develop locally.
+
+\subsection{Authentication}
+
+Authentication in the Remote Lab platform is implemented using Microsoft OAuth, integrated via the NextAuth library on the frontend. This setup allows users to log in using their university credentials, providing a secure and familiar authentication experience. Upon successful login, users are assigned roles (such as student, professor, or administrator) that determine their permissions within the system.
+
+The authentication process is enforced on both the frontend and backend. The frontend uses NextAuth to handle the OAuth flow, manage user sessions, and securely store authentication tokens. The backend validates these tokens on each request to ensure that only authenticated users can access protected resources and perform actions according to their assigned roles.
+
+The system is designed to be flexible and extensible. While Microsoft OAuth is used for university login, the authentication layer can be adapted to support other OAuth providers (such as Google or GitHub) or even an internal login mechanism if required. User information and session data are managed securely, following best practices to protect sensitive data and maintain user privacy.
+
+\subsection{Role-Based Access Control (RBAC)}
 
 The system implements Role-Based Access Control (RBAC) to ensure that users have access only to the resources and actions appropriate for their role. Each authenticated user is assigned a role, such as student, professor, or administrator, which determines their permissions within the platform. 
 
@@ -26,8 +37,12 @@ The main roles in the system are:
     \item \textbf{Administrator:} Has full access to all system features, including user management, system configuration, and oversight of all laboratory sessions and resources. Administrators can manage roles, permissions, and perform maintenance or troubleshooting tasks across the platform.
 \end{itemize}
 
-This approach provides a secure and flexible way to manage access, making it easy to introduce new roles or adjust permissions as the platform evolves. The RBAC system is central to maintaining the integrity and security of the Remote Lab environment.
-
-These choices ensure the platform is robust, extensible, and easy to deploy or develop locally.
-
 In addition, the web application allows users to view and interact with the platform as if they had a lower role than their own. This feature is particularly useful for testing, support, and understanding the user experience from different perspectives. For example, an administrator or professor can switch to a student view to verify permissions, troubleshoot issues, or provide guidance, without needing to log in as a different user. 
+
+\subsection{Cloudflare Tunneling}
+
+Cloudflare tunneling is used in the project to securely expose local development environments to the internet. This is achieved by creating a secure tunnel between the local machine and a public Cloudflare endpoint, allowing remote access to the platform for testing, demonstrations, or collaboration without requiring firewall changes or public IP addresses.
+
+In our implementation, Cloudflare tunneling is integrated with the deployment workflow through the \texttt{start.sh} script and Docker Compose. By passing the appropriate flag (\texttt{cloudflare} or \texttt{c}) to \texttt{start.sh}, the system automatically starts a Cloudflare tunnel alongside the other services. The Docker Compose configuration includes a service for Cloudflare, which establishes the tunnel and routes external traffic securely to the local environment. This setup enables developers and stakeholders to access the development instance remotely in a secure and convenient manner, facilitating real-time testing and collaboration.
+
+This approach provides a secure and flexible way to manage access, making it easy to introduce new roles or adjust permissions as the platform evolves. The RBAC system is central to maintaining the integrity and security of the Remote Lab environment.
