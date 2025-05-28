@@ -1,0 +1,16 @@
+\section{Implementation Details}
+
+Key implementation decisions and details include:
+
+\begin{itemize}
+    \item \textbf{Containerization:} All major components (frontend, backend, database) are containerized using Docker, ensuring consistent environments across development and production.
+    \item \textbf{Orchestration:} Docker Compose is used to manage multi-container deployments, networking, and environment configuration.
+    \item \textbf{Backend:} The backend uses JDBI for type-safe database access and is configured via environment variables for flexibility and security.
+    \item \textbf{Frontend:} The frontend is built with Next.js, providing a modern, responsive interface and integrating with the backend via RESTful APIs.
+    \item \textbf{Authentication:} Microsoft OAuth (via NextAuth) is used for secure authentication, supporting multiple user roles (student, professor, administrator).
+    \item \textbf{Role-based Access Control:} The system enforces permissions based on user roles, ensuring secure and appropriate access to resources.
+    \item \textbf{Hardware Abstraction:} The backend abstracts hardware-specific details, allowing for easy extension to new laboratory equipment.
+    \item \textbf{Automation:} The \texttt{start.sh} script automates the bootstrap process, starting all necessary services with a single command.
+\end{itemize}
+
+These choices ensure the platform is robust, extensible, and easy to deploy or develop locally. 

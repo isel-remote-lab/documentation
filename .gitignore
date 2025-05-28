@@ -8,6 +8,7 @@
 *.out
 *.toc
 *.synctex.gz
+*.lof
 
 ### MacOS ###
 .DS_Store

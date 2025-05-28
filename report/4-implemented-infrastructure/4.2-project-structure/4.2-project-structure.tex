@@ -1,0 +1,18 @@
+\section{Project Structure}
+
+The Remote Lab project is organized into several main directories, each of which is managed as a GitHub submodule. This approach allows for independent development, versioning, and access control of each core component, supporting both modularity and security. The use of submodules also facilitates collaboration among different teams and ensures that sensitive information is handled appropriately.
+
+The main submodules of the project are:
+
+\begin{itemize}
+    \item \textbf{api/} -- Contains the backend source code, implemented in Kotlin with Spring Boot. This submodule is responsible for business logic, user management and laboratory session control.
+    \item \textbf{db/} -- Includes database scripts, migrations, and documentation, supporting the persistence layer of the system.
+    \item \textbf{docs/} -- Stores project documentation, including technical reports, user guides, and architectural diagrams.
+    \item \textbf{img/} -- Stores project images, including technical reports, user guides, and architectural diagrams.
+    \item \textbf{nginx/} -- This directory is not a GitHub submodule but it provides Nginx configuration files for reverse proxying, load balancing, and secure access to backend services.
+    \item \textbf{private/} -- Dedicated to sensitive files and configurations, such as environment variables and secrets necessary for the secure operation of the system, and specific to our implementation choices. This submodule contains the information and configuration files required to run the project with our selected authentication (login) and database setup, reflecting the particular options chosen for our use case. It is not included directly in the main repository, ensuring that only authorized members have access to confidential information like API keys, external service credentials, and other private data essential for both production and development environments.
+    \item \textbf{website/} -- Holds the frontend web application, built with Next.js (React). This submodule provides the user interface for laboratory access, scheduling, and management.
+    \item \textbf{wiki/} -- Stores the GitHub Wiki pages, including the project documentation, deployment instructions, and other relevant information.
+\end{itemize}
+
+This modular structure, based on GitHub submodules, allows for independent development, testing, and deployment of each component, supporting both scalability and maintainability. By clearly separating concerns and leveraging best practices such as containerization and secure secret management, the project is well-positioned for collaborative development and future expansion. 
