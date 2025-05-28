@@ -9,6 +9,31 @@ This chapter details the infrastructure implemented for the Remote Lab platform,
 
 The Remote Lab platform is designed as a modular, containerized system that enables secure and efficient remote access to laboratory equipment. The infrastructure follows a layered architecture, separating the user interface, backend logic, and hardware integration, and is built with scalability and maintainability in mind.
 
+\begin{figure}[h]
+    \begin{center}
+        \resizebox{16cm}{!}{\includegraphics{../img/SystemArchitectureWithTechRL.png}}
+    \end{center}
+    \caption{System Architecture Overview}
+    \label{fig:system-architecture}
+\end{figure}
+
+\section{Project Structure}
+Project structure explaination.
+
+\section{Implementation Details}
+Project decisions.
+
+\section{Database}
+Database
+
+\section{Web API}
+Web API
+
+\section{Web Application}
+Web App
+
+\section{Deployment}
+
 \section{Technologies Used}
 
 \begin{itemize}
@@ -50,16 +75,6 @@ All services are connected via Docker networks to ensure secure and efficient co
     \item \textbf{Dockerfiles:} Multi-stage builds are used for both backend and frontend to optimize image size and security.
     \item \textbf{GitHub Actions:} (If applicable) Used for continuous integration and automated builds.
 \end{itemize}
-
-\section{System Diagram}
-
-\begin{figure}[h]
-    \begin{center}
-        %\resizebox{16cm}{!}{\includegraphics{../img/SystemInfrastracture.drawio.png}}
-    \end{center}
-    \caption{System Architecture Overview}
-    \label{fig:system-architecture}
-\end{figure}
 
 \section{Notable Implementation Details}
 
