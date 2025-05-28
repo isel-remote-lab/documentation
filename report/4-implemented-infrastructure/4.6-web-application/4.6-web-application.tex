@@ -1,0 +1,25 @@
+\section{Web Application}
+
+The web application for the Remote Lab platform provides a modern, user-friendly interface that enables users to access, schedule, and manage laboratory resources remotely. Built with Next.js (React), the web app is designed to be responsive and accessible from any device, ensuring a seamless experience for students, professors, and administrators.
+
+\subsection{Overview}
+The web application serves as the primary point of interaction for users, integrating with the backend services via RESTful APIs. It supports multiple user roles, each with tailored access and features according to their permissions.
+
+The choice of Next.js as the framework for the web application was motivated by several factors. Next.js is built on top of React, a technology already taught in the course, which allowed us to leverage our existing knowledge. At the same time, Next.js simplifies development by providing built-in solutions for routing, server-side rendering, API integration, and other common tasks. This not only accelerated our development process but also allowed us to work with a modern, widely adopted framework in the industry, expanding our understanding of full-stack web development and exposing us to new possibilities and best practices.
+
+\subsection{Client-Server Logic Separation}
+
+The web application leverages Next.js to achieve a clear separation between client-side and server-side logic. All requests to the backend API are made from the server side, ensuring that sensitive operations and data exchanges are handled securely and are not exposed directly to the client. This architecture enhances security, enables better control over data flow, and allows for efficient server-side rendering and data fetching.
+
+\subsection{Main Features}
+\begin{itemize}
+    \item \textbf{Authentication:} Secure login using Microsoft OAuth (NextAuth), supporting university credentials and role assignment.
+    \item \textbf{Dashboard:} Personalized dashboard displaying relevant information, upcoming sessions, and quick access to key features.
+    \item \textbf{Laboratory Management:} Professors and administrators can create, edit, and manage laboratory sessions, equipment, and participant lists.
+    \item \textbf{Calendar and Scheduling:} Interactive calendar for booking and managing laboratory sessions, with real-time availability and notifications.
+    \item \textbf{Role-Based Access:} Interface adapts to the user's role, showing only the features and data relevant to their permissions. Users with higher roles can view and interact with the platform as if they had a lower role for testing and support purposes.
+    \item \textbf{Responsive Design:} Optimized for desktops, tablets, and mobile devices, ensuring accessibility and usability across platforms.
+\end{itemize}
+
+\subsection{Integration and Security}
+The web application communicates securely with the backend via RESTful APIs, using authentication tokens to protect sensitive operations. User sessions and data are managed according to best practices, ensuring privacy and integrity. The frontend is designed to prevent unauthorized access and to provide a robust, extensible foundation for future enhancements. 
