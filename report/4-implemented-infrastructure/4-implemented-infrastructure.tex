@@ -24,7 +24,124 @@ Project structure explaination.
 Project decisions.
 
 \section{Database}
-Database
+The database serves as the foundational component of the system architecture. PostgreSQL was selected as the database management system due to its reliability, open-source nature, and robust support for relational data models. This choice aligns with previous project implementations and provides the consistency and performance required for the system's operational needs.
+
+This section presents a overview of the \ac{er model} and critical implementation details. Complete technical documentation is provided in the accompanying appendix.
+
+\subsection{Entity-Relationship Model}
+
+\begin{figure}[h]
+    \begin{center}
+        \resizebox{16cm}{!}{\includegraphics{../img/DB-diagrams/ERDiagramRL.drawio.png}}
+    \end{center}
+    \caption{Entity-Relationship Model (ER Model)}
+    \label{fig:er_model}
+\end{figure}
+
+The database design follows a normalized relational structure that supports user authentication, secure session management, and the remaining system functionalities. The ER model encompasses the core entities required for system functionality while maintaining data integrity and scalability.
+
+\subsection*{Core Entities}
+\subsection*{User}
+
+\begin{figure}[h]
+    \begin{center}
+        \resizebox{10cm}{!}{\includegraphics{../img/DB-diagrams/User.drawio.png}}
+    \end{center}
+    \caption{User Entity}
+    \label{fig:user_entity}
+\end{figure}
+
+The \textbf{User} entity represents a user in the system. The username and email attributes are provided by the authentication system. The role serves as descriminator attribute to identify whether the user is an administrator, professor or student.
+
+\subsection*{Token}
+
+\begin{figure}[h]
+    \begin{center}
+        \resizebox{10cm}{!}{\includegraphics{../img/DB-diagrams/Token.drawio.png}}
+    \end{center}
+    \caption{Token Entity}
+    \label{fig:token_entity}
+\end{figure}
+
+A user can create \textit{N} tokens. The \textbf{Token} is a weak entity because it cannot be identified by its attributes alone and therefore requires a user, which is a strong entity, to be identified. Its attributes cannot uniquely identify it. A token is created by only one user.
+
+This is a useful entity for authentication propuses. It was designed to hold a hash value in the \textit{token\_validation} attribute.
+
+Authentication workflow:
+
+\begin{enumerate}
+    \item Upon successful user login, a unique token is created with cryptographically secure values and stored in the database.
+    \item For subsequent authenticated operations, the system queries the database to verify the client-provided token against stored values.
+    \item Valid tokens enable secure user identification without transmitting unique identifiers.
+\end{enumerate}
+
+The \textit{last\_used\_at} and the \textit{created\_at} are useful for determining token expiration.
+
+\subsection*{Laboratory}
+
+\begin{figure}[h]
+    \begin{center}
+        \resizebox{10cm}{!}{\includegraphics{../img/DB-diagrams/Laboratory.drawio.png}}
+    \end{center}
+    \caption{Laboratory Entity}
+    \label{fig:laboratory_entity}
+\end{figure}
+
+A user, as an administrator or professor, can create \textit{N} laboratories. When creating a \textbf{Laboratory}, the user can define the name (\textit{lab\_name}) and description (\textit{lab\_description}). They can also define the duration of a laboratory session (\textit{lab\_duration}) and its queue limit (\textit{lab\_queue\_limit}).
+
+\subsection*{Hardware}
+
+\begin{figure}[H]
+    \begin{center}
+        \resizebox{10cm}{!}{\includegraphics{../img/DB-diagrams/Hardware.drawio.png}}
+    \end{center}
+    \caption{Hardware Entity}
+    \label{fig:hardware_entity}
+\end{figure}
+
+Upon successful laboratory creation, the user can associate \textbf{Hardware} to it, which must be created separately.
+
+For the creation, it requires a name (\textit{hw\_name}), IP (\textit{ip\_address}) and MAC (\textit{mac\_address}) addresses (which can be null depending on the hardware), a status (\textit{hw\_status}) to indicate whether the hardware is under maintenance, occupied, or available, and a serial number (\textit{hw\_serial\_num}) to uniquely identify the hardware. Although it has an ID, the serial number helps physically identify the hardware.    
+
+\subsection*{Group}
+
+\begin{figure}[h]
+    \begin{center}
+        \resizebox{9cm}{!}{\includegraphics{../img/DB-diagrams/Group.drawio.png}}
+    \end{center}
+    \caption{Group Entity}
+    \label{fig:group_entity}
+\end{figure}
+
+For a student to access a laboratory, they must be in a group that is associated with that laboratory. A professor can create a \textbf{Group} and associate users to it.
+
+When creating a group, the user needs to name it (\textit{group\_name}) and, optionally, add a description (\textit{group\_description}) to it.
+
+\subsection*{Lab Session}
+
+\begin{figure}[H]
+    \begin{center}
+        \resizebox{7.5cm}{!}{\includegraphics{../img/DB-diagrams/LabSession.drawio.png}}
+    \end{center}
+    \caption{Lab Session Entity}
+    \label{fig:lab_session_entity}
+\end{figure}
+
+Finally, a user can join a laboratory if they are in a group associated with it. If the laboratory is being used, the user enters a waiting queue; otherwise, a \textbf{Lab Session} is created.
+
+Lab Session is a weak entity. It requires two strong entities to be identified: the \textbf{User} entity and the \textbf{Laboratory} entity. This is used to check whether a user is in a lab session or for statistical purposes. The \textit{state} attribute indicates whether the session is over or still running. The \textit{start\_time} and \textit{end\_time} can be used for statistical details, such as determining how much time a user spent in a laboratory, or for future purposes, such as scheduling sessions.
+
+\subsection{Implementation Details}
+After providing an overview of the database entities and their associations, there are important details worth mentioning:
+
+\begin{itemize}
+    \item Although PostgreSQL is being used for its functionalities, it was decided that all logic and verifications are implemented in the Web API, so that no triggers or complex constraints are implemented on the database side.
+\end{itemize}
+
+\subsection{Conclusion}
+This section has provided an overview of the database architecture, implementation, and design decisions. It has also presented the \acs{er model} of the database and described a typical user journey, explaining database interactions.
+
+The documentation should be consulted for a comprehensive deep dive. It explains every entity, its attributes, and provides theoretical insights.
 
 \section{Web API}
 Web API
