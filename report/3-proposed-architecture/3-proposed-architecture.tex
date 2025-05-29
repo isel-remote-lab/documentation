@@ -5,16 +5,8 @@
 
 This chapter presents the proposed architecture for the Remote Lab platform, detailing its main components, their interactions, and the rationale behind the architectural choices.
 
-%
-% Section 3.1
-%
-\section{System Overview} \label{sec31}
 The Remote Lab platform is designed as a modular and scalable system, enabling secure and efficient remote access to laboratory equipment. The architecture follows a layered approach, separating concerns between the user interface, application logic, and hardware integration. This separation facilitates maintainability, extensibility, and the integration of new features or laboratory devices.
 
-%
-% Section 3.2
-%
-\section{Main Components} \label{sec32}
 The architecture consists of the following main components:
 \begin{itemize}
     \item \textbf{Frontend:} A web-based user interface developed with Next.js, providing users with access to laboratory resources, session scheduling, and experiment monitoring.
@@ -24,10 +16,6 @@ The architecture consists of the following main components:
     \item \textbf{Authentication and Authorization:} Ensures secure access to the platform, supporting multiple user roles (e.g., students, professors, administrators) with different permissions.
 \end{itemize}
 
-%
-% Section 3.3
-%
-\section{Component Interactions} \label{sec33}
 The components interact as follows:
 \begin{itemize}
     \item Users interact with the frontend to authenticate, schedule sessions, and access laboratory resources.
@@ -36,10 +24,6 @@ The components interact as follows:
     \item The hardware abstraction layer translates backend commands into device-specific instructions, enabling remote control of laboratory equipment.
 \end{itemize}
 
-%
-% Section 3.4
-%
-\section{Architecture Diagram} \label{sec34}
 Figure~\ref{fig:architecture} illustrates the high-level architecture of the Remote Lab platform.
 
 % Insert architecture diagram here
@@ -50,8 +34,4 @@ Figure~\ref{fig:architecture} illustrates the high-level architecture of the Rem
 \caption{High-level architecture of the Remote Lab platform.}\label{fig:architecture}
 \end{figure}
 
-%
-% Section 3.5
-%
-\section{Design Rationale} \label{sec35}
 The architectural choices were guided by the need for scalability, security, and ease of integration with diverse laboratory equipment. The use of a layered architecture and standardized interfaces ensures that the platform can evolve to meet future requirements and support additional functionalities.
