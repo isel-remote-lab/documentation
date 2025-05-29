@@ -1,0 +1,74 @@
+%% Creator: Inkscape 1.4.2 (ebf0e940d0, 2025-05-08), www.inkscape.org
+%% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
+%% Accompanies image file 'Hardware_svg-tex.pdf' (pdf, eps, ps)
+%%
+%% To include the image in your LaTeX document, write
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics{<filename>.pdf}
+%% To scale the image, write
+%%   \def\svgwidth{<desired width>}
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics[width=<desired width>]{<filename>.pdf}
+%%
+%% Images with a different path to the parent latex file can
+%% be accessed with the `import' package (which may need to be
+%% installed) using
+%%   \usepackage{import}
+%% in the preamble, and then including the image with
+%%   \import{<path to file>}{<filename>.pdf_tex}
+%% Alternatively, one can specify
+%%   \graphicspath{{<path to file>/}}
+%% 
+%% For more information, please see info/svg-inkscape on CTAN:
+%%   http://tug.ctan.org/tex-archive/info/svg-inkscape
+%%
+\begingroup%
+  \makeatletter%
+  \providecommand\color[2][]{%
+    \errmessage{(Inkscape) Color is used for the text in Inkscape, but the package 'color.sty' is not loaded}%
+    \renewcommand\color[2][]{}%
+  }%
+  \providecommand\transparent[1]{%
+    \errmessage{(Inkscape) Transparency is used (non-zero) for the text in Inkscape, but the package 'transparent.sty' is not loaded}%
+    \renewcommand\transparent[1]{}%
+  }%
+  \providecommand\rotatebox[2]{#2}%
+  \newcommand*\fsize{\dimexpr\f@size pt\relax}%
+  \newcommand*\lineheight[1]{\fontsize{\fsize}{#1\fsize}\selectfont}%
+  \ifx\svgwidth\undefined%
+    \setlength{\unitlength}{312.75bp}%
+    \ifx\svgscale\undefined%
+      \relax%
+    \else%
+      \setlength{\unitlength}{\unitlength * \real{\svgscale}}%
+    \fi%
+  \else%
+    \setlength{\unitlength}{\svgwidth}%
+  \fi%
+  \global\let\svgwidth\undefined%
+  \global\let\svgscale\undefined%
+  \makeatother%
+  \begin{picture}(1,0.55424459)%
+    \lineheight{1}%
+    \setlength\tabcolsep{0pt}%
+    \put(0,0){\includegraphics[width=\unitlength,page=1]{Hardware_svg-tex.pdf}}%
+    \put(0.5203837,0.27606713){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}HARDWARE\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=2]{Hardware_svg-tex.pdf}}%
+    \put(0.35971223,0.47990407){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}hw_name\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=3]{Hardware_svg-tex.pdf}}%
+    \put(0.14388489,0.27366905){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}hw_serial_num\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=4]{Hardware_svg-tex.pdf}}%
+    \put(0.69544365,0.47990407){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}hw_id\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=5]{Hardware_svg-tex.pdf}}%
+    \put(0.81294964,0.124988){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}hw_mac_address\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=6]{Hardware_svg-tex.pdf}}%
+    \put(0.2589928,0.12019183){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}created_at\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=7]{Hardware_svg-tex.pdf}}%
+    \put(0.87769784,0.27606713){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}ip_address\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=8]{Hardware_svg-tex.pdf}}%
+    \put(0.5203837,0.04824939){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}hw_status\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=9]{Hardware_svg-tex.pdf}}%
+  \end{picture}%
+\endgroup%
