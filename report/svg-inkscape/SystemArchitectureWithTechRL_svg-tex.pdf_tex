@@ -62,7 +62,7 @@
     \put(0,0){\includegraphics[width=\unitlength,page=4]{SystemArchitectureWithTechRL_svg-tex.pdf}}%
     \put(0.48352049,0.30108431){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}Back-End\end{tabular}}}}%
     \put(0,0){\includegraphics[width=\unitlength,page=5]{SystemArchitectureWithTechRL_svg-tex.pdf}}%
-    \put(0.26623209,0.29893294){\color[rgb]{1,1,1}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}Front-End\end{tabular}}}}%
+    \put(0.26623209,0.29893294){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}Front-End\end{tabular}}}}%
     \put(0,0){\includegraphics[width=\unitlength,page=6]{SystemArchitectureWithTechRL_svg-tex.pdf}}%
     \put(0.69327911,0.2731165){\color[rgb]{0.1372549,0.18431373,0.24313725}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}Embedded...\end{tabular}}}}%
   \end{picture}%

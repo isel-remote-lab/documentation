@@ -9,10 +9,9 @@ This chapter details the infrastructure implemented for the Remote Lab platform,
 
 The Remote Lab platform is designed as a modular, containerized system that enables secure and efficient remote access to laboratory equipment. The infrastructure follows a layered architecture, separating the user interface, backend logic, and hardware integration, and is built with scalability and maintainability in mind.
 
-\begin{figure}[h]
-    \begin{center}
-        \resizebox{16cm}{!}{\includesvg{../img/SystemArchitectureWithTechRL.svg}}
-    \end{center}
+\begin{figure}[H]
+    \centering
+    \includesvg[inkscapelatex=false, width=0.95\linewidth]{../img/SystemArchitectureWithTechRL.drawio.svg}
     \caption{System Architecture Overview}
     \label{fig:system-architecture}
 \end{figure}
@@ -24,14 +23,13 @@ The Remote Lab platform is designed as a modular, containerized system that enab
 \section{Database}
 The database serves as the foundational component of the system architecture. PostgreSQL was selected as the database management system due to its reliability, open-source nature, and robust support for relational data models. This choice aligns with previous project implementations and provides the consistency and performance required for the system's operational needs.
 
-This section presents a overview of the \ac{er model} and critical implementation details. Complete technical documentation is provided in the accompanying appendix.
+This section presents an overview of the \ac{er model} and critical implementation details. Complete technical documentation is provided in the accompanying appendix.
 
 \subsection{Entity-Relationship Model}
 
 \begin{figure}[H]
-    \begin{center}
-        \resizebox{17cm}{!}{\includesvg{../img/DB-diagrams/ERDiagramRL.svg}}
-    \end{center}
+    \centering
+    \includesvg[inkscapelatex=false, width=1.05\linewidth]{../img/DB-diagrams/ERDiagramRL.drawio.svg}
     \caption{Entity-Relationship Model (ER Model)}
     \label{fig:er_model}
 \end{figure}
@@ -42,9 +40,8 @@ The database design follows a normalized relational structure that supports user
 \subsection*{User}
 
 \begin{figure}[H]
-    \begin{center}
-        \resizebox{10cm}{!}{\includesvg{../img/DB-diagrams/User.svg}}
-    \end{center}
+    \centering
+    \includesvg[inkscapelatex=false, width=0.5\linewidth]{../img/DB-diagrams/User.drawio.svg}
     \caption{User Entity}
     \label{fig:user_entity}
 \end{figure}
@@ -54,9 +51,8 @@ The \textbf{User} entity represents a user in the system. The username and email
 \subsection*{Token}
 
 \begin{figure}[H]
-    \begin{center}
-        \resizebox{10cm}{!}{\includesvg{../img/DB-diagrams/Token.svg}}
-    \end{center}
+    \centering
+    \includesvg[inkscapelatex=false, width=0.6\linewidth]{../img/DB-diagrams/Token.drawio.svg}
     \caption{Token Entity}
     \label{fig:token_entity}
 \end{figure}
@@ -78,9 +74,8 @@ The \textit{last\_used\_at} and the \textit{created\_at} are useful for determin
 \subsection*{Laboratory}
 
 \begin{figure}[H]
-    \begin{center}
-        \resizebox{10cm}{!}{\includesvg{../img/DB-diagrams/Laboratory.svg}}
-    \end{center}
+    \centering
+    \includesvg[inkscapelatex=false, width=0.55\linewidth]{../img/DB-diagrams/Laboratory.drawio.svg}
     \caption{Laboratory Entity}
     \label{fig:laboratory_entity}
 \end{figure}
@@ -90,9 +85,8 @@ A user, as an administrator or professor, can create \textit{N} laboratories. Wh
 \subsection*{Hardware}
 
 \begin{figure}[H]
-    \begin{center}
-        \resizebox{10cm}{!}{\includesvg{../img/DB-diagrams/Hardware.svg}}
-    \end{center}
+    \centering
+    \includesvg[inkscapelatex=false, width=0.55\linewidth]{../img/DB-diagrams/Hardware.drawio.svg}
     \caption{Hardware Entity}
     \label{fig:hardware_entity}
 \end{figure}
@@ -104,9 +98,8 @@ For the creation, it requires a name (\textit{hw\_name}), IP (\textit{ip\_addres
 \subsection*{Group}
 
 \begin{figure}[H]
-    \begin{center}
-        \resizebox{9cm}{!}{\includesvg{../img/DB-diagrams/Group.svg}}
-    \end{center}
+    \centering
+    \includesvg[inkscapelatex=false, width=0.5\linewidth]{../img/DB-diagrams/Group.drawio.svg}
     \caption{Group Entity}
     \label{fig:group_entity}
 \end{figure}
@@ -118,9 +111,8 @@ When creating a group, the user needs to name it (\textit{group\_name}) and, opt
 \subsection*{Lab Session}
 
 \begin{figure}[H]
-    \begin{center}
-        \resizebox{7.5cm}{!}{\includesvg{../img/DB-diagrams/LabSession.svg}}
-    \end{center}
+    \centering
+    \includesvg[inkscapelatex=false, width=0.5\linewidth]{../img/DB-diagrams/LabSession.drawio.svg}
     \caption{Lab Session Entity}
     \label{fig:lab_session_entity}
 \end{figure}
@@ -153,9 +145,8 @@ Spring's dependency injection is a well-known technology in Java enterprise prog
 The Strategy pattern allowed us to have more control over the specific implementation since it follows an interface. Every concrete implementation follows an interface, making it possible to change a class dynamically without changing the code. Spring's dependency injection works very well with this strategy design pattern. This makes unit tests much easier when the concrete implementation is not intended to be tested without changing it's code.
 
 \begin{figure}[H]
-    \begin{center}
-        \resizebox{15cm}{!}{\includesvg{../img/api/api_architecture.svg}}
-    \end{center}
+    \centering
+    \includesvg[inkscapelatex=false, width=0.9\linewidth]{../img/api/api_architecture.drawio.svg}
     \caption{API Architecture}
     \label{fig:api_architecture}
 \end{figure}
@@ -165,9 +156,8 @@ Figure \ref{fig:api_architecture} provides a simple overview of the implemented 
 \vspace{3mm}
 
 \begin{figure}[H]
-    \begin{center}
-        \resizebox{15cm}{!}{\includesvg{../img/api/detailed_architecture.svg}}
-    \end{center}
+    \centering
+    \includesvg[inkscapelatex=false, width=0.9\linewidth]{../img/api/detailed_architecture.drawio.svg}
     \caption{API Detailed Architecture}
     \label{fig:api_detailed_architecture}
 \end{figure}
