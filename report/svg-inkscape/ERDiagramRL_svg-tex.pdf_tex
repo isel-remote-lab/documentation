@@ -1,0 +1,190 @@
+%% Creator: Inkscape 1.4.2 (ebf0e940d0, 2025-05-08), www.inkscape.org
+%% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
+%% Accompanies image file 'ERDiagramRL_svg-tex.pdf' (pdf, eps, ps)
+%%
+%% To include the image in your LaTeX document, write
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics{<filename>.pdf}
+%% To scale the image, write
+%%   \def\svgwidth{<desired width>}
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics[width=<desired width>]{<filename>.pdf}
+%%
+%% Images with a different path to the parent latex file can
+%% be accessed with the `import' package (which may need to be
+%% installed) using
+%%   \usepackage{import}
+%% in the preamble, and then including the image with
+%%   \import{<path to file>}{<filename>.pdf_tex}
+%% Alternatively, one can specify
+%%   \graphicspath{{<path to file>/}}
+%% 
+%% For more information, please see info/svg-inkscape on CTAN:
+%%   http://tug.ctan.org/tex-archive/info/svg-inkscape
+%%
+\begingroup%
+  \makeatletter%
+  \providecommand\color[2][]{%
+    \errmessage{(Inkscape) Color is used for the text in Inkscape, but the package 'color.sty' is not loaded}%
+    \renewcommand\color[2][]{}%
+  }%
+  \providecommand\transparent[1]{%
+    \errmessage{(Inkscape) Transparency is used (non-zero) for the text in Inkscape, but the package 'transparent.sty' is not loaded}%
+    \renewcommand\transparent[1]{}%
+  }%
+  \providecommand\rotatebox[2]{#2}%
+  \newcommand*\fsize{\dimexpr\f@size pt\relax}%
+  \newcommand*\lineheight[1]{\fontsize{\fsize}{#1\fsize}\selectfont}%
+  \ifx\svgwidth\undefined%
+    \setlength{\unitlength}{828bp}%
+    \ifx\svgscale\undefined%
+      \relax%
+    \else%
+      \setlength{\unitlength}{\unitlength * \real{\svgscale}}%
+    \fi%
+  \else%
+    \setlength{\unitlength}{\svgwidth}%
+  \fi%
+  \global\let\svgwidth\undefined%
+  \global\let\svgscale\undefined%
+  \makeatother%
+  \begin{picture}(1,0.6522826)%
+    \lineheight{1}%
+    \setlength\tabcolsep{0pt}%
+    \put(0,0){\includegraphics[width=\unitlength,page=1]{ERDiagramRL_svg-tex.pdf}}%
+    \put(0.46195652,0.5307971){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}USER\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=2]{ERDiagramRL_svg-tex.pdf}}%
+    \put(0.57246377,0.48550724){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}id\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=3]{ERDiagramRL_svg-tex.pdf}}%
+    \put(0.46195652,0.4347826){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}creates\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=4]{ERDiagramRL_svg-tex.pdf}}%
+    \put(0.46195652,0.33242753){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}LABORATORY\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=5]{ERDiagramRL_svg-tex.pdf}}%
+    \put(0.3442029,0.30072463){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}id\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=6]{ERDiagramRL_svg-tex.pdf}}%
+    \put(0.47101449,0.49456521){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}1\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=7]{ERDiagramRL_svg-tex.pdf}}%
+    \put(0.47101449,0.36865942){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}N\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=8]{ERDiagramRL_svg-tex.pdf}}%
+    \put(0.41666667,0.25543478){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}lab_name\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=9]{ERDiagramRL_svg-tex.pdf}}%
+    \put(0.37681159,0.6240942){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}email\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=10]{ERDiagramRL_svg-tex.pdf}}%
+    \put(0.15398551,0.5307971){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}GROUP\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=11]{ERDiagramRL_svg-tex.pdf}}%
+    \put(0.30797101,0.53170289){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}creates\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=12]{ERDiagramRL_svg-tex.pdf}}%
+    \put(0.39855072,0.54166666){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}1\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=13]{ERDiagramRL_svg-tex.pdf}}%
+    \put(0.2173913,0.54166666){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}N\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=14]{ERDiagramRL_svg-tex.pdf}}%
+    \put(0.59148551,0.58605072){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}username\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=15]{ERDiagramRL_svg-tex.pdf}}%
+    \put(0.04257246,0.53260869){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}id\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=16]{ERDiagramRL_svg-tex.pdf}}%
+    \put(0.06974638,0.59963768){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}group_name\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=17]{ERDiagramRL_svg-tex.pdf}}%
+    \put(0.30797101,0.5905797){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}belongs\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=18]{ERDiagramRL_svg-tex.pdf}}%
+    \put(0.4076087,0.57065217){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}N\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=19]{ERDiagramRL_svg-tex.pdf}}%
+    \put(0.1865942,0.57155797){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}N\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=20]{ERDiagramRL_svg-tex.pdf}}%
+    \put(0.15398551,0.33242753){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}has\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=21]{ERDiagramRL_svg-tex.pdf}}%
+    \put(0.16304348,0.49637681){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}N\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=22]{ERDiagramRL_svg-tex.pdf}}%
+    \put(0.46195652,0.10597826){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}HARDWARE\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=23]{ERDiagramRL_svg-tex.pdf}}%
+    \put(0.46195652,0.21920289){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}has\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=24]{ERDiagramRL_svg-tex.pdf}}%
+    \put(0.47101449,0.14311594){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}N\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=25]{ERDiagramRL_svg-tex.pdf}}%
+    \put(0.47101449,0.29710144){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}N\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=26]{ERDiagramRL_svg-tex.pdf}}%
+    \put(0.36231884,0.17481884){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}hw_name\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=27]{ERDiagramRL_svg-tex.pdf}}%
+    \put(0.32880435,0.10597826){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}hw_serial_num\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=28]{ERDiagramRL_svg-tex.pdf}}%
+    \put(0.5615942,0.17481884){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}hw_id\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=29]{ERDiagramRL_svg-tex.pdf}}%
+    \put(0.77898551,0.33242753){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}USER\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=30]{ERDiagramRL_svg-tex.pdf}}%
+    \put(0.77898551,0.33242753){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}LAB_SESSION\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=31]{ERDiagramRL_svg-tex.pdf}}%
+    \put(0.62047101,0.33242753){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}creates\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=32]{ERDiagramRL_svg-tex.pdf}}%
+    \put(0.62047101,0.33242753){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}has\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=33]{ERDiagramRL_svg-tex.pdf}}%
+    \put(0.71557971,0.3423913){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}N\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=34]{ERDiagramRL_svg-tex.pdf}}%
+    \put(0.52536232,0.3423913){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}1\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=35]{ERDiagramRL_svg-tex.pdf}}%
+    \put(0.51630435,0.49637681){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}1\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=36]{ERDiagramRL_svg-tex.pdf}}%
+    \put(0.77898551,0.40126811){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}id\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=37]{ERDiagramRL_svg-tex.pdf}}%
+    \put(0.89039855,0.36865942){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}start_time\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=38]{ERDiagramRL_svg-tex.pdf}}%
+    \put(0.89039855,0.29619565){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}end_time\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=39]{ERDiagramRL_svg-tex.pdf}}%
+    \put(0.77898551,0.26902173){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}state\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=40]{ERDiagramRL_svg-tex.pdf}}%
+    \put(0.37952899,0.4365942){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}joins\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=41]{ERDiagramRL_svg-tex.pdf}}%
+    \put(0.39945652,0.50452898){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}N\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=42]{ERDiagramRL_svg-tex.pdf}}%
+    \put(0.40036232,0.35960144){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}N\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=43]{ERDiagramRL_svg-tex.pdf}}%
+    \put(0.29528986,0.40942028){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Waiting Queue\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=44]{ERDiagramRL_svg-tex.pdf}}%
+    \put(0.51539855,0.26539855){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}lab_duration\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=45]{ERDiagramRL_svg-tex.pdf}}%
+    \put(0.5625,0.04710144){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}hw_mac_address\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=46]{ERDiagramRL_svg-tex.pdf}}%
+    \put(0.39855072,0.3423913){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}N\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=47]{ERDiagramRL_svg-tex.pdf}}%
+    \put(0.06521739,0.4682971){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}group_description\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=48]{ERDiagramRL_svg-tex.pdf}}%
+    \put(0.46557971,0.6222826){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}created_at\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=49]{ERDiagramRL_svg-tex.pdf}}%
+    \put(0.2201087,0.4682971){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}created_at\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=50]{ERDiagramRL_svg-tex.pdf}}%
+    \put(0.36322464,0.04710144){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}created_at\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=51]{ERDiagramRL_svg-tex.pdf}}%
+    \put(0.56974638,0.30072463){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}created_at\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=52]{ERDiagramRL_svg-tex.pdf}}%
+    \put(0.59692029,0.10597826){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}ip_address\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=53]{ERDiagramRL_svg-tex.pdf}}%
+    \put(0.46195652,0.01992753){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}hw_status\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=54]{ERDiagramRL_svg-tex.pdf}}%
+    \put(0.54438406,0.63315217){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}role\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=55]{ERDiagramRL_svg-tex.pdf}}%
+    \put(0.33242754,0.25362318){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}lab_description\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=56]{ERDiagramRL_svg-tex.pdf}}%
+    \put(0.55434783,0.38134057){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}lab_queue_limit\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=57]{ERDiagramRL_svg-tex.pdf}}%
+    \put(0.32880435,0.46014492){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}id\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=58]{ERDiagramRL_svg-tex.pdf}}%
+    \put(0.52536232,0.54166666){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}1\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=59]{ERDiagramRL_svg-tex.pdf}}%
+    \put(0.63858696,0.5307971){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}creates\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=60]{ERDiagramRL_svg-tex.pdf}}%
+    \put(0.63858696,0.5307971){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}creates\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=61]{ERDiagramRL_svg-tex.pdf}}%
+    \put(0.75181159,0.54166666){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}N\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=62]{ERDiagramRL_svg-tex.pdf}}%
+    \put(0.81521739,0.5307971){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}USER\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=63]{ERDiagramRL_svg-tex.pdf}}%
+    \put(0.81521739,0.5307971){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}TOKEN\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=64]{ERDiagramRL_svg-tex.pdf}}%
+    \put(0.81521739,0.61322463){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}token_validation\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=65]{ERDiagramRL_svg-tex.pdf}}%
+    \put(0.95742754,0.53260869){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}created_at\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=66]{ERDiagramRL_svg-tex.pdf}}%
+    \put(0.81521739,0.46014492){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}last_used_at\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=67]{ERDiagramRL_svg-tex.pdf}}%
+  \end{picture}%
+\endgroup%

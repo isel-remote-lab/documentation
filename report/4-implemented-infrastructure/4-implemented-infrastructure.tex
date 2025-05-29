@@ -11,7 +11,7 @@ The Remote Lab platform is designed as a modular, containerized system that enab
 
 \begin{figure}[h]
     \begin{center}
-        \resizebox{16cm}{!}{\includegraphics{../img/SystemArchitectureWithTechRL.png}}
+        \resizebox{16cm}{!}{\includesvg{../img/SystemArchitectureWithTechRL.svg}}
     \end{center}
     \caption{System Architecture Overview}
     \label{fig:system-architecture}
@@ -30,7 +30,7 @@ This section presents a overview of the \ac{er model} and critical implementatio
 
 \begin{figure}[H]
     \begin{center}
-        \resizebox{17cm}{!}{\includegraphics{../img/DB-diagrams/ERDiagramRL.drawio.png}}
+        \resizebox{17cm}{!}{\includesvg{../img/DB-diagrams/ERDiagramRL.svg}}
     \end{center}
     \caption{Entity-Relationship Model (ER Model)}
     \label{fig:er_model}
@@ -43,7 +43,7 @@ The database design follows a normalized relational structure that supports user
 
 \begin{figure}[H]
     \begin{center}
-        \resizebox{10cm}{!}{\includegraphics{../img/DB-diagrams/User.drawio.png}}
+        \resizebox{10cm}{!}{\includesvg{../img/DB-diagrams/User.svg}}
     \end{center}
     \caption{User Entity}
     \label{fig:user_entity}
@@ -55,7 +55,7 @@ The \textbf{User} entity represents a user in the system. The username and email
 
 \begin{figure}[H]
     \begin{center}
-        \resizebox{10cm}{!}{\includegraphics{../img/DB-diagrams/Token.drawio.png}}
+        \resizebox{10cm}{!}{\includesvg{../img/DB-diagrams/Token.svg}}
     \end{center}
     \caption{Token Entity}
     \label{fig:token_entity}
@@ -79,7 +79,7 @@ The \textit{last\_used\_at} and the \textit{created\_at} are useful for determin
 
 \begin{figure}[H]
     \begin{center}
-        \resizebox{10cm}{!}{\includegraphics{../img/DB-diagrams/Laboratory.drawio.png}}
+        \resizebox{10cm}{!}{\includesvg{../img/DB-diagrams/Laboratory.svg}}
     \end{center}
     \caption{Laboratory Entity}
     \label{fig:laboratory_entity}
@@ -91,7 +91,7 @@ A user, as an administrator or professor, can create \textit{N} laboratories. Wh
 
 \begin{figure}[H]
     \begin{center}
-        \resizebox{10cm}{!}{\includegraphics{../img/DB-diagrams/Hardware.drawio.png}}
+        \resizebox{10cm}{!}{\includesvg{../img/DB-diagrams/Hardware.svg}}
     \end{center}
     \caption{Hardware Entity}
     \label{fig:hardware_entity}
@@ -105,7 +105,7 @@ For the creation, it requires a name (\textit{hw\_name}), IP (\textit{ip\_addres
 
 \begin{figure}[H]
     \begin{center}
-        \resizebox{9cm}{!}{\includegraphics{../img/DB-diagrams/Group.drawio.png}}
+        \resizebox{9cm}{!}{\includesvg{../img/DB-diagrams/Group.svg}}
     \end{center}
     \caption{Group Entity}
     \label{fig:group_entity}
@@ -119,7 +119,7 @@ When creating a group, the user needs to name it (\textit{group\_name}) and, opt
 
 \begin{figure}[H]
     \begin{center}
-        \resizebox{7.5cm}{!}{\includegraphics{../img/DB-diagrams/LabSession.drawio.png}}
+        \resizebox{7.5cm}{!}{\includesvg{../img/DB-diagrams/LabSession.svg}}
     \end{center}
     \caption{Lab Session Entity}
     \label{fig:lab_session_entity}
@@ -154,7 +154,7 @@ The Strategy pattern allowed us to have more control over the specific implement
 
 \begin{figure}[H]
     \begin{center}
-        \resizebox{15cm}{!}{\includegraphics{../img/api/api_architecture.drawio.png}}
+        \resizebox{15cm}{!}{\includesvg{../img/api/api_architecture.svg}}
     \end{center}
     \caption{API Architecture}
     \label{fig:api_architecture}
@@ -166,7 +166,7 @@ Figure \ref{fig:api_architecture} provides a simple overview of the implemented 
 
 \begin{figure}[H]
     \begin{center}
-        \resizebox{15cm}{!}{\includegraphics{../img/api/detailed_architecture.drawio.png}}
+        \resizebox{15cm}{!}{\includesvg{../img/api/detailed_architecture.svg}}
     \end{center}
     \caption{API Detailed Architecture}
     \label{fig:api_detailed_architecture}
