@@ -7,6 +7,8 @@ The web application serves as the primary point of interaction for users, integr
 
 The choice of Next.js as the framework for the web application was motivated by several factors. Next.js is built on top of React, a technology already taught in the course, which allowed us to leverage our existing knowledge. At the same time, Next.js simplifies development by providing built-in solutions for routing, server-side rendering, API integration, and other common tasks. This not only accelerated our development process but also allowed us to work with a modern, widely adopted framework in the industry, expanding our understanding of full-stack web development and exposing us to new possibilities and best practices.
 
+The web application also retrieves the domain configuration in JSON format from the API. By consuming this configuration, the frontend ensures that its domain-related settings are always synchronized and up to date with those defined on the backend. This approach centralizes domain management and reduces the risk of inconsistencies between the client and server.
+
 \subsection{Client-Server Logic Separation}
 
 The web application leverages Next.js to achieve a clear separation between client-side and server-side logic. All requests to the backend API are made from the server side, ensuring that sensitive operations and data exchanges are handled securely and are not exposed directly to the client. This architecture enhances security, enables better control over data flow, and allows for efficient server-side rendering and data fetching.
