@@ -2,15 +2,23 @@
 \babel@toc {english}{}\relax 
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {2.1}{\ignorespaces High-level architecture of the Remote Lab platform.}}{6}{figure.2.1}%
+\contentsline {figure}{\numberline {2.1}{\ignorespaces High-level Architecture}}{7}{figure.2.1}%
+\contentsline {figure}{\numberline {2.2}{\ignorespaces Detailed System Architecture}}{9}{figure.2.2}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {3.1}{\ignorespaces System Architecture Overview}}{7}{figure.3.1}%
-\contentsline {figure}{\numberline {3.2}{\ignorespaces Entity-Relationship Model (ER Model)}}{12}{figure.3.2}%
-\contentsline {figure}{\numberline {3.3}{\ignorespaces User Entity}}{12}{figure.3.3}%
-\contentsline {figure}{\numberline {3.4}{\ignorespaces Token Entity}}{13}{figure.3.4}%
-\contentsline {figure}{\numberline {3.5}{\ignorespaces Laboratory Entity}}{13}{figure.3.5}%
-\contentsline {figure}{\numberline {3.6}{\ignorespaces Hardware Entity}}{14}{figure.3.6}%
-\contentsline {figure}{\numberline {3.7}{\ignorespaces Group Entity}}{14}{figure.3.7}%
-\contentsline {figure}{\numberline {3.8}{\ignorespaces Lab Session Entity}}{15}{figure.3.8}%
-\contentsline {figure}{\numberline {3.9}{\ignorespaces API Architecture}}{16}{figure.3.9}%
-\contentsline {figure}{\numberline {3.10}{\ignorespaces API Detailed Architecture}}{17}{figure.3.10}%
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Entity-Relationship Model (ER Model)}}{11}{figure.3.1}%
+\contentsline {figure}{\numberline {3.2}{\ignorespaces User Entity}}{12}{figure.3.2}%
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Token Entity}}{12}{figure.3.3}%
+\contentsline {figure}{\numberline {3.4}{\ignorespaces Laboratory Entity}}{13}{figure.3.4}%
+\contentsline {figure}{\numberline {3.5}{\ignorespaces Hardware Entity}}{13}{figure.3.5}%
+\contentsline {figure}{\numberline {3.6}{\ignorespaces Group Entity}}{14}{figure.3.6}%
+\contentsline {figure}{\numberline {3.7}{\ignorespaces Lab Session Entity}}{14}{figure.3.7}%
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {4.1}{\ignorespaces API Architecture}}{17}{figure.4.1}%
+\contentsline {figure}{\numberline {4.2}{\ignorespaces API Detailed Architecture}}{18}{figure.4.2}%
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Web Application High-Level Architecture}}{21}{figure.5.1}%
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {9.1}{\ignorespaces System Architecture Overview}}{29}{figure.9.1}%
