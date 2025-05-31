@@ -1,0 +1,74 @@
+\chapter{Web API} \label{cap:web_api}
+The Web API provides endpoints for user management, authentication, authorization, and CRUD operations. 
+
+The API is developed with Kotlin and Spring Boot, and follows the Controller-Service-Repository pattern, which is prevalent in many Spring Boot applications. We chose this pattern because of the separation of concerns it provides and the possibilities for unit testing.
+
+To make the codebase even easier to maintain and improve the quality of life during development, Spring Framework's Inversion of Control container (COLOCAR REFERENCIA) and the Strategy pattern principle were also used. 
+
+Spring's dependency injection is a well-known technology in Java enterprise programming. It provides an easy way to declare dependencies, since the API was mostly built following Object Oriented Programming (OOP) principles. This framework allows us to declare the necessary dependencies for each module. It also provides a BeanFactory interface for advanced configurations. Using these Spring technologies moves the object management to Spring.
+
+The Strategy pattern allowed us to have more control over the specific implementation since it follows an interface. Every concrete implementation follows an interface, making it possible to change a class dynamically without changing the code. Spring's dependency injection works very well with this strategy design pattern. This makes unit tests much easier when the concrete implementation is not intended to be tested without changing it's code.
+
+\begin{figure}[H]
+    \centering
+    \includesvg[inkscapelatex=false, width=0.9\linewidth]{../img/api/api_architecture.drawio.svg}
+    \caption{API Architecture}
+    \label{fig:api_architecture}
+\end{figure}
+
+Figure \ref{fig:api_architecture} provides a simple overview of the implemented \acs{api}. The \textbf{HTTP} module (Controller) is responsible for exposing the endpoints and handling the messages. When a request is made, the HTTP module receives the request and hands it to the \textbf{Service} module. This is where the logic and verifications are performed. Since it is necessary to fetch and save data, a \textbf{Repository} module is needed. The repository module is responsible for communicating with the database.
+
+\vspace{3mm}
+
+\begin{figure}[H]
+    \centering
+    \includesvg[inkscapelatex=false, width=0.9\linewidth]{../img/api/detailed_architecture.drawio.svg}
+    \caption{API Detailed Architecture}
+    \label{fig:api_detailed_architecture}
+\end{figure}
+
+Figure \ref{fig:api_detailed_architecture} provides a more detailed overview of how the architecture is composed. 
+
+As explained, the HTTP module contains the controllers, each one with its functions. The pipeline contains the argument resolvers and interceptors. For the implemented system, only one argument resolver and two interceptors were implemented. The argument resolver (COLOCAR REFERENCIA) is used to provide user information to the controllers. Since the authentication method we used was token-based, this argument resolver extracts user information from the request. Every controller that has a parameter with the type \textit{AuthenticatedUser} will be authenticated. 
+
+For the request to contain the needed information about the user, an interceptor is required. This is one of the two interceptors implemented. Every request, before reaching the controller, passes through every configured interceptor. This authentication interceptor checks if the handler parameters contain a parameter of the type \textit{AuthenticatedUser}. If it does, the entire process of getting the token from the request, verifying it, and retrieving the user is performed. If not, normal execution continues.
+\begin{center}
+    \begin{lstlisting}[caption={Type AuthenticatedUser verification example}]
+    if (handler is HandlerMethod &&
+        handler.methodParameters.any {
+            it.parameterType == AuthenticatedUser::class.java
+        }
+    )
+    \end{lstlisting}
+\end{center}
+
+The other interceptor is for an API key. It checks if the handler contains a custom annotation. If yes, the API key is validated; if not, an unauthorized response is sent. This interceptor is useful for the login endpoint. This login endpoint is to be performed in the Web App and is not meant to be used by end users.
+
+The service module performs the necessary checks, using domain classes defined in the Domain module. These classes provide configurations and methods for validating certain data. Configurations in domain classes are provided by a JSON file containing domain restrictions.
+
+\begin{center}
+    \begin{lstlisting}[caption={Example of the group entry}]
+        "group": {
+            "groupName": {
+              "min": 3,
+              "max": 100,
+              "optional": false
+            },
+            "groupDescription": {
+              "min": 10,
+              "max": 1000,
+              "optional": true
+            }
+          }
+    \end{lstlisting}
+\end{center}
+
+This JSON file is converted to a class using Kotlin Serialization. This allows an easy way to change specific values without touching the codebase.
+
+\vspace{3mm}
+
+Every response, whether successful or an error, follows a specific format. The API documentation provides an overview of the possible responses. Error messages follow the application/problem+json format (COLOCAR REFERENCIA).
+
+\vspace{3mm}
+
+The API is expected to be public, providing full documentation (COLOCAR REFERENCIA POSTMAN) in Postman. It was decided to have the documentation in Postman because of the easy-to-use documentation builder inside the collection containing the tests for the endpoints. The API key is implemented for this reason. In future work, when the API reaches a stable version to be made public, users who want to use it will need to log in to the website and generate a token to use the API.

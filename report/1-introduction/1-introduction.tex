@@ -1,39 +1,44 @@
 %
 % Chapter 1
 %
-\chapter{Introduction} \label{cap:intro}
+\chapter{Introduction}\label{cap:intro}
+In recent years, the need for remote access to laboratory resources has grown significantly, driven by the expansion of online education, increased research collaboration, and the growing complexity of experimental setups. Traditional laboratories often require physical presence, which can limit accessibility and flexibility for students, researchers, and professionals. This limitation has become particularly evident in situations where geographical constraints, time restrictions, or extraordinary circumstances (such as global pandemics) prevent direct access to laboratory facilities.
+
+The project described in this report addresses these challenges by developing a comprehensive solution for remote laboratory access that maintains the quality and integrity of hands-on experimentation while providing the flexibility of remote operation.
 
 %
-% Secção 1.1
+% Section 1.1
 %
-\section{Context and Motivation} \label{sec11}
-In the recent years, the need for remote access to laboratory resources has grown significantly, driven by the expansion of online education, research collaboration, and the increasing complexity of experimental setups. Traditional laboratories often require physical presence, which can limit accessibility and flexibility for students, researchers, and professionals.
-The \textbf{Remote Lab} here is proposed to address these challenges by providing a platform that enables secure, efficient, and user-friendly remote access to laboratory equipment and resources.
+\section{Objectives}\label{sec:objectives}
+Considering these emerging needs, a platform was proposed and implemented to enable secure, efficient, and user-friendly remote access to laboratory equipment and resources. The design of the platform was divided into two distinct phases. In the first phase, a database, an \acf{api}, and a web application were designed and implemented. This phase also encompassed the deployment architecture of the platform, including containerization, orchestration, and other essential configurations. In the second phase, the communication protocols between the platform and laboratory hardware were designed and implemented.
 
-\section{State of the Art}
-
-In recent years, several initiatives have emerged to provide remote access to laboratory resources, especially in the context of higher education and research. Projects such as \acs{mit}'s iLab~\cite{ilab} and LabShare~\cite{labshare} have demonstrated the feasibility and benefits of remote laboratories, enabling students and researchers to conduct experiments from anywhere in the world. These platforms typically focus on providing secure access, scheduling, and integration with a variety of laboratory equipment. The literature highlights the importance of usability, scalability, and security in the design of such systems, as well as the challenges associated with real-time interaction and hardware integration.
-
-There are several systems that offer functionalities similar to those of the Remote Lab project. For example, the \acs{isa}, developed by \acs{mit}, is no longer operational and is not available for public access~\cite{ilab}. LabShare is another notable example, but it is currently also unavailable~\cite{labshare}. Other systems, such as WebLab-Deusto, focus on specific domains like electronics and instrumentation, providing specialized interfaces and tools for remote experimentation~\cite{weblabdeusto}. These systems serve as valuable references for the development of the Remote Lab platform, informing decisions related to architecture, user experience, and integration with laboratory hardware.
-
-%
-% Secção 1.2
-%
-\section{Objectives} \label{sec12}
-The main objectives of the Remote Lab project are:
+To design and implement a scalable platform for remote laboratory access, the following main objectives were established:
 \begin{itemize}
-    \item To design and implement a scalable platform for remote laboratory access.
-    \item To ensure secure authentication and authorization for different user roles.
-    \item To provide an intuitive user interface for managing and scheduling laboratory sessions.
-    \item To support integration with various types of laboratory hardware.
+\item Web \acs{api} to ensure comprehensive user, laboratory, and hardware management;
+\item Web application that provides an intuitive and user-friendly interface;
+\item Secure authentication and authorization mechanisms;
+\item Role-based access control;
+\item Robust data persistence through a well-designed database system;
+\item Remote manipulation capabilities via terminal access to laboratory devices.
 \end{itemize}
 
-This project focuses on the development of the core platform, including backend services, user management, and basic hardware integration. Advanced features such as real-time data analytics, support for a wide range of laboratory devices, and extensive reporting capabilities are considered out of scope for the current phase.
+Additionally, several optional objectives were identified to enhance the system's functionality:
+\begin{itemize}
+\item Laboratory scheduling and reservation system;
+\item Real-time visual monitoring of laboratory hardware;
+\end{itemize}
 
-The project follows a modular and iterative development approach, leveraging modern software engineering practices. The backend is implemented using Kotlin and follows a layered architecture, while the frontend is developed with Next.js to provide a responsive and accessible user experience.
+\section{State of the Art}\label{sec:state_of_art}
+In recent years, numerous initiatives have emerged to provide remote access to laboratory resources, particularly in higher education and research contexts. Pioneering projects such as \acs{mit}'s iLab~\cite{ilab} and LabShare~\cite{labshare} have demonstrated both the feasibility and substantial benefits of remote laboratories, enabling students and researchers to conduct experiments from anywhere in the world. These platforms typically emphasize secure access protocols, intelligent scheduling systems, and seamless integration with diverse laboratory equipment.
+
+The existing literature underscores the critical importance of usability, scalability, and security in the design of remote laboratory systems. Key challenges identified include ensuring real-time interaction capabilities, maintaining hardware integration reliability, and providing adequate user support and training.
+
+Several systems currently offer functionalities similar to those proposed in the Remote Lab project. The \acs{isa}, originally developed by \acs{mit}, represented an early successful implementation but is no longer operational and unavailable for public access~\cite{ilab}. Similarly, LabShare, another notable platform, is currently inactive~\cite{labshare}. Contemporary systems such as WebLab-Deusto focus on specialized domains like electronics and instrumentation, providing tailored interfaces and tools for remote experimentation in specific fields~\cite{weblabdeusto}.
+
+Other significant contributions to the field include the Remote Laboratory Management System (RLMS)~\cite{rlms} and the Labshare Sahara framework~\cite{sahara}, which have influenced modern approaches to remote laboratory architecture and user experience design. These systems serve as valuable references for the development of the Remote Lab platform, informing critical decisions related to system architecture, user experience optimization, and hardware integration strategies.
 
 %
-% Secção 1.3
+% Section 1.3
 %
-\section{Structure of the Document} \label{sec13}
-The structure of this report is as follows: Chapter 2 presents the related work, with a general overview of the existing solutions and technologies; Chapter 3 describes the system architecture; Chapter 4 details the main components and their interactions; Chapter 5 evaluates the system's performance and usability; and Chapter 6 presents the conclusions and future work perspectives.
+\section{Document Structure}\label{sec:document_structure}
+This report is organized as follows: Chapter~\ref{cap:proposed-architecture} presents and describes the proposed system architecture, including detailed specifications and core functionalities. Building upon the understanding of system components, the database design, web \acs{api} implementation, and web application development are described in Chapters~\ref{cap:database}, \ref{cap:web_api}, and \ref{cap:web_app}, respectively. Chapter~\ref{cap:project_org_deployment} details the project organization methodology and deployment strategies employed. Chapter~\ref{cap:experimental_results} presents comprehensive testing procedures and validation results for the implemented system. Finally, Chapter~\ref{cap:conclusions} provides conclusions regarding the system's performance and outlines potential directions for future development and enhancement. 

@@ -57,6 +57,14 @@
   short=MIT,
   long=Massachusetts Institute of Technology
 }
+\DeclareAcronym{uri}{
+  short=URI,
+  long=Uniform Resource Identifier
+}
+\DeclareAcronym{http}{
+  short=HTTP,
+  long=HyperText Transfer Protocol
+}
 
 \begin{document}
 \pagenumbering{roman}
@@ -184,17 +192,29 @@ Baseado numa arquitetura com back-end (base de dados e Web \acs{api}) e front-en
 \include{1-introduction/1-introduction}
 
 % Capitulo 2
-%\include{2-state-of-the-art/2-state-of-the-art}
+\include{2-proposed-architecture/2-proposed-architecture}
 
 % Capitulo 3
-\include{3-proposed-architecture/3-proposed-architecture}
+\include{3-database/3-database}
 
 % Capitulo 4
+\include{4-web-api/4-web-api}
+
+% Capitulo 5
+\include{5-web-app/5-web-app}
+
+% Capitulo 6
+\include{6-deployment-project-org/6-deployment-project-org}
+
+% Capitulo 7
+\include{7-experimental-results/7-experimental-results}
+
+% Capitulo 8
+\include{8-conclusions/8-conclusions}
+
+
 \include{4-implemented-infrastructure/4-implemented-infrastructure}
-%\include{capexemplos}
 
-% Capitulo 4
-%\include{captestes}
 
 % Referências
 \bibliographystyle{unsrt}

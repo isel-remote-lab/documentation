@@ -1,0 +1,60 @@
+%
+% Chapter 3
+%
+\chapter{Proposed Architecture} \label{cap:proposed-architecture}
+
+Having the objective to implement a platform to provide remote laboratories, figure ~\ref{fig:architecture} introduces a simple architecture of the system. A user, remotely, can access the platform. The server hosting the platform communicates with an external authentication service to authenticate the user. Then a user can remotely manipulate hardware. 
+
+\vspace{5mm}
+
+\begin{figure}[H]
+    \centering
+    \includesvg[inkscapelatex=false, width=0.9\linewidth]{./../img/SimpleArchitectureRL.drawio.svg}
+\caption{High-level Architecture}
+\label{fig:architecture}
+\end{figure}
+
+Section~\ref{sec:user_role} describe the different types of users as well their possible interactions with the system. In section~\ref{sec:system_functionalities}, the system functionalities are introduced and to conclude, in section Y, it is described the system architecture with a introduction to it's components. 
+
+\section{System Users} \label{sec:user_role}
+In order to separate functions by user, it is considered three types of user:
+
+\begin{description}
+    \item \textbf{Student} can access laboratories and manipulate it's hardware. 
+    \item \textbf{Professor} can create laboratories and assign hardware and groups, which he can also create.
+    \item \textbf{Administrator} can managed system users and administrative aspects.
+\end{description}
+
+This separation of user types, gives a reliable control in the system, for example if a user can perform certain actions or not. This is further elaborated later as one progresses through, introducing a hierarchy and RBAC (COLOCAR REF) systems.
+
+\section{System Functionalities} \label{sec:system_functionalities}
+The system supports user authentication and authorization. This is further utilized in the Web \acs{api}, which exposes endpoints that offers resources, their management and applies the business logic. The endpoints are offered as \ac{uri}. The Web \acs{api} communicates with the database which were design to meet the requirements of the system, such as holding the necessary information. The hardware abstraction layer is also in communication with the Web \acs{api}, translating instructions to the specefic hardware. The Web Application makes requests to the Web \acs{api}. This provides:
+
+\begin{itemize}
+    \item Access user information;
+    \item Laboratory access and creation;
+    \item Group creation;
+    \item Hardware information creation;
+    \item User management.
+\end{itemize}
+
+\section{System Components} \label{sec:system_components}
+As mentioned before, the system is composed with a Web Application, Web \acs{api}, database and a hardware abstraction layer. Figure~\ref{fig:detailed_architecture} illustrates a more detailed architecture of the proposed system as well the tecnologies taken intro consideration when proposing it: 
+
+\begin{figure}[H]
+    \centering
+    \includesvg[inkscapelatex=false, width=1\linewidth]{./../img/SystemArchitectureWithTechRL.drawio.svg}
+\caption{Detailed System Architecture}
+\label{fig:detailed_architecture}
+\end{figure}
+
+The server in figure~\ref{fig:architecture}, as a top level entity is zoomed into what is shown in figure~\ref{fig:detailed_architecture}, containing the Back-End (1), Database (2), Front-End (3). It also illustrates the Authentication Server (4) and the Embedded Client (5). 
+
+The Back-End (1) contains the Web \acs{api} and the hardware abstraction layer. The Embedded Client (5) is illustrated and mentioned to show the possibilities of the communication with hardware. In this case the Embedded Client is communicating with a FPGA (COLOCAR REF). Depending on what hardware is associated with a sepecific laboratory, the hardware abstraction layer contained in the Back-End (1) provides different instructions and interactions. The Web API uses \acf{http} as a communication means. Spring (COLOCAR REF) was proposed as the main tecnology for the Web \acs{api} and Kotlin as the programming language. Chapter~\ref{cap:web_api} takes a deep dive into the Web API explaining the choice of Spring and Kotlin, architecture and implementation details. 
+
+The Database (2) was design to hold the necessary information of the system. PostgreSQL was the choice for the proposed database. Chapter~\ref{cap:database} describes the database ER model, the reason behind PostgreSQL and implementation details.
+
+The Front-End (3) s developed in Next.js (COLOCAR REF) and is the visual interface for a user. It makes requests to the Back-End (1) for fetching or set data. Chapter~\ref{cap:web_app} takes a deep dive to the Web Application.
+
+The authentication is made through the Web Application, using NextAuth (COLOCAR REF). Using this framework a simple communication with the Authentication Server (4) to authenticate a user. This Authentication Server (4) is provided by Microsoft OAuth (COLOCAR REF). This setup allows users to log in using their university credentials, providing a secure and familiar authentication experience. It also allows to change the OAuth provider or add one if needed.
+
