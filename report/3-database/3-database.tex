@@ -33,7 +33,7 @@ The \textbf{User} entity represents a user in the system. The username and email
     \label{fig:token_entity}
 \end{figure}
 
-A user can create \textit{N} tokens. The \textbf{Token} is a weak entity because it cannot be identified by its attributes alone and therefore requires a user, which is a strong entity, to be identified. Its attributes cannot uniquely identify it. A token is created by only one user.
+A user can create \textit{N} tokens. The \textbf{Token} is a weak entity because it cannot be uniquely identified by its attributes alone and therefore requires a user, which is a strong entity, to be identified. A token is created by only one user.
 
 This is a useful entity for authentication propuses. It was designed to hold a hash value in the \textit{token\_validation} attribute.
 
@@ -98,13 +98,9 @@ Finally, a user can join a laboratory if they are in a group associated with it.
 Lab Session is a weak entity. It requires two strong entities to be identified: the \textbf{User} entity and the \textbf{Laboratory} entity. This is used to check whether a user is in a lab session or for statistical purposes. The \textit{state} attribute indicates whether the session is over or still running. The \textit{start\_time} and \textit{end\_time} can be used for statistical details, such as determining how much time a user spent in a laboratory, or for future purposes, such as scheduling sessions.
 
 \subsection{Implementation Details}
-After providing an overview of the database entities and their associations, there are important details worth mentioning:
-
-\begin{itemize}
-    \item Although PostgreSQL is being used for its functionalities, it was decided that all logic and verifications are implemented in the Web API, so that no triggers or complex constraints are implemented on the database side.
-\end{itemize}
+Although PostgreSQL is being used for its functionalities, it was decided that all logic and verifications are implemented in the Web API, so that no triggers or complex constraints are implemented on the database side.
 
 \subsection{Conclusion}
-This section has provided an overview of the database architecture, implementation, and design decisions. It has also presented the \acs{er model} of the database and described a typical user journey, explaining database interactions.
+This chapter has provided an overview of the database architecture, implementation, and design decisions. It has also presented the \acs{er model} of the database and described a typical user journey, explaining database interactions.
 
 The documentation should be consulted for a comprehensive deep dive. It explains every entity, its attributes, and provides theoretical insights.
