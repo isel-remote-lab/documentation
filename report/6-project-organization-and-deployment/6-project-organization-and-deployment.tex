@@ -25,7 +25,7 @@ The deployment process for the Remote Lab platform is designed to be straightfor
 
 \subsection{Containerization and Orchestration} \label{subsec:containerization}
 
-All major components—including the backend (api), frontend (website), and database—are containerized using Docker~\cite{docker-docs}. This guarantees consistency across development, testing, and production environments. Docker Compose orchestrates multi-container deployments, manages networking between services, and handles environment-specific configurations~\cite{docker-compose-docs}.
+All major components—including the backend (\ac{api}), frontend (website), and database—are containerized using Docker~\cite{docker-docs}. This guarantees consistency across development, testing, and production environments. Docker Compose orchestrates multi-container deployments, manages networking between services, and handles environment-specific configurations~\cite{docker-compose-docs}.
 
 \subsection{Environment Configuration and Secrets} \label{subsec:env_config}
 
@@ -35,7 +35,7 @@ Sensitive configuration files and environment variables are managed in the \text
 
 To streamline deployment, the platform provides a \texttt{start.sh} script at the repository root. This script automates the initialization of all required services and dependencies with a single command. It builds Docker images, starts containers using Docker Compose, and ensures that environment variables and configuration files are correctly loaded from the \texttt{private/} submodule.
 
-The \texttt{start.sh} script also supports several flags to customize the deployment process, such as selecting the environment (development or production), starting only the api, enabling Cloudflare tunneling, or switching branches. These options make it easy to adapt deployment to different scenarios with simple command-line arguments.
+The \texttt{start.sh} script also supports several flags to customize the deployment process, such as selecting the environment (development or production), starting only the \ac{api}, enabling Cloudflare tunneling, or switching branches. These options make it easy to adapt deployment to different scenarios with simple command-line arguments.
 
 \subsection{Cloudflare Tunneling} \label{subsec:cloudflare_tunneling}
 
@@ -53,7 +53,7 @@ This approach reduces operational complexity, increases security, and streamline
 
 \subsection{Nginx as Reverse Proxy} \label{subsec:nginx_reverse_proxy}
 
-In the current implementation, NGINX acts as a reverse proxy to route \ac{http} requests to both the frontend (website) and backend (API) services~\cite{nginx-docs}. This allows the web application and the API to be accessed through a single entry point, even though they run in separate containers and listen on different internal ports. NGINX transparently proxies requests from the frontend to the backend, simplifying client-side configuration and enabling seamless communication between modules.
+In the current implementation, NGINX acts as a reverse proxy to route \ac{http} requests to both the frontend (website) and backend (\ac{api}) services~\cite{nginx-docs}. This allows the web application and the \ac{api} to be accessed through a single entry point, even though they run in separate containers and listen on different internal ports. NGINX transparently proxies requests from the frontend to the backend, simplifying client-side configuration and enabling seamless communication between modules.
 
 At this stage, NGINX is not configured for load balancing or native HTTPS termination. All traffic is handled over HTTP within the Docker network, and any external HTTPS is managed by tunneling solutions such as Cloudflare when needed.
 
