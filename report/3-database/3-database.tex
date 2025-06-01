@@ -10,7 +10,7 @@ This chapter presents an overview of the \ac{er model} and critical implementati
     \label{fig:er_model}
 \end{figure}
 
-The database design follows a normalized relational structure that supports user authentication, secure session management, and the remaining system functionalities. The ER model encompasses the core entities required for system functionality while maintaining data integrity and scalability.
+The database design follows a normalized relational structure that supports user authentication, secure session management, and the remaining system functionalities. The \acs{er model} encompasses the core entities required for system functionality while maintaining data integrity and scalability.
 
 \section{Core Entities}
 \subsection*{User}
@@ -69,7 +69,7 @@ A user, as an administrator or professor, can create \textit{N} laboratories. Wh
 
 Upon successful laboratory creation, the user can associate \textbf{Hardware} to it, which must be created separately.
 
-For the creation, it requires a name (\textit{hw\_name}), \ac{ip} (\textit{ip\_address}) and MAC (\textit{mac\_address}) addresses (which can be null depending on the hardware), a status (\textit{hw\_status}) to indicate whether the hardware is under maintenance, occupied, or available, and a serial number (\textit{hw\_serial\_num}) to uniquely identify the hardware. Although it has an ID, the serial number helps physically identify the hardware.    
+For the creation, it requires a name (\textit{hw\_name}), \ac{ip} (\textit{ip\_address}) and \ac{mac} (\textit{mac\_address}) addresses (which can be null depending on the hardware), a status (\textit{hw\_status}) to indicate whether the hardware is under maintenance, occupied, or available, and a serial number (\textit{hw\_serial\_num}) to uniquely identify the hardware. Although it has an identifier, the serial number helps physically identify the hardware.    
 
 \subsection*{Group}
 
@@ -98,7 +98,7 @@ Finally, a user can join a laboratory if they are in a group associated with it.
 Lab Session is a weak entity. It requires two strong entities to be identified: the \textbf{User} entity and the \textbf{Laboratory} entity. This is used to check whether a user is in a lab session or for statistical purposes. The \textit{state} attribute indicates whether the session is over or still running. The \textit{start\_time} and \textit{end\_time} can be used for statistical details, such as determining how much time a user spent in a laboratory, or for future purposes, such as scheduling sessions.
 
 \section{Implementation Details}
-Although PostgreSQL is being used for its functionalities, it was decided that all logic and verifications are implemented in the Web \ac{api}, so that no triggers or complex constraints are implemented on the database side.
+Although PostgreSQL~\cite{postgresql} is being used for its functionalities, it was decided that all logic and verifications are implemented in the Web \ac{api}, so that no triggers or complex constraints are implemented on the database side.
 
 \section{Summary}
 This chapter has provided an overview of the database architecture, implementation, and design decisions. It has also presented the \acs{er model} of the database and described a typical user journey, explaining database interactions.
