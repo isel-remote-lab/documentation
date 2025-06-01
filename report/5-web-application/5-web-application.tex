@@ -1,5 +1,7 @@
 \chapter{Web Application} \label{cap:web_app}
 
+This chapter serves as the main documentation for the @Web (Next.js) application, providing a comprehensive overview of its architecture, features, authentication mechanisms, and integration strategies. It is intended as the primary reference for understanding the design and implementation choices made in the development of the web application, and should be consulted for any details regarding the frontend of the Remote Lab platform~\cite{nextjs-docs}.
+
 The web application is the primary interface for users to interact with the Remote Lab platform. Built with Next.js (React), it provides a modern, responsive, and user-friendly experience for students, professors, and administrators~\cite{nextjs-docs}. The application enables users to access, schedule, and manage laboratory resources remotely, supporting a wide range of devices and ensuring accessibility for all user roles.
 
 \section{Overview}
@@ -9,21 +11,21 @@ The decision to use Next.js as the framework was driven by its robust feature se
 
 A key architectural choice is the retrieval of domain configuration in JSON format from the backend API. This ensures that the frontend's domain-related settings are always synchronized with those defined on the backend, centralizing domain management and reducing the risk of inconsistencies.
 
-\begin{figure}[H]
-    \begin{center}
-        %\resizebox{15cm}{!}{\includesvg{../img/SimpleArchitectureRL.svg}}
-    \end{center}
-    \caption{Web Application High-Level Architecture}
-    \label{fig:webapp_simple_architecture}
-\end{figure}
-
-%Figure \ref{fig:webapp_simple_architecture} illustrates the high-level architecture of the web application, showing the main components and their interactions.
-
 \section{Architecture and Logic Separation}
 
 The application leverages Next.js to achieve a clear separation between client-side and server-side logic. All sensitive operations and data exchanges with the backend API are performed server-side, enhancing security and control over data flow~\cite{nextjs-server-client-components,nextjs-data-fetching}. This architecture enables efficient server-side rendering, improved performance, and a better user experience. For more details on using Next.js to perform API requests from the server, see~\cite{auth0-nextjs-server-actions}.
 
 To optimize performance and user experience, the frontend performs input validation before sending requests to the API. This approach reduces the number of unnecessary API calls by catching invalid data early, providing immediate feedback to users, and minimizing server load. Importantly, the validation rules on the frontend are kept synchronized with the backend by leveraging the domain configuration JSON retrieved from the API. This ensures that both the client and server enforce consistent validation logic, reducing the risk of discrepancies and improving the reliability of the application.
+
+\begin{figure}[H]
+    \begin{center}
+        %\resizebox{15cm}{!}{\includesvg{../img/SimpleArchitectureRL.svg}}
+    \end{center}
+    \caption{High-level architecture of the web application, illustrating the separation between client-side and server-side logic and how API calls are performed on the server.}
+    \label{fig:webapp_simple_architecture}
+\end{figure}
+
+%Figure \ref{fig:webapp_simple_architecture} illustrates the high-level architecture of the web application, showing the main components and their interactions.
 
 \section{Main Features}
 \begin{itemize}
@@ -35,6 +37,8 @@ To optimize performance and user experience, the frontend performs input validat
     \item \textbf{Responsive Design:} Optimized for desktops, tablets, and mobile devices, ensuring accessibility and usability across platforms.
     \item \textbf{Loading UI:} The application uses loading states and skeleton screens to provide feedback during data fetching, improving perceived performance~\cite{nextjs-loading-ui}.
 \end{itemize}
+
+An additional usability feature implemented in the frontend is the ability for users with higher roles to switch their view to that of a lower role. For example, an administrator can choose to view the application as a professor, and a professor can view it as a student. This functionality is particularly useful for testing, support, and understanding the user experience from different perspectives, ensuring that features and permissions are correctly enforced for each role.
 
 \section{Authentication with NextAuth}
 
@@ -56,4 +60,4 @@ Deployment is streamlined using Next.js's built-in tools and best practices~\cit
 
 \section{Summary}
 
-The web application leverages the power and flexibility of Next.js to deliver a secure, scalable, and user-centric platform for remote laboratory access. Its architecture ensures clear separation of concerns, robust authentication, and a responsive user experience, while its integration with modern deployment practices guarantees maintainability and future growth. 
+The web application leverages the power and flexibility of Next.js to deliver a secure, scalable, and user-centric platform for remote laboratory access. Its architecture ensures clear separation of concerns, robust authentication, and a responsive user experience, while its integration with modern deployment practices guarantees maintainability and future growth. For further details on the features and implementation of the web application, this chapter should be used as the main reference, in conjunction with the official Next.js documentation~\cite{nextjs-docs}. 
