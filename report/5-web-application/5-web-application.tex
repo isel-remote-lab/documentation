@@ -40,6 +40,8 @@ To optimize performance and user experience, the frontend performs input validat
 
 An additional usability feature implemented in the frontend is the ability for users with higher roles to switch their view to that of a lower role. For example, an administrator can choose to view the application as a professor, and a professor can view it as a student. This functionality is particularly useful for testing, support, and understanding the user experience from different perspectives, ensuring that features and permissions are correctly enforced for each role.
 
+To enhance the user experience and make the application feel as much like a single-page application with multiple menus as possible, the frontend leverages Next.js modals using parallel and intercepting routes~\cite{nextjs-app-router}. This approach allows users to open dialogs, forms, or detailed views as overlays without leaving the current page context, providing smooth navigation and reducing full page reloads. By utilizing these advanced routing features, the application maintains a cohesive and interactive interface, improving usability and workflow efficiency.
+
 \section{Authentication with NextAuth}
 
 Authentication is implemented using NextAuth.js, a flexible authentication solution for Next.js applications. NextAuth is integrated to provide secure, seamless login experiences using Microsoft OAuth, allowing users to authenticate with their university credentials~\cite{nextjs-authentication}.
