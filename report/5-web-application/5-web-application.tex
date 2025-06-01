@@ -15,6 +15,15 @@ A key architectural choice is the retrieval of domain configuration in \ac{json}
 
 The application leverages Next.js to achieve a clear separation between client-side and server-side logic. All sensitive operations and data exchanges with the backend API are performed server-side, enhancing security and control over data flow~\cite{nextjs-server-client-components,nextjs-data-fetching}. This architecture enables efficient server-side rendering, improved performance, and a better user experience. For more details on using Next.js to perform API requests from the server, see~\cite{auth0-nextjs-server-actions}.
 
+It is important to note that these API requests are performed on the server side, meaning the user cannot directly see or inspect these requests from their browser. This enhances security and encapsulates sensitive operations away from the client.
+
+\begin{figure}[H]
+    \centering
+    \includesvg[inkscapelatex=false, width=0.9\linewidth]{../img/NextServerCalls.drawio.svg}
+    \caption{API requests performed by the Next.js server during the rendering and data fetching process.}
+    \label{fig:next-server-api-calls}
+\end{figure}
+
 To optimize performance and user experience, the frontend performs input validation before sending requests to the API. This approach reduces the number of unnecessary API calls by catching invalid data early, providing immediate feedback to users, and minimizing server load. Importantly, the validation rules on the frontend are kept synchronized with the backend by leveraging the domain configuration JSON retrieved from the API. This ensures that both the client and server enforce consistent validation logic, reducing the risk of discrepancies and improving the reliability of the application.
 
 \section{Main Features}
