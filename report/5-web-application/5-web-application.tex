@@ -1,12 +1,13 @@
 \chapter{Web Application} \label{cap:web_app}
-The web application provides a modern, user-friendly interface that enables users to access, schedule, and manage laboratory resources remotely. Built with Next.js (React), the web app is designed to be responsive and accessible from any device, ensuring a seamless experience for students, professors, and administrators.
 
-\subsection{Overview}
-The web application serves as the primary point of interaction for users, integrating with the backend services via RESTful APIs. It supports multiple user roles, each with tailored access and features according to their permissions.
+The web application is the primary interface for users to interact with the Remote Lab platform. Built with Next.js (React), it provides a modern, responsive, and user-friendly experience for students, professors, and administrators~\cite{nextjs-docs}. The application enables users to access, schedule, and manage laboratory resources remotely, supporting a wide range of devices and ensuring accessibility for all user roles.
 
-The choice of Next.js as the framework for the web application was motivated by several factors. Next.js is built on top of React, a technology already taught in the course, which allowed us to leverage our existing knowledge. At the same time, Next.js simplifies development by providing built-in solutions for routing, server-side rendering, API integration, and other common tasks. This not only accelerated our development process but also allowed us to work with a modern, widely adopted framework in the industry, expanding our understanding of full-stack web development and exposing us to new possibilities and best practices.
+\section{Overview}
+The web application serves as the main point of interaction, integrating seamlessly with backend services via RESTful APIs. It supports multiple user roles, each with tailored access and features according to their permissions. The interface dynamically adapts to the user's role, ensuring that each user only sees the features and data relevant to them.
 
-The web application also retrieves the domain configuration in JSON format from the API. By consuming this configuration, the frontend ensures that its domain-related settings are always synchronized and up to date with those defined on the backend. This approach centralizes domain management and reduces the risk of inconsistencies between the client and server.
+The decision to use Next.js as the framework was driven by its robust feature set and alignment with modern web development best practices. Next.js, built on top of React, offers built-in solutions for routing, server-side rendering, API integration, and more~\cite{nextjs-app-router,nextjs-server-client-components,nextjs-data-fetching,nextjs-api-routes}. This allowed the team to leverage existing knowledge while accelerating development and ensuring scalability and maintainability.
+
+A key architectural choice is the retrieval of domain configuration in JSON format from the backend API. This ensures that the frontend's domain-related settings are always synchronized with those defined on the backend, centralizing domain management and reducing the risk of inconsistencies.
 
 \begin{figure}[H]
     \begin{center}
@@ -16,22 +17,43 @@ The web application also retrieves the domain configuration in JSON format from 
     \label{fig:webapp_simple_architecture}
 \end{figure}
 
-Figure 
-%\ref{fig:webapp_simple_architecture} illustrates the high-level architecture of the web application, showing the main components and their interactions.
+%Figure \ref{fig:webapp_simple_architecture} illustrates the high-level architecture of the web application, showing the main components and their interactions.
 
-\subsection{Client-Server Logic Separation}
+\section{Architecture and Logic Separation}
 
-The web application leverages Next.js to achieve a clear separation between client-side and server-side logic. All requests to the backend API are made from the server side, ensuring that sensitive operations and data exchanges are handled securely and are not exposed directly to the client. This architecture enhances security, enables better control over data flow, and allows for efficient server-side rendering and data fetching. For more details on using Next.js to perform API requests from the server, see~\cite{auth0-nextjs-server-actions}.
+The application leverages Next.js to achieve a clear separation between client-side and server-side logic. All sensitive operations and data exchanges with the backend API are performed server-side, enhancing security and control over data flow~\cite{nextjs-server-client-components,nextjs-data-fetching}. This architecture enables efficient server-side rendering, improved performance, and a better user experience. For more details on using Next.js to perform API requests from the server, see~\cite{auth0-nextjs-server-actions}.
 
-\subsection{Main Features}
+To optimize performance and user experience, the frontend performs input validation before sending requests to the API. This approach reduces the number of unnecessary API calls by catching invalid data early, providing immediate feedback to users, and minimizing server load. Importantly, the validation rules on the frontend are kept synchronized with the backend by leveraging the domain configuration JSON retrieved from the API. This ensures that both the client and server enforce consistent validation logic, reducing the risk of discrepancies and improving the reliability of the application.
+
+\section{Main Features}
 \begin{itemize}
-    \item \textbf{Authentication:} Secure login using Microsoft OAuth (NextAuth), supporting university credentials and role assignment.
+    \item \textbf{Authentication:} Secure login using Microsoft OAuth (NextAuth), supporting university credentials and automatic role assignment~\cite{nextjs-authentication}.
     \item \textbf{Dashboard:} Personalized dashboard displaying relevant information, upcoming sessions, and quick access to key features.
     \item \textbf{Laboratory Management:} Professors and administrators can create, edit, and manage laboratory sessions, equipment, and participant lists.
     \item \textbf{Calendar and Scheduling:} Interactive calendar for booking and managing laboratory sessions, with real-time availability and notifications.
-    \item \textbf{Role-Based Access:} Interface adapts to the user's role, showing only the features and data relevant to their permissions. Users with higher roles can view and interact with the platform as if they had a lower role for testing and support purposes.
+    \item \textbf{Role-Based Access:} The interface adapts to the user's role, showing only the features and data relevant to their permissions. Users with higher roles can view and interact with the platform as if they had a lower role for testing and support purposes.
     \item \textbf{Responsive Design:} Optimized for desktops, tablets, and mobile devices, ensuring accessibility and usability across platforms.
+    \item \textbf{Loading UI:} The application uses loading states and skeleton screens to provide feedback during data fetching, improving perceived performance~\cite{nextjs-loading-ui}.
 \end{itemize}
 
-\subsection{Integration and Security}
-The web application communicates securely with the backend via RESTful APIs, using authentication tokens to protect sensitive operations. User sessions and data are managed according to best practices, ensuring privacy and integrity. The frontend is designed to prevent unauthorized access and to provide a robust, extensible foundation for future enhancements. 
+\section{Authentication with NextAuth}
+
+Authentication is implemented using NextAuth.js, a flexible authentication solution for Next.js applications. NextAuth is integrated to provide secure, seamless login experiences using Microsoft OAuth, allowing users to authenticate with their university credentials~\cite{nextjs-authentication}.
+
+When a user attempts to log in, they are redirected to the Microsoft login page. Upon successful authentication, NextAuth handles the OAuth flow, retrieves the user's profile information, and establishes a session. The session includes the user's role (such as student, professor, or administrator), which is determined based on information provided by the authentication provider or assigned within the application logic.
+
+NextAuth manages user sessions securely, storing authentication tokens and session data in HTTP-only cookies to prevent unauthorized access from the client side. The authentication state is accessible throughout the application, enabling role-based access control and dynamic adaptation of the user interface according to the user's permissions.
+
+This approach ensures that only authorized users can access protected resources and features, while also providing a familiar and convenient login experience. The integration with Microsoft OAuth leverages the institution's existing identity infrastructure, enhancing security and simplifying user management.
+
+NextAuth.js is highly extensible and supports a wide range of authentication providers through its flexible OAuth configuration~\cite{nextjs-authentication}. This means that, in addition to Microsoft OAuth, it is possible to integrate other OAuth-based authentication methods commonly used by universities, such as Google, GitHub, or institutional identity providers that support OAuth 2.0 or OpenID Connect. Furthermore, NextAuth allows the implementation of custom OAuth providers, making it feasible to connect to a university's own authentication server if needed. This flexibility ensures that the authentication system can adapt to different institutional requirements and future changes in identity management strategies~\cite{nextjs-authentication}.
+
+\section{Integration, Security, and Deployment}
+
+The web application communicates securely with the backend via RESTful APIs, using authentication tokens to protect sensitive operations. User sessions and data are managed according to best practices, ensuring privacy and integrity. The frontend is designed to prevent unauthorized access and to provide a robust, extensible foundation for future enhancements.
+
+Deployment is streamlined using Next.js's built-in tools and best practices~\cite{nextjs-deployment}. Environment variables are used to manage configuration securely across different environments~\cite{nextjs-env-vars}. The application is containerized and orchestrated alongside other platform components, ensuring consistency and reliability in both development and production.
+
+\section{Summary}
+
+The web application leverages the power and flexibility of Next.js to deliver a secure, scalable, and user-centric platform for remote laboratory access. Its architecture ensures clear separation of concerns, robust authentication, and a responsive user experience, while its integration with modern deployment practices guarantees maintainability and future growth. 
