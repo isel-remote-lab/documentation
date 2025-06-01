@@ -1,72 +1,73 @@
 \chapter{Project Organization and Deployment} \label{cap:project_org_deployment}
 
-% --- Project Structure ---
 \section{Project Structure}
 
-The Remote Lab project is organized into several main directories, each of which is managed as a GitHub submodule. This approach allows for independent development, versioning, and access control of each core component, supporting both modularity and security. The use of submodules also facilitates collaboration among different teams and ensures that sensitive information is handled appropriately.
+The Remote Lab project is organized into several main directories, most of which are managed as GitHub submodules. This modular approach enables independent development, versioning, and access control for each core component, supporting both scalability and security. Submodules also facilitate collaboration among different teams and ensure that sensitive information is handled appropriately.
 
-The main submodules of the project are:
+The main submodules and directories are:
 
 \begin{itemize}
-    \item \textbf{api/} -- Contains the backend source code, implemented in Kotlin with Spring Boot. This submodule is responsible for business logic, user management and laboratory session control.
-    \item \textbf{db/} -- Includes database scripts, supporting the persistence layer of the system.
-    \item \textbf{docs/} -- Stores project documentation, including technical reports, user guides, and architectural diagrams.
-    \item \textbf{img/} -- Stores project images, including diagrams, screenshots, and other visual representations of the system.
-    \item \textbf{nginx/} -- This directory is not a GitHub submodule but it provides Nginx configuration files for reverse proxying, load balancing, and secure access to backend services.
-    \item \textbf{private/} -- Dedicated to sensitive files and configurations, such as environment variables and secrets necessary for the secure operation of the system, and specific to our implementation choices. This submodule contains the information and configuration files required to run the project with our selected authentication (login) and database setup, reflecting the particular options chosen for our use case. It is not included directly in the main repository, ensuring that only authorized members have access to confidential information like API keys, external service credentials, and other private data essential for both production and development environments.
-    \item \textbf{website/} -- Holds the frontend web application, built with Next.js (React). This submodule provides the user interface for laboratory access, scheduling, and management.
-    \item \textbf{wiki/} -- Stores the GitHub Wiki pages, including the project documentation, deployment instructions, and other relevant information.
+    \item \textbf{api/} – Contains the backend source code, implemented in Kotlin with Spring Boot. Responsible for business logic, user management, and laboratory session control.
+    \item \textbf{db/} – Includes database scripts, supporting the system's persistence layer.
+    \item \textbf{docs/} – Stores project documentation, including technical reports, user guides, and architectural diagrams.
+    \item \textbf{img/} – Contains project images, such as diagrams, screenshots, and other visual assets.
+    \item \textbf{nginx/} – Provides Nginx configuration files for reverse proxying, load balancing, and secure access to backend services.
+    \item \textbf{private/} – Dedicated to sensitive files and configurations, such as environment variables and secrets. This submodule is not included directly in the main repository, ensuring that only authorized members have access to confidential information like API keys and external service credentials.
+    \item \textbf{website/} – Holds the frontend web application, built with Next.js (React). Provides the user interface for laboratory access, scheduling, and management.
+    \item \textbf{wiki/} – Stores the GitHub Wiki pages, including project documentation, deployment instructions, and other relevant information.
 \end{itemize}
 
-This modular structure, based on GitHub submodules, allows for independent development, testing, and deployment of each component, supporting both scalability and maintainability. By clearly separating concerns and leveraging best practices such as containerization and secure secret management, the project is well-positioned for collaborative development and future expansion.
+This structure allows for independent development, testing, and deployment of each component, while best practices such as containerization and secure secret management ensure the project is robust and ready for collaborative development and future expansion.
 
-% --- Deployment ---
 \section{Deployment} \label{sec:deployment}
 
 The deployment process for the Remote Lab platform is designed to be straightforward, secure, and reproducible, leveraging modern DevOps practices and containerization technologies.
 
 \subsection{Containerization and Orchestration} \label{subsec:containerization}
-All major components of the platform—including the backend (api), frontend (website), and database—are containerized using Docker. This ensures consistency across development, testing, and production environments. Docker Compose is used to orchestrate multi-container deployments, manage networking between services, and handle environment-specific configurations.
+
+All major components—including the backend (api), frontend (website), and database—are containerized using Docker. This guarantees consistency across development, testing, and production environments. Docker Compose orchestrates multi-container deployments, manages networking between services, and handles environment-specific configurations.
 
 \subsection{Environment Configuration and Secrets} \label{subsec:env_config}
-Sensitive configuration files and environment variables required for deployment are managed in the \textbf{private/} submodule. This submodule contains the necessary secrets, such as API keys, database credentials, and authentication settings, tailored to the specific requirements of the platform. Access to this submodule is restricted to authorized team members, ensuring the security of confidential information.
+
+Sensitive configuration files and environment variables are managed in the \textbf{private/} submodule. This submodule contains secrets such as API keys, database credentials, and authentication settings, tailored to the platform's requirements. Access is restricted to authorized team members, ensuring the security of confidential information.
 
 \subsection{Automation with start.sh} \label{subsec:automation_startsh}
-To further streamline the deployment process, the platform provides a \texttt{start.sh} script located at the root of the repository. This script automates the bootstrap process by orchestrating the initialization of all required services and dependencies with a single command. It handles tasks such as building Docker images, starting containers using Docker Compose, and ensuring that environment variables and configuration files are correctly loaded from the \texttt{private/} submodule.
 
-The \texttt{start.sh} script also supports several flags to customize the deployment process, such as selecting the environment (development or production), starting only the API, enabling Cloudflare tunneling, or switching branches. These options make it easy to adapt the deployment to different scenarios with simple command-line arguments.
+To streamline deployment, the platform provides a \texttt{start.sh} script at the repository root. This script automates the initialization of all required services and dependencies with a single command. It builds Docker images, starts containers using Docker Compose, and ensures that environment variables and configuration files are correctly loaded from the \texttt{private/} submodule.
 
-% --- Cloudflare Tunneling ---
+The \texttt{start.sh} script also supports several flags to customize the deployment process, such as selecting the environment (development or production), starting only the API, enabling Cloudflare tunneling, or switching branches. These options make it easy to adapt deployment to different scenarios with simple command-line arguments.
+
 \subsection{Cloudflare Tunneling} \label{subsec:cloudflare_tunneling}
 
-To facilitate secure remote access to the development or demonstration environment of the Remote Lab, Cloudflare Tunneling is used. This solution allows local services to be exposed to the internet without the need to configure firewall rules, port forwarding, or obtain public IPs.
-
-Cloudflare Tunnel creates a secure connection between the local machine and a public endpoint managed by Cloudflare, routing external traffic in an encrypted manner to the internal environment. This is especially useful for:
+To facilitate secure remote access to development or demonstration environments, Cloudflare Tunneling is used. This solution exposes local services to the internet without requiring firewall changes, port forwarding, or public IPs. Cloudflare Tunnel creates a secure connection between the local machine and a public endpoint managed by Cloudflare, routing external traffic in an encrypted manner to the internal environment. This is especially useful for:
 
 \begin{itemize}
     \item Allowing team members, professors, or evaluators to access development instances remotely.
-    \item Demonstrating the system without the need to deploy in a production environment.
+    \item Demonstrating the system without deploying to a production environment.
     \item Testing external integrations or federated authentication in controlled environments.
 \end{itemize}
 
-In this project, the use of Cloudflare Tunnel is integrated into the automation workflow via \texttt{start.sh} and Docker Compose. By using the appropriate flag (\texttt{cloudflare} or \texttt{c}) in the startup script, the tunnel service is automatically started alongside the other containers, making remote access simple and secure.
+In this project, Cloudflare Tunnel is integrated into the automation workflow via \texttt{start.sh} and Docker Compose. By using the appropriate flag (\texttt{cloudflare} or \texttt{c}) in the startup script, the tunnel service is automatically started alongside the other containers, making remote access simple and secure.
 
 This approach reduces operational complexity, increases security, and streamlines the system's development and validation cycle.
 
+\subsection{Nginx as Reverse Proxy} \label{subsec:nginx_reverse_proxy}
+
+In the current implementation, Nginx acts as a reverse proxy to route HTTP requests to both the frontend (website) and backend (API) services. This allows the web application and the API to be accessed through a single entry point, even though they run in separate containers and listen on different internal ports. Nginx transparently proxies requests from the frontend to the backend, simplifying client-side configuration and enabling seamless communication between modules.
+
+At this stage, Nginx is not configured for load balancing or native HTTPS termination. All traffic is handled over HTTP within the Docker network, and any external HTTPS is managed by tunneling solutions such as Cloudflare when needed.
+
+The Nginx configuration files are located in the \texttt{nginx/} directory and are included in the Docker Compose setup, ensuring that the reverse proxy is automatically started and configured alongside the other services during deployment.
+
 \subsection{Deployment Steps} \label{subsec:deployment_steps}
+
 \begin{enumerate}
     \item \textbf{Clone the Repository and Submodules:} Clone the main repository and initialize all submodules, including \texttt{private/}, to ensure all components and configurations are available.
     \item \textbf{Configure Environment Variables:} Ensure that all required environment variables and secret files are present in the appropriate locations, as provided by the \texttt{private/} submodule.
-    \item \textbf{Build and Start Services:} Use the provided \texttt{docker-compose.yml} file to build and start all services with a single command (e.g., \texttt{docker compose up --build}).
+    \item \textbf{Build and Start Services:} Use the provided \texttt{docker-compose.yml} file to build and start all services with a single command (e.g., \texttt{docker compose up --build}), or simply run the \texttt{start.sh} script at the project root, which automates the entire process including building images, starting containers, and loading environment variables and secrets.
     \item \textbf{Access the Platform:} Once all containers are running, the platform can be accessed via the configured web address. Nginx is used as a reverse proxy to route traffic securely to the appropriate services.
 \end{enumerate}
 
-\subsection{Local and Production Deployment} \label{subsec:local_prod_deployment}
-The deployment process is designed to be nearly identical for both local development and production environments. Developers can run the entire stack locally using Docker Compose, mirroring the production setup. For production, additional considerations such as SSL certificates, domain configuration, and scaling may be applied, but the core process remains the same.
-
-This approach ensures that deployments are reliable, repeatable, and secure, minimizing the risk of configuration drift and simplifying both initial setup and ongoing maintenance.
-
-% --- Build and CI/CD ---
 \section{Build and CI/CD} \label{sec:build_cicd}
 
 \begin{itemize}
@@ -76,7 +77,6 @@ This approach ensures that deployments are reliable, repeatable, and secure, min
     \item \textbf{GitHub Actions:} (If applicable) Used for continuous integration and automated builds.
 \end{itemize}
 
-% --- Summary ---
 \section{Summary}
 
-The implemented infrastructure leverages modern web technologies, containerization, and modular design to provide a robust, scalable, and maintainable platform for remote laboratory access.
+The implemented infrastructure leverages modern web technologies, containerization, and modular design to provide a robust, scalable, and maintainable platform for remote laboratory access. The deployment process is automated, secure, and ready for future growth, ensuring that the platform can evolve to meet new requirements and increased demand.
