@@ -1,11 +1,11 @@
 \chapter{Web API} \label{cap:web_api}
 The Web \ac{api} provides endpoints for user management, authentication, authorization, and \ac{crud} operations. 
 
-It is developed with Kotlin and Spring Boot, and follows the Controller-Service-Repository pattern, which is prevalent in many Spring Boot applications. We chose this pattern because of the separation of concerns it provides and the possibilities for unit testing.
+It is developed with Kotlin~\cite{kotlin} and Spring Framework~\cite{spring-framework}, and follows the Controller-Service-Repository pattern, which is prevalent in many Spring~\cite{spring} applications. We chose this pattern because of the separation of concerns it provides and the possibilities for unit testing.
 
-To make the codebase even easier to maintain and improve the quality of life during development, Spring Framework's Inversion of Control container (COLOCAR REFERENCIA) and the Strategy pattern principle were also used. 
+To make the codebase even easier to maintain and improve the quality of life during development, Spring Framework's Inversion of Control container~\cite{spring-ioc-container} and the Strategy pattern~\cite{strategy-pattern} principle were also used. 
 
-Spring's dependency injection is a well-known technology in Java enterprise programming. It provides an easy way to declare dependencies, since the \ac{api} was mostly built following Object Oriented Programming (\ac{oop}) principles. This framework allows us to declare the necessary dependencies for each module. It also provides a BeanFactory interface for advanced configurations. Using these Spring technologies, the object management is Spring's duty.
+Spring's dependency injection~\cite{spring-di} is a well-known technology in Java~\cite{java} enterprise programming. It provides an easy way to declare dependencies, since the \ac{api} was mostly built following \ac{oop} principles. This framework allows us to declare the necessary dependencies for each module. It also provides a BeanFactory interface~\cite{spring-bean-factory} for advanced configurations. Using these Spring technologies, the object management is Spring's duty.
 
 The Strategy pattern allowed us to have more control over the specific implementation since it follows an interface. Every concrete implementation follows an interface, making it possible to change a class dynamically without changing the code. Spring's dependency injection works very well with this strategy design pattern. This makes unit tests much easier when the concrete implementation is not intended to be tested without changing its code.
 
@@ -18,7 +18,7 @@ The Strategy pattern allowed us to have more control over the specific implement
     \label{fig:api_architecture}
 \end{figure}
 
-Figure \ref{fig:api_architecture} provides a simple overview of the implemented \acs{api}. The \textbf{\ac{http}} module (Controller) is responsible for exposing the endpoints and handling the messages. When a request is made, the HTTP module receives the request and hands it to the \textbf{Service} module. This is where the logic and verifications are performed. Since it is necessary to fetch and save data, a \textbf{Repository} module is needed. The repository module is responsible for communicating with the database.
+Figure \ref{fig:api_architecture} provides a simple overview of the implemented \acs{api}. The \textbf{\ac{http}} module (Controller) is responsible for exposing the endpoints and handling the messages. When a request is made, the \acs{http} module receives the request and hands it to the \textbf{Service} module. This is where the logic and verifications are performed. Since it is necessary to fetch and save data, a \textbf{Repository} module is needed. The repository module is responsible for communicating with the database.
 
 \vspace{3mm}
 
@@ -32,7 +32,7 @@ Figure \ref{fig:api_architecture} provides a simple overview of the implemented 
 Figure \ref{fig:api_detailed_architecture} provides a more detailed overview of how the architecture is composed. 
 
 \subsection*{HTTP Module}
-As explained, the HTTP module contains the controllers, each one with its functions. The pipeline contains the argument resolvers and interceptors. For the implemented system, only one argument resolver and two interceptors were implemented. The argument resolver (COLOCAR REFERENCIA) is used to provide user information to the controllers. Since the authentication method we used was token-based, this argument resolver extracts user information from the request. Every controller that has a parameter with the type \textit{AuthenticatedUser} will be authenticated. 
+The \acs{http} module contains the controllers~\cite{controller}, each one with its functions. The pipeline contains the argument resolvers~\cite{argument-resolver} and interceptors~\cite{interceptor}. For the implemented system, only one argument resolver and two interceptors were implemented. The argument resolver is used to provide user information to the controllers. Since the authentication method we used was token-based, this argument resolver extracts user information from the request. Every controller that has a parameter with the type \textit{AuthenticatedUser} will be authenticated. 
 
 For the request to contain the needed information about the user, an interceptor is required. This is one of the two interceptors implemented. Every request, before reaching the controller, passes through every configured interceptor. This authentication interceptor checks if the handler parameters contain a parameter of the type \textit{AuthenticatedUser}. If it does, the entire process of getting the token from the request, verifying it, and retrieving the user is performed. If not, normal execution continues.
 \begin{center}
@@ -45,7 +45,7 @@ For the request to contain the needed information about the user, an interceptor
     \end{lstlisting}
 \end{center}
 
-The other interceptor is for an API key. It checks if the handler contains a custom annotation. If yes, the API key is validated; if not, an unauthorized response is sent. This interceptor is useful for the login endpoint. This login endpoint is to be performed in the Web App and is not meant to be used by end users.
+The other interceptor is for an \acs{api} key. It checks if the handler contains a custom annotation. If yes, the \acs{api} key is validated; if not, an unauthorized response is sent. This interceptor is useful for the login endpoint. This login endpoint is to be performed in the Web Application and is not meant to be used by end users.
 
 \subsection*{Service Module}
 The service module performs the necessary checks, using domain classes defined in the Domain module. These classes provide configurations and methods for validating certain data. Configurations in domain classes are provided by a \ac{json} file containing domain restrictions.
@@ -67,14 +67,14 @@ The service module performs the necessary checks, using domain classes defined i
     \end{lstlisting}
 \end{center}
 
-This \ac{json} file is converted to a class using Kotlin Serialization. This allows an easy way to change specific values without touching the codebase.
+This \ac{json} file is converted to a class using Kotlin Serialization~\cite{kotlin-serialization}. This allows an easy way to change specific values without touching the codebase.
 
 \subsection*{Repository Module}
-The repository module serves as the data access layer, responsible for managing all communication between the application and the database. This functionality is implemented using \ac{jdbi} (COLCOAR REF), a lightweight and efficient database access library that provides a clean, declarative \acs{api} for database operations.
+The repository module serves as the data access layer, responsible for managing all communication between the application and the database. This functionality is implemented using \ac{jdbi}~\cite{jdbi}, a lightweight and efficient database access library that provides a clean, declarative \acs{api} for database operations.
 
-\ac{jdbi} offers several advantages for database interaction through its declarative approach. It enables the use of interfaces, annotations, and custom mappers to perform database access operations without requiring extensive boilerplate code. The library is built on top of \ac{jdbc} (COLOCAR REF), leveraging the standard Java database connectivity framework while providing a more intuitive and developer-friendly interface. This design philosophy results in a natural idiom that integrates seamlessly with both Java and Kotlin codebases.
+\ac{jdbi} offers several advantages for database interaction through its declarative approach. It enables the use of interfaces, annotations, and custom mappers to perform database access operations without requiring extensive boilerplate code. The library is built on top of \ac{jdbc}~\cite{jdbc}, leveraging the standard Java database connectivity framework while providing a more intuitive and developer-friendly interface. This design philosophy results in a natural idiom that integrates seamlessly with both Java and Kotlin codebases.
 
-The repository module implements the Repository pattern (COLOCAR CITE), which provides a consistent interface for data access operations while abstracting the underlying database implementation details.
+The repository module implements the Repository pattern, which provides a consistent interface for data access operations while abstracting the underlying database implementation details.
 
 \section{Role-Based Access Control System}
 As the introduction (chapter~\ref{cap:intro}) and database (chapter~\ref{cap:database}) already introduced what user types the system has as well their possible interaction and roles, an approach is needed to control that interactions to ensure the correct access control to resources. For this a \acf{rbac} approach was implemented to ensure that users have access only to the resources and actions appropriate for their role, coming from the user attribute role in the database. 
@@ -83,4 +83,4 @@ As mentioned before, a user, when authenticated, is assigned a role, such as stu
 
 \section{Conclusion}
 
-Since the \acs{api} is expected to be public in future work, the documentation is published in Postman (COLOCAR REF). This provides an easy-to-use documentation builder. When the API reaches a stable version and is made public, users will have to generate an authorization token via website. 
+Since the \acs{api} is expected to be public in future work, the documentation is published in Postman~\cite{postman}. The public API documentation~\cite{public-api-documentation} and the private API documentation~\cite{private-api-documentation} are hosted as public websites in postman. This provides an easy-to-use documentation builder. When the API reaches a stable version and is made public, users will have to generate an authorization token via website. 

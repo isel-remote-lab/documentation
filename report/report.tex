@@ -53,6 +53,10 @@
   short=IP,
   long=Internet Protocol address
 }
+\DeclareAcronym{mac}{
+  short=MAC,
+  long=Media Access Control address
+}
 \DeclareAcronym{http}{
   short=HTTP,
   long=HyperText Transfer Protocol
@@ -87,7 +91,7 @@
 }
 \DeclareAcronym{oauth}{
   short=OAuth,
-  long=Open Authorization (OAuth)
+  long=Open Authorization
 }
 \DeclareAcronym{cicd}{
   short=CI/CD,
@@ -108,6 +112,10 @@
 \DeclareAcronym{jdbc}{
   short=JDBC,
   long=Java Database Connectivity
+}
+\DeclareAcronym{fpga}{
+  short=FPGA,
+  long=Field-Programmable Gate Array
 }
 
 \begin{document}
@@ -261,8 +269,9 @@ Baseado numa arquitetura com back-end (base de dados e Web \acs{api}) e front-en
 \bibliography{references}
 \addcontentsline{toc}{chapter}{References}
 
-% Apêndices (opcional)
-%\appendix
-%\include{apendiceex}
+% Apêndices
+\appendix
+\chapter{Database Documentation}
+\input{../database/database-content}
 
 \end{document}
