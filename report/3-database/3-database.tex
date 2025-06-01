@@ -12,7 +12,7 @@ This chapter presents an overview of the \ac{er model} and critical implementati
 
 The database design follows a normalized relational structure that supports user authentication, secure session management, and the remaining system functionalities. The ER model encompasses the core entities required for system functionality while maintaining data integrity and scalability.
 
-\subsection*{Core Entities}
+\section{Core Entities}
 \subsection*{User}
 
 \begin{figure}[H]
@@ -97,10 +97,10 @@ Finally, a user can join a laboratory if they are in a group associated with it.
 
 Lab Session is a weak entity. It requires two strong entities to be identified: the \textbf{User} entity and the \textbf{Laboratory} entity. This is used to check whether a user is in a lab session or for statistical purposes. The \textit{state} attribute indicates whether the session is over or still running. The \textit{start\_time} and \textit{end\_time} can be used for statistical details, such as determining how much time a user spent in a laboratory, or for future purposes, such as scheduling sessions.
 
-\subsection{Implementation Details}
+\section{Implementation Details}
 Although PostgreSQL is being used for its functionalities, it was decided that all logic and verifications are implemented in the Web API, so that no triggers or complex constraints are implemented on the database side.
 
-\subsection{Conclusion}
+\section{Conclusion}
 This chapter has provided an overview of the database architecture, implementation, and design decisions. It has also presented the \acs{er model} of the database and described a typical user journey, explaining database interactions.
 
 The documentation should be consulted for a comprehensive deep dive. It explains every entity, its attributes, and provides theoretical insights.
