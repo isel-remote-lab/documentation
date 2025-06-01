@@ -25,16 +25,16 @@ To ensure proper access control and functionality separation, the system defines
     \item[\textbf{Administrator}] can manage system users, configure system-wide settings, monitor platform performance, and handle administrative aspects such as user provisioning and system maintenance.
 \end{description}
 
-This hierarchical separation of user types provides reliable access control throughout the system, determining whether a user can perform specific actions based on their assigned role. This approach is further enhanced through the implementation of a comprehensive hierarchy and RBAC system (COLOCAR REF), which provides fine-grained control over user permissions and system resources.
+This hierarchical separation of user types provides reliable access control throughout the system, determining whether a user can perform specific actions based on their assigned role. This approach is further enhanced through the implementation of a comprehensive hierarchy and \ac{rbac} system, which provides fine-grained control over user permissions and system resources.
 
 \section{System Functionalities}\label{sec:system_functionalities}
-The system is built around several core functionalities that work together to provide a comprehensive remote laboratory experience. The platform supports robust user authentication and authorization mechanisms, ensuring secure access to laboratory resources. These security features are integrated throughout the Web \acs{api}, which exposes well-defined endpoints that provide access to resources, implement resource management capabilities, and enforce business logic rules.
+The system is built around several core functionalities that work together to provide a comprehensive remote laboratory experience. The platform supports robust user authentication and authorization mechanisms, ensuring secure access to laboratory resources. These security features are integrated throughout the Web \ac{api}, which exposes well-defined endpoints that provide access to resources, implement resource management capabilities, and enforce business logic rules.
 
-The Web \acs{api} follows REST (COLOCAR REF) principles and exposes resources through standardized \acp{uri}. It maintains bidirectional communication with a purpose-built database designed to meet the system's requirements for storing and managing all necessary information, including user data, laboratory configurations, and session logs.
+The Web \ac{api} follows REST principles and exposes resources through standardized \acp{uri}. It maintains bidirectional communication with a purpose-built database designed to meet the system's requirements for storing and managing all necessary information, including user data, laboratory configurations, and session logs.
 
-A critical component of the system is the hardware abstraction layer, which communicates with the Web \acs{api} to translate high-level user instructions into hardware-specific commands. This abstraction enables the platform to support diverse types of laboratory equipment while maintaining a consistent user interface.
+A critical component of the system is the hardware abstraction layer, which communicates with the Web \ac{api} to translate high-level user instructions into hardware-specific commands. This abstraction enables the platform to support diverse types of laboratory equipment while maintaining a consistent user interface.
 
-The Web Application serves as the primary user interface, making \acs{http} requests to the Web \acs{api} to provide users with comprehensive functionality, including:
+The Web Application serves as the primary user interface, making \ac{http} requests to the Web \ac{api} to provide users with comprehensive functionality, including:
 
 \begin{itemize}
     \item Secure user authentication and profile management;
@@ -46,7 +46,7 @@ The Web Application serves as the primary user interface, making \acs{http} requ
 \end{itemize}
 
 \section{System Components}\label{sec:system_components}
-The proposed system comprises four main components: a Web Application, Web \acs{api}, database, and hardware abstraction layer. Figure~\ref{fig:detailed_architecture} illustrates the detailed architecture of the proposed system along with the specific technologies considered during the design phase:
+The proposed system comprises four main components: a Web Application, Web \ac{api}, database, and hardware abstraction layer. Figure~\ref{fig:detailed_architecture} illustrates the detailed architecture of the proposed system along with the specific technologies considered during the design phase:
 
 \begin{figure}[H]
     \centering
@@ -58,16 +58,16 @@ The proposed system comprises four main components: a Web Application, Web \acs{
 The server entity shown in Figure~\ref{fig:architecture} is expanded in Figure~\ref{fig:detailed_architecture} to reveal its internal components: the Back-End (1), Database (2), and Front-End (3). The architecture also illustrates the external Authentication Server (4) and the Embedded Client (5), demonstrating the system's integration capabilities.
 
 \subsection*{Back-End Architecture}
-The Back-End (1) encompasses both the Web \acs{api} and the hardware abstraction layer. The Web \acs{api} utilizes \acf{http} as its primary communication protocol and is built using Spring Framework (COLOCAR REF) as the main technology stack, with Kotlin (COLOCAR REF) as the primary programming language. Chapter~\ref{cap:web_api} provides comprehensive details about the Web \acs{api}, including the rationale for choosing Spring and Kotlin, architectural decisions, and implementation specifics.
+The Back-End (1) encompasses both the Web \ac{api} and the hardware abstraction layer. The Web \ac{api} utilizes \ac{http} as its primary communication protocol and is built using Spring Framework as the main technology stack, with Kotlin as the primary programming language. Chapter~\ref{cap:web_api} provides comprehensive details about the Web \ac{api}, including the rationale for choosing Spring and Kotlin, architectural decisions, and implementation specifics.
 
 \subsection*{Database Design}
 The Database (2) is designed to efficiently store and manage all system information, including user profiles, laboratory configurations, hardware specifications, and operational logs. PostgreSQL (COLOCAR REF) was selected as the database management system. Chapter~\ref{cap:database} describes the database entity-relationship model, explains the rationale behind choosing PostgreSQL, and provides detailed implementation information.
 
 \subsection*{Front-End Implementation}
-The Front-End (3) is developed using Next.js (COLOCAR REF), a modern React-based framework that provides server-side rendering capabilities and excellent performance optimization features. It serves as the primary visual interface for users and handles all client-server communication by making HTTP (COLOCAR REF) requests to the Back-End (1) for data retrieval and manipulation. Chapter~\ref{cap:web_app} provides an in-depth analysis of the Web Application design and implementation.
+The Front-End (3) is developed using Next.js, a modern React-based framework that provides server-side rendering capabilities and excellent performance optimization features. It serves as the primary visual interface for users and handles all client-server communication by making \ac{http} requests to the Back-End (1) for data retrieval and manipulation. Chapter~\ref{cap:web_app} provides an in-depth analysis of the Web Application design and implementation.
 
 \subsection*{Authentication System}
-User authentication is implemented through the Web Application using NextAuth.js (COLOCAR REF), a comprehensive authentication framework that facilitates secure communication with external authentication providers. The Authentication Server (4) is provided by Microsoft OAuth (COLOCAR REF), enabling users to authenticate using their institutional credentials.
+User authentication is implemented through the Web Application using NextAuth.js, a comprehensive authentication framework that facilitates secure communication with external authentication providers. The Authentication Server (4) is provided by Microsoft \ac{oauth}, enabling users to authenticate using their institutional credentials.
 
 \subsection*{Hardware Integration}
 The Embedded Client (5) is illustrated to demonstrate the system's hardware communication capabilities. In the current implementation, the Embedded Client communicates with FPGA (COLOCAR REF), showcasing the platform's ability to interface with programmable hardware devices. The hardware abstraction layer within the Back-End (1) provides different instruction sets and interaction protocols depending on the specific hardware associated with each laboratory, ensuring compatibility with diverse equipment types while maintaining a consistent user experience.
