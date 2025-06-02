@@ -41,11 +41,11 @@ The Web Application serves as the primary user interface, making \ac{http} reque
     \item Laboratory discovery, access, and real-time interaction capabilities;
     \item Group creation and collaborative workspace management;
     \item Hardware configuration and monitoring interfaces;
-    \item Comprehensive user and system administration tools;
+    \item Comprehensive user and system administration tools.
 \end{itemize}
 
 \section{System Components}\label{sec:system_components}
-The proposed system comprises four main components: a Web Application, Web \acs{api}, Database, and Hardware Abstraction layer. Figure~\ref{fig:detailed_architecture} illustrates the detailed architecture of the proposed system along with the specific technologies considered during the design phase:
+The proposed system comprises four main components: a Web Application, Web \acs{api}, Database, and Hardware Abstraction layer. Figure~\ref{fig:detailed_architecture} illustrates the detailed architecture of the proposed system along with the specific technologies considered during the design phase.
 
 \begin{figure}[H]
     \centering
@@ -54,19 +54,14 @@ The proposed system comprises four main components: a Web Application, Web \acs{
 \label{fig:detailed_architecture}
 \end{figure}
 
-The server entity shown in Figure~\ref{fig:detailed_architecture} is expanded in Figure~\ref{fig:detailed_architecture} to reveal its internal components: the Back-End (1), Database (2), and Front-End (3). The architecture also illustrates the external Authentication Server (4) and the Embedded Client (5), demonstrating the system's integration capabilities.
+The server entity depicted in Figure~\ref{fig:architecture} is expanded in Figure~\ref{fig:detailed_architecture} to reveal its internal components: the Back-End (1), Database (2), and Front-End (3). The architecture also illustrates the external Authentication Server (4) and the Embedded Client (5), demonstrating the system's integration capabilities.
 
-\subsection*{Back-End Architecture}
 The Back-End (1) encompasses both the Web \acs{api} and the Hardware Abstraction layer. The Web \acs{api} utilizes \ac{http} as its primary communication protocol and is built using Spring Framework~\cite{spring-framework} as the main technology stack, with Kotlin~\cite{kotlin} as the primary programming language. Chapter~\ref{cap:web_api} provides comprehensive details about the Web \acs{api}, including the rationale for choosing Spring~\cite{spring} and Kotlin~\cite{kotlin}, architectural decisions, and implementation specifics.
 
-\subsection*{Database Design}
 The Database (2) is designed to efficiently store and manage all system information, including user profiles, laboratory configurations, hardware specifications, and operational logs. PostgreSQL~\cite{postgresql} was selected as the database management system. Chapter~\ref{cap:database} describes the database entity-relationship model, explains the rationale behind choosing PostgreSQL~\cite{postgresql}, and provides detailed implementation information.
 
-\subsection*{Front-End Implementation}
 The Front-End (3) is developed using Next.js~\cite{nextjs-docs}, a modern React-based framework~\cite{react} that provides server-side rendering capabilities and excellent performance optimization features. It serves as the primary visual interface for users and handles all client-server communication by making \acs{http} requests to the Back-End (1) for data retrieval and manipulation. Chapter~\ref{cap:web_app} provides an in-depth analysis of the Web Application design and implementation.
 
-\subsection*{Authentication System}
 User authentication is implemented through the Web Application using NextAuth.js~\cite{nextjs-authentication}, a comprehensive authentication framework that facilitates secure communication with external authentication providers. The Authentication Server (4) is provided by Microsoft \ac{oauth}~\cite{microsoft-oauth}, enabling users to authenticate using their institutional credentials.
 
-\subsection*{Hardware Integration}
 The Embedded Client (5) is illustrated to demonstrate the system's hardware communication capabilities. In the current implementation, the Embedded Client communicates with \ac{fpga}, showcasing the platform's ability to interface with programmable hardware devices. The hardware abstraction layer within the Back-End (1) provides different instruction sets and interaction protocols depending on the specific hardware associated with each laboratory, ensuring compatibility with diverse equipment types while maintaining a consistent user experience.

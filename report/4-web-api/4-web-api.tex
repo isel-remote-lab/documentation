@@ -77,7 +77,7 @@ The repository module serves as the data access layer, responsible for managing 
 The repository module implements the Repository pattern, which provides a consistent interface for data access operations while abstracting the underlying database implementation details.
 
 \section{Role-Based Access Control System}
-As the introduction (chapter~\ref{cap:intro}) and database (chapter~\ref{cap:database}) already introduced what user types the system has as well their possible interaction and roles, an approach is needed to control that interactions to ensure the correct access control to resources. For this a \acf{rbac} approach was implemented to ensure that users have access only to the resources and actions appropriate for their role, coming from the user attribute role in the database. 
+As the introduction (Chapter~\ref{cap:intro}) and database (Chapter~\ref{cap:database}) already introduced what user types the system has as well their possible interaction and roles, an approach is needed to control that interactions to ensure the correct access control to resources. For this a \ac{rbac} approach was implemented to ensure that users have access only to the resources and actions appropriate for their role, coming from the user attribute role in the database. 
 
 As mentioned before, a user, when authenticated, is assigned a role, such as student, professor, or administrator, which determines their permissions within the platform. The service module is responsible in checking the user's role before allowing access to sensitive operations, such as managing laboratory sessions, accessing administrative features, or modifying user data. 
 
