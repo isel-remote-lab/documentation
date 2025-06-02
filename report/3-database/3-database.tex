@@ -1,5 +1,5 @@
 \chapter{Database} \label{cap:database}
-The database serves as the foundational component of the system architecture. PostgreSQL was selected as the database management system due to its open-source nature and robust support for relational data models. This choice aligns with previous project implementations and provides the consistency and performance required for the system's operational needs.
+The database serves as the foundational component of the system architecture. PostgreSQL~\cite{postgresql} was selected as the database management system due to its open-source nature and robust support for relational data models. This choice aligns with previous project implementations and provides the consistency and performance required for the system's operational needs.
 
 This chapter presents an overview of the \ac{er model} and critical implementation details. Complete technical documentation is provided in the accompanying appendix.
 
@@ -28,7 +28,7 @@ The \textbf{User} entity represents a user in the system. The username and email
 
 A user can create \textit{N} tokens. The \textbf{Token} is a weak entity because it cannot be uniquely identified by its attributes alone and therefore requires a user, which is a strong entity, to be identified. A token is created by only one user.
 
-This is a useful entity for authentication propuses. It was designed to hold a hash value in the \textit{token\_validation} attribute.
+This is a useful entity for authentication purposes. It was designed to hold a hash value in the \textit{token\_validation} attribute.
 
 Authentication workflow:
 

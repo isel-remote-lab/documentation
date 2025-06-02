@@ -1,8 +1,8 @@
 \chapter{Web Application} \label{cap:web_app}
 
-This chapter serves as the main documentation for the @Web (Next.js) application, providing a comprehensive overview of its architecture, features, authentication mechanisms, and integration strategies. It is intended as the primary reference for understanding the design and implementation choices made in the development of the web application, and should be consulted for any details regarding the frontend of the Remote Lab platform~\cite{nextjs-docs}.
-
 The web application is the primary interface for users to interact with the Remote Lab platform. Built with Next.js (React), it provides a modern, responsive, and user-friendly experience for students, professors, and administrators~\cite{nextjs-docs}. The application enables users to access, schedule, and manage laboratory resources remotely, supporting a wide range of devices and ensuring accessibility for all user roles.
+
+This chapter serves as the main documentation for the @Web (Next.js) application, providing a comprehensive overview of its architecture, features, authentication mechanisms, and integration strategies. It is intended as the primary reference for understanding the design and implementation choices made in the development of the web application, and should be consulted for any details regarding the frontend of the Remote Lab platform~\cite{nextjs-docs}.
 
 \section{Overview}
 The web application serves as the main point of interaction, integrating seamlessly with backend services via RESTful \ac{api}s. It supports multiple user roles, each with tailored access and features according to their permissions. The interface dynamically adapts to the user's role, ensuring that each user only sees the features and data relevant to them.
@@ -31,7 +31,6 @@ To optimize performance and user experience, the frontend performs input validat
     \item \textbf{Authentication:} Secure login using Microsoft \ac{oauth} (NextAuth), supporting university credentials and automatic role assignment~\cite{nextjs-authentication}.
     \item \textbf{Dashboard:} Personalized dashboard displaying relevant information, upcoming sessions, and quick access to key features.
     \item \textbf{Laboratory Management:} Professors and administrators can create, edit, and manage laboratory sessions, equipment, and participant lists.
-    \item \textbf{Calendar and Scheduling:} Interactive calendar for booking and managing laboratory sessions, with real-time availability and notifications.
     \item \textbf{Role-Based Access:} The interface adapts to the user's role, showing only the features and data relevant to their permissions. Users with higher roles can view and interact with the platform as if they had a lower role for testing and support purposes (\ac{rbac}).
     \item \textbf{Responsive Design:} Optimized for desktops, tablets, and mobile devices, ensuring accessibility and usability across platforms.
     \item \textbf{Loading UI:} The application uses loading states and skeleton screens to provide feedback during data fetching, improving perceived performance~\cite{nextjs-loading-ui}.
@@ -45,19 +44,13 @@ To enhance the user experience and make the application feel as much like a sing
 
 Authentication is implemented using NextAuth.js, a flexible authentication solution for Next.js applications. NextAuth is integrated to provide secure, seamless login experiences using Microsoft \ac{oauth}, allowing users to authenticate with their university credentials~\cite{nextjs-authentication}.
 
-When a user attempts to log in, they are redirected to the Microsoft login page. Upon successful authentication, NextAuth handles the \ac{oauth} flow, retrieves the user's profile information, and establishes a session. The session includes the user's role (such as student, professor, or administrator), which is determined based on information provided by the authentication provider or assigned within the application logic.
+When a user attempts to log in, they are redirected to the Microsoft login page. Upon successful authentication, NextAuth handles the \ac{oauth} flow, retrieves the user's profile information, and establishes a session.
 
 NextAuth manages user sessions securely, storing authentication tokens and session data in \ac{http}-only cookies to prevent unauthorized access from the client side. The authentication state is accessible throughout the application, enabling role-based access control and dynamic adaptation of the user interface according to the user's permissions.
 
 This approach ensures that only authorized users can access protected resources and features, while also providing a familiar and convenient login experience. The integration with Microsoft \ac{oauth} leverages the institution's existing identity infrastructure, enhancing security and simplifying user management.
 
 NextAuth.js is highly extensible and supports a wide range of authentication providers through its flexible \ac{oauth} configuration~\cite{nextjs-authentication}. This means that, in addition to Microsoft \ac{oauth}, it is possible to integrate other \ac{oauth}-based authentication methods commonly used by universities, such as Google, GitHub, or institutional identity providers that support \ac{oauth} 2.0 or OpenID Connect. Furthermore, NextAuth allows the implementation of custom \ac{oauth} providers, making it feasible to connect to a university's own authentication server if needed. This flexibility ensures that the authentication system can adapt to different institutional requirements and future changes in identity management strategies~\cite{nextjs-authentication}.
-
-\section{Integration, Security, and Deployment}
-
-The web application communicates securely with the backend via RESTful APIs, using authentication tokens to protect sensitive operations. User sessions and data are managed according to best practices, ensuring privacy and integrity. The frontend is designed to prevent unauthorized access and to provide a robust, extensible foundation for future enhancements.
-
-Deployment is streamlined using Next.js's built-in tools and best practices~\cite{nextjs-deployment}. Environment variables are used to manage configuration securely across different environments~\cite{nextjs-env-vars}. The application is containerized and orchestrated alongside other platform components, ensuring consistency and reliability in both development and production using modern \ac{cicd} practices.
 
 \section{Summary}
 

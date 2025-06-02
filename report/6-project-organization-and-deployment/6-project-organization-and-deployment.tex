@@ -10,13 +10,13 @@ The Remote Lab project is organized into several main directories, most of which
 The main submodules and directories are:
 
 \begin{itemize}
-    \item \textbf{api/} – Contains the backend source code, implemented in Kotlin with Spring Boot. Responsible for business logic, user management, and laboratory session control.
+    \item \textbf{api/} – Contains the backend source code. Responsible for business logic, user management, and laboratory session control.
     \item \textbf{db/} – Includes database scripts, supporting the system's persistence layer.
     \item \textbf{docs/} – Stores project documentation, including technical reports, user guides, and architectural diagrams.
     \item \textbf{img/} – Contains project images, such as diagrams, screenshots, and other visual assets.
     \item \textbf{nginx/} – Provides NGINX configuration files for reverse proxying, load balancing, and secure access to backend services~\cite{nginx-docs}.
     \item \textbf{private/} – Dedicated to sensitive files and configurations, such as environment variables and secrets. This submodule is not included directly in the main repository, ensuring that only authorized members have access to confidential information like \ac{api} keys and external service credentials.
-    \item \textbf{website/} – Holds the frontend web application, built with Next.js (React)~\cite{nextjs-docs}. Provides the user interface for laboratory access, scheduling, and management.
+    \item \textbf{website/} – Holds the frontend web application. Provides the user interface for laboratory access, scheduling, and management.
     \item \textbf{wiki/} – Stores the GitHub Wiki pages, including project documentation, deployment instructions, and other relevant information.
 \end{itemize}
 
@@ -24,7 +24,7 @@ This structure allows for independent development, testing, and deployment of ea
 
 \section{Deployment} \label{sec:deployment}
 
-The deployment process for the Remote Lab platform is designed to be straightforward, secure, and reproducible, leveraging modern DevOps practices and containerization technologies~\cite{docker-docs,docker-compose-docs}.
+The deployment process for the Remote Lab platform is designed to be straightforward, secure, and reproducible, leveraging modern \ac{devops} practices and containerization technologies~\cite{docker-docs,docker-compose-docs}.
 
 \subsection{Containerization and Orchestration} \label{subsec:containerization}
 
