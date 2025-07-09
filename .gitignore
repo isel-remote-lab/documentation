@@ -9,6 +9,7 @@
 *.toc
 *.synctex.gz
 *.lof
+*.bkp
 
 ### MacOS ###
 .DS_Store

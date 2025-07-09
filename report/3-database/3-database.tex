@@ -5,8 +5,14 @@ This chapter presents an overview of the \ac{er model} and critical implementati
 
 The database design follows a normalized relational structure that supports user authentication, secure session management, and the remaining system functionalities. The \acs{er model} encompasses the core entities required for system functionality while maintaining data integrity and scalability.
 
-\section{Core Entities}
-\subsection*{User}
+\begin{landscape}
+    \begin{figure}
+        \centering
+        \includesvg[inkscapelatex=false, width=1\linewidth]{../img/DB-diagrams/ERDiagramRL.drawio.svg}
+        \caption{Entity-Relationship Model (ER Model)}
+        \label{fig:er_model}
+    \end{figure}
+\end{landscape}
 
 \begin{figure}[H]
     \centering
@@ -15,9 +21,7 @@ The database design follows a normalized relational structure that supports user
     \label{fig:user_entity}
 \end{figure}
 
-The \textbf{User} entity represents a user in the system. The username and email attributes are provided by the authentication system. The role serves as descriminator attribute to identify whether the user is an administrator, professor or student.
-
-\subsection*{Token}
+The \textbf{User} entity represents a user in the system. The name and email attributes are provided by the authentication system. The role serves as a discriminator attribute to identify whether the user is an administrator, professor, or student.
 
 \begin{figure}[H]
     \centering
@@ -26,7 +30,7 @@ The \textbf{User} entity represents a user in the system. The username and email
     \label{fig:token_entity}
 \end{figure}
 
-A user can create \textit{N} tokens. The \textbf{Token} is a weak entity because it cannot be uniquely identified by its attributes alone and therefore requires a user, which is a strong entity, to be identified. A token is created by only one user.
+A user can create \textit{N} tokens. The \textbf{Token} is a weak entity because it cannot be uniquely identified by its attributes alone and therefore requires a user, which is a strong entity, to be identified. A token, being unique, is created by only one user.
 
 This is a useful entity for authentication purposes. It was designed to hold a hash value in the \textit{token\_validation} attribute.
 
@@ -38,9 +42,7 @@ Authentication workflow:
     \item Valid tokens enable secure user identification without transmitting unique identifiers.
 \end{enumerate}
 
-The \textit{last\_used\_at} and the \textit{created\_at} are useful for determining token expiration.
-
-\subsection*{Laboratory}
+The \textit{last\_used\_at} and the \textit{created\_at} are useful for determining token expiration. This expiration is determined in the application domain.
 
 \begin{figure}[H]
     \centering
@@ -49,9 +51,7 @@ The \textit{last\_used\_at} and the \textit{created\_at} are useful for determin
     \label{fig:laboratory_entity}
 \end{figure}
 
-A user, as an administrator or professor, can create \textit{N} laboratories. When creating a \textbf{Laboratory}, the user can define the name (\textit{lab\_name}) and description (\textit{lab\_description}). They can also define the duration of a laboratory session (\textit{lab\_duration}) and its queue limit (\textit{lab\_queue\_limit}).
-
-\subsection*{Hardware}
+A user, as an administrator or professor, can create \textit{N} laboratories. When creating a \textbf{Laboratory}, the user can define the name (\textit{name}) and description (\textit{description}). They can also define the duration of a laboratory session (\textit{duration}) and its queue limit (\textit{queue\_limit}).
 
 \begin{figure}[H]
     \centering
@@ -62,9 +62,7 @@ A user, as an administrator or professor, can create \textit{N} laboratories. Wh
 
 Upon successful laboratory creation, the user can associate \textbf{Hardware} to it, which must be created separately.
 
-For the creation, it requires a name (\textit{hw\_name}), \ac{ip} (\textit{ip\_address}) and \ac{mac} (\textit{mac\_address}) addresses (which can be null depending on the hardware), a status (\textit{hw\_status}) to indicate whether the hardware is under maintenance, occupied, or available, and a serial number (\textit{hw\_serial\_num}) to uniquely identify the hardware. Although it has an identifier, the serial number helps physically identify the hardware.    
-
-\subsection*{Group}
+For the creation, it requires a name (\textit{name}), \ac{ip} (\textit{ip\_address}) and \ac{mac} (\textit{mac\_address}) addresses (which can be null depending on the hardware), a status (\textit{status}) to indicate whether the hardware is under maintenance, occupied, or available, and a serial number (\textit{serial\_num}) to uniquely identify the hardware. Although it has an identifier, the serial number helps physically identify the hardware.
 
 \begin{figure}[H]
     \centering
@@ -75,20 +73,11 @@ For the creation, it requires a name (\textit{hw\_name}), \ac{ip} (\textit{ip\_a
 
 For a student to access a laboratory, they must be in a group that is associated with that laboratory. A professor can create a \textbf{Group} and associate users to it.
 
-When creating a group, the user needs to name it (\textit{group\_name}) and, optionally, add a description (\textit{group\_description}) to it.
+When creating a group, the user needs to name it (\textit{name}) and, optionally, add a description (\textit{description}) to it.
 
-\subsection*{Lab Session}
+Besides the normal relationships between the entities described before and illustrated in the \acs{er model}, there are two that need an overview. The first is the \textit{waiting\_queue}. Although it was said that a user must be in a group associated with a laboratory to be able to join it, it is not possible, at least in a simple way, to illustrate that. So this relationship acts as a waiting queue for a specific laboratory.
 
-\begin{figure}[H]
-    \centering
-    \includesvg[inkscapelatex=false, width=0.45\linewidth]{../img/DB-diagrams/LabSession.drawio.svg}
-    \caption{Lab Session Entity}
-    \label{fig:lab_session_entity}
-\end{figure}
-
-Finally, a user can join a laboratory if they are in a group associated with it. If the laboratory is being used, the user enters a waiting queue; otherwise, a \textbf{Lab Session} is created.
-
-Lab Session is a weak entity. It requires two strong entities to be identified: the \textbf{User} entity and the \textbf{Laboratory} entity. This is used to check whether a user is in a lab session or for statistical purposes. The \textit{state} attribute indicates whether the session is over or still running. The \textit{start\_time} and \textit{end\_time} can be used for statistical details, such as determining how much time a user spent in a laboratory, or for future purposes, such as scheduling sessions.
+The second one is the relationship \textit{session}. This is an important relationship to manage laboratory sessions and statistics. When a user successfully joins a laboratory, a session is created. With this relationship it is possible to control the sessions a user has in a laboratory.
 
 \section{Summary}
 This chapter has provided an overview of the database architecture, implementation, and design decisions. It has also presented the \acs{er model} of the database and described a typical user journey, explaining database interactions.
@@ -96,10 +85,3 @@ This chapter has provided an overview of the database architecture, implementati
 The documentation should be consulted for a comprehensive deep dive. It explains every entity, its attributes, and provides theoretical insights.
 
 Although PostgreSQL~\cite{postgresql} is being used for its functionalities, it was decided that all logic and verifications are implemented in the Web \ac{api}, so that no triggers or complex constraints are implemented on the database side.
-
-\begin{figure}[H]
-    \centering
-    \includesvg[inkscapelatex=false, width=1\linewidth]{../img/DB-diagrams/ERDiagramRL.drawio.svg}
-    \caption{Entity-Relationship Model (ER Model)}
-    \label{fig:er_model}
-\end{figure}
