@@ -52,6 +52,194 @@ This approach ensures that only authorized users can access protected resources 
 
 NextAuth.js is highly extensible and supports a wide range of authentication providers through its flexible \ac{oauth} configuration~\cite{nextjs-authentication}. This means that, in addition to Microsoft \ac{oauth}, it is possible to integrate other \ac{oauth}-based authentication methods commonly used by universities, such as Google, GitHub, or institutional identity providers that support \ac{oauth} 2.0 or OpenID Connect. Furthermore, NextAuth allows the implementation of custom \ac{oauth} providers, making it feasible to connect to a university's own authentication server if needed. This flexibility ensures that the authentication system can adapt to different institutional requirements and future changes in identity management strategies~\cite{nextjs-authentication}.
 
+\section{User Interface Screenshots}
+
+This section presents a comprehensive overview of the web application's user interface through screenshots that demonstrate the various features and user flows available to different roles within the platform.
+
+\subsection{Authentication and Initial Access}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\linewidth]{../img/website-screenshots/1-tela-inicial.png}
+    \caption{Initial landing page of the Remote Lab platform, providing access to the main application features.}
+    \label{fig:initial-screen}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\linewidth]{../img/website-screenshots/2-login-microsoft-oauth.png}
+    \caption{Microsoft OAuth login page, allowing users to authenticate using their university credentials.}
+    \label{fig:microsoft-oauth-login}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\linewidth]{../img/website-screenshots/3-login-isel.png}
+    \caption{ISEL-specific login interface, customized for the institution's branding and requirements.}
+    \label{fig:isel-login}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\linewidth]{../img/website-screenshots/4-tela-login.png}
+    \caption{Login screen showing the authentication flow and user interface elements.}
+    \label{fig:login-screen}
+\end{figure}
+
+\subsection{Role-Based Interface and Navigation}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\linewidth]{../img/website-screenshots/5-dropdown-escolha-vista-papel.png}
+    \caption{Role selection dropdown allowing users with higher permissions to switch their view to lower roles for testing and support purposes.}
+    \label{fig:role-dropdown}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\linewidth]{../img/website-screenshots/6-tela-inicial-professor.png}
+    \caption{Professor dashboard showing the main interface and available features for laboratory management.}
+    \label{fig:professor-dashboard}
+\end{figure}
+
+\subsection{Laboratory Creation and Management}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\linewidth]{../img/website-screenshots/7-modal-criar-lab.png}
+    \caption{Modal dialog for creating a new laboratory session with form validation and input fields.}
+    \label{fig:create-lab-modal}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\linewidth]{../img/website-screenshots/8-criar-lab-tela-cheia.png}
+    \caption{Full-screen laboratory creation interface providing comprehensive configuration options.}
+    \label{fig:create-lab-fullscreen}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\linewidth]{../img/website-screenshots/9-mensagem-na-criacao.png}
+    \caption{Success message displayed after successful laboratory creation, confirming the operation completion.}
+    \label{fig:creation-success-message}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\linewidth]{../img/website-screenshots/10-editar-lab.png}
+    \caption{Laboratory editing interface allowing professors to modify existing laboratory configurations.}
+    \label{fig:edit-lab}
+\end{figure}
+
+\subsection{Group Management}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\linewidth]{../img/website-screenshots/11-gerir-grupos-lab.png}
+    \caption{Group management interface for laboratories, showing existing groups and management options.}
+    \label{fig:manage-lab-groups}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\linewidth]{../img/website-screenshots/12-criar-grupo-lab.png}
+    \caption{Group creation form within a laboratory, allowing professors to organize students into groups.}
+    \label{fig:create-lab-group}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\linewidth]{../img/website-screenshots/13-grupo-criado.png}
+    \caption{Confirmation screen showing a successfully created group with its details and member information.}
+    \label{fig:group-created}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\linewidth]{../img/website-screenshots/14-gerir-utilizadores-grupo.png}
+    \caption{User management interface within a group, allowing professors to add, remove, and manage group members.}
+    \label{fig:manage-group-users}
+\end{figure}
+
+\subsection{Hardware Management}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\linewidth]{../img/website-screenshots/15-gerir-hardware-lab.png}
+    \caption{Hardware management interface for laboratories, showing available equipment and configuration options.}
+    \label{fig:manage-lab-hardware}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\linewidth]{../img/website-screenshots/16-hardware-adicionado-ao-lab.png}
+    \caption{Confirmation screen showing hardware successfully added to a laboratory with detailed equipment information.}
+    \label{fig:hardware-added-to-lab}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\linewidth]{../img/website-screenshots/17-editar-hardware.png}
+    \caption{Hardware editing interface allowing administrators to modify equipment configurations and settings.}
+    \label{fig:edit-hardware}
+\end{figure}
+
+\subsection{Laboratory Sessions and User Experience}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\linewidth]{../img/website-screenshots/18-inicio-sessao-lab.png}
+    \caption{Laboratory session initiation screen, showing the process of starting a remote laboratory session.}
+    \label{fig:lab-session-start}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\linewidth]{../img/website-screenshots/19-final-sessao-lab.png}
+    \caption{Laboratory session termination screen, confirming the end of a remote laboratory session.}
+    \label{fig:lab-session-end}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\linewidth]{../img/website-screenshots/20-tela-fila-de-espera.png}
+    \caption{Waiting queue interface, showing students waiting for their turn to access laboratory resources.}
+    \label{fig:waiting-queue}
+\end{figure}
+
+\subsection{User Account and Settings}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\linewidth]{../img/website-screenshots/21-dropdown-conta.png}
+    \caption{Account dropdown menu providing access to user profile, settings, and logout options.}
+    \label{fig:account-dropdown}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\linewidth]{../img/website-screenshots/22-detalhes-propria-conta.png}
+    \caption{User account details page showing personal information, role, and account settings.}
+    \label{fig:account-details}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\linewidth]{../img/website-screenshots/23-dropdown-mudanca-papel-administrador.png}
+    \caption{Administrator role change dropdown, demonstrating the role-switching functionality for testing and support.}
+    \label{fig:admin-role-change}
+\end{figure}
+
+\subsection{User Experience Features}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\linewidth]{../img/website-screenshots/5-movimentar-redimensionar-modal-validacao-input.png}
+    \caption{Interactive modal with input validation, demonstrating the responsive and user-friendly form design with real-time feedback.}
+    \label{fig:modal-validation}
+\end{figure}
+
 \section{Summary}
 
 The web application leverages the power and flexibility of Next.js to deliver a secure, scalable, and user-centric platform for remote laboratory access. Its architecture ensures clear separation of concerns, robust authentication, and a responsive user experience, while its integration with modern deployment practices guarantees maintainability and future growth. For further details on the features and implementation of the web application, this chapter should be used as the main reference, in conjunction with the official Next.js documentation~\cite{nextjs-docs}. 
