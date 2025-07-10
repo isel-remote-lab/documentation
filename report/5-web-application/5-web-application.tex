@@ -2,6 +2,8 @@
 
 The web application is the primary interface for users to interact with the Remote Lab platform. Built with Next.js (React), it provides a modern, responsive, and user-friendly experience for students, professors, and administrators~\cite{nextjs-docs}. The application enables users to access, schedule, and manage laboratory resources remotely, supporting a wide range of devices and ensuring accessibility for all user roles.
 
+The user interface is built using Ant Design~\cite{antdesign}, a comprehensive UI design language and React component library that provides a rich set of pre-built components. This choice ensures consistency in design, rapid development, and a professional appearance across all application screens. Ant Design components are used throughout the application for forms, tables, modals, navigation elements, and other interactive components, providing a cohesive and intuitive user experience.
+
 This chapter serves as the main documentation for the @Web (Next.js) application, providing a comprehensive overview of its architecture, features, authentication mechanisms, and integration strategies. It is intended as the primary reference for understanding the design and implementation choices made in the development of the web application, and should be consulted for any details regarding the frontend of the Remote Lab platform~\cite{nextjs-docs}.
 
 \section{Overview}
@@ -17,6 +19,8 @@ The application leverages Next.js to achieve a clear separation between client-s
 
 To optimize performance and user experience, the frontend performs input validation before sending requests to the API. This approach reduces the number of unnecessary API calls by catching invalid data early, providing immediate feedback to users, and minimizing server load. Importantly, the validation rules on the frontend are kept synchronized with the backend by leveraging the domain configuration JSON retrieved from the API. This ensures that both the client and server enforce consistent validation logic, reducing the risk of discrepancies and improving the reliability of the application.
 
+The application implements a comprehensive notification system that provides real-time feedback to users during various operations. Notifications are displayed for both successful and failed operations, ensuring users are always informed about the status of their actions. This includes notifications for laboratory creation, group management, hardware configuration, user operations, and session management. The notification system enhances user experience by providing immediate feedback, reducing uncertainty, and helping users understand the outcome of their interactions with the platform.
+
 \section{Main Features}
 \begin{itemize}
     \item \textbf{Authentication:} Secure login using Microsoft \ac{oauth} (NextAuth), supporting university credentials and automatic role assignment~\cite{nextjs-authentication}.
@@ -25,6 +29,7 @@ To optimize performance and user experience, the frontend performs input validat
     \item \textbf{Role-Based Access:} The interface adapts to the user's role, showing only the features and data relevant to their permissions. Users with higher roles can view and interact with the platform as if they had a lower role for testing and support purposes (\ac{rbac}).
     \item \textbf{Responsive Design:} Optimized for desktops, tablets, and mobile devices, ensuring accessibility and usability across platforms.
     \item \textbf{Loading UI:} The application uses loading states and skeleton screens to provide feedback during data fetching, improving perceived performance~\cite{nextjs-loading-ui}.
+    \item \textbf{Terminal Integration:} The application integrates xterm.js~\cite{xtermjs} for real-time terminal access to hardware devices. This terminal component establishes WebSocket~\cite{websocket} connections with the backend API, enabling direct communication with laboratory hardware. Users can interact with hardware devices through a full-featured terminal interface, providing a seamless remote laboratory experience with real-time command execution and response display.
 \end{itemize}
 
 An additional usability feature implemented in the frontend is the ability for users with higher roles to switch their view to that of a lower role. For example, an administrator can choose to view the application as a professor, and a professor can view it as a student. This functionality is particularly useful for testing, support, and understanding the user experience from different perspectives, ensuring that features and permissions are correctly enforced for each role.
@@ -41,7 +46,7 @@ By utilizing these advanced routing features and interactive capabilities, the a
 
 \section{Authentication with NextAuth}
 
-Authentication is implemented using NextAuth.js, a flexible authentication solution for Next.js applications. NextAuth is integrated to provide secure, seamless login experiences using Microsoft \ac{oauth}, allowing users to authenticate with their university credentials~\cite{nextjs-authentication}.
+Authentication is implemented using NextAuth.js~\cite{nextauth}, a flexible authentication solution for Next.js applications. NextAuth is integrated to provide secure, seamless login experiences using Microsoft \ac{oauth}, allowing users to authenticate with their university credentials~\cite{nextjs-authentication}.
 
 When a user attempts to log in, they are redirected to the Microsoft login page. Upon successful authentication, NextAuth handles the \ac{oauth} flow, retrieves the user's profile information, and establishes a session.
 
@@ -49,7 +54,7 @@ NextAuth manages user sessions securely, storing authentication tokens and sessi
 
 This approach ensures that only authorized users can access protected resources and features, while also providing a familiar and convenient login experience. The integration with Microsoft \ac{oauth} leverages the institution's existing identity infrastructure, enhancing security and simplifying user management.
 
-NextAuth.js is highly extensible and supports a wide range of authentication providers through its flexible \ac{oauth} configuration~\cite{nextjs-authentication}. This means that, in addition to Microsoft \ac{oauth}, it is possible to integrate other \ac{oauth}-based authentication methods commonly used by universities, such as Google, GitHub, or institutional identity providers that support \ac{oauth} 2.0 or OpenID Connect. Furthermore, NextAuth allows the implementation of custom \ac{oauth} providers, making it feasible to connect to a university's own authentication server if needed. This flexibility ensures that the authentication system can adapt to different institutional requirements and future changes in identity management strategies~\cite{nextjs-authentication}.
+NextAuth.js~\cite{nextauth} is highly extensible and supports a wide range of authentication providers through its flexible \ac{oauth} configuration~\cite{nextjs-authentication}. This means that, in addition to Microsoft \ac{oauth}, it is possible to integrate other \ac{oauth}-based authentication methods commonly used by universities, such as Google, GitHub, or institutional identity providers that support \ac{oauth} 2.0 or OpenID Connect. Furthermore, NextAuth allows the implementation of custom \ac{oauth} providers, making it feasible to connect to a university's own authentication server if needed. This flexibility ensures that the authentication system can adapt to different institutional requirements and future changes in identity management strategies~\cite{nextjs-authentication}.
 
 \section{User Interface Screenshots}
 
