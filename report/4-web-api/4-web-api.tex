@@ -1,13 +1,13 @@
 \chapter{Web API} \label{cap:web_api}
 The Web \ac{api} provides endpoints for user management, authentication, authorization, and \ac{crud} operations. 
 
-It is developed with Kotlin~\cite{kotlin} and Spring Framework~\cite{spring-framework}, and follows the Controller-Service-Repository pattern, which is prevalent in many Spring~\cite{spring} applications. We chose this pattern because of the separation of concerns it provides and the possibilities for unit testing.
+It is developed using Kotlin~\cite{kotlin} and the Spring Framework~\cite{spring-framework}, following the Controller-Service-Repository pattern, which is prevalent in many Spring~\cite{spring} applications. We chose this pattern because of the separation of concerns it provides and the testing possibilities it offers.
 
-To make the codebase even easier to maintain and improve the quality of life during development, Spring Framework's Inversion of Control container~\cite{spring-ioc-container} and the Strategy pattern~\cite{strategy-pattern} principle were also used. 
+To make the codebase even easier to maintain and improve the quality of life during development, Spring Framework's Inversion of Control container~\cite{spring-ioc-container} and the Strategy pattern~\cite{strategy-pattern} principle were also employed. 
 
-Spring's dependency injection~\cite{spring-di} is a well-known technology in Java~\cite{java} enterprise programming. It provides an easy way to declare dependencies, since the \ac{api} was mostly built following \ac{oop} principles. This framework allows us to declare the necessary dependencies for each module. It also provides a BeanFactory interface~\cite{spring-bean-factory} for advanced configurations. Using these Spring technologies, the object management is Spring's duty.
+Spring's dependency injection~\cite{spring-di} is a well-established technology in Java~\cite{java} enterprise programming. It provides an easy way to declare dependencies, since the \ac{api} was mostly built following \ac{oop} principles. This framework allows us to declare the necessary dependencies for each module and provides a BeanFactory interface~\cite{spring-bean-factory} for advanced configurations. Using these Spring technologies, object management becomes Spring's responsibility.
 
-The Strategy pattern allowed us to have more control over the specific implementation since it follows an interface. Every concrete implementation follows an interface, making it possible to change a class dynamically without changing the code. Spring's dependency injection works very well with this strategy design pattern. This makes unit tests much easier when the concrete implementation is not intended to be tested without changing its code.
+The Strategy pattern allowed us to have more control over specific implementations since it follows an interface-based approach. Every concrete implementation follows an interface, making it possible to change a class dynamically. This is applied to every module. For example, if it is necessary to change the repository implementation to use other framework, it is only needed to create a new class following the interface, without breaking the codebase. Spring's dependency injection works very well with this strategy design pattern, making unit tests much easier when the concrete implementation is not intended to be tested without changing its code.
 
 \section{API Architecture}
 
@@ -18,37 +18,37 @@ The Strategy pattern allowed us to have more control over the specific implement
     \label{fig:api_architecture}
 \end{figure}
 
-Figure \ref{fig:api_architecture} provides a simple overview of the implemented \acs{api}. The \textbf{\ac{http}} module (Controller) is responsible for exposing the endpoints and handling the messages. When a request is made, the \acs{http} module receives the request and hands it to the \textbf{Service} module. This is where the logic and verifications are performed. Since it is necessary to fetch and save data, a \textbf{Repository} module is needed. The repository module is responsible for communicating with the database.
+Figure \ref{fig:api_architecture} provides a simple overview of the implemented \acs{api}. The \textbf{\ac{http}} module (Controller) is responsible for exposing the endpoints and handling the messages. When a request is made, the \acs{http} module receives the request and passes it to the \textbf{Service} module. This is where the logic and verifications are performed. Since it is necessary to fetch and save data, a \textbf{Repository} module is required. The repository module is responsible for communicating with the database.
 
 \vspace{3mm}
 
 \begin{figure}[H]
     \centering
-    \includesvg[inkscapelatex=false, width=0.9\linewidth]{../img/api/detailed_architecture.drawio.svg}
+    \includesvg[inkscapelatex=false, width=0.8\linewidth]{../img/api/detailed_architecture.drawio.svg}
     \caption{API Detailed Architecture}
-    \label{fig:api_detailed_architecture}
+    \label{fig:detailed_api_architecture}
 \end{figure}
 
-Figure \ref{fig:api_detailed_architecture} provides a more detailed overview of how the architecture is composed. 
-
 \subsection*{HTTP Module}
-The \acs{http} module contains the controllers~\cite{controller}, each one with its functions. The pipeline contains the argument resolvers~\cite{argument-resolver} and interceptors~\cite{interceptor}. For the implemented system, only one argument resolver and two interceptors were implemented. The argument resolver is used to provide user information to the controllers. Since the authentication method we used was token-based, this argument resolver extracts user information from the request. Every controller that has a parameter with the type \textit{AuthenticatedUser} will be authenticated. 
+The \acs{http} module contains the controllers~\cite{controller}, each with its respective functions and the pipeline. The controllers are responsible for handling requests, extracting information, converting them into domain objects, and passing them to the next layer (Service Module).
 
-For the request to contain the needed information about the user, an interceptor is required. This is one of the two interceptors implemented. Every request, before reaching the controller, passes through every configured interceptor. This authentication interceptor checks if the handler parameters contain a parameter of the type \textit{AuthenticatedUser}. If it does, the entire process of getting the token from the request, verifying it, and retrieving the user is performed. If not, normal execution continues.
-\begin{center}
-    \begin{lstlisting}[caption={Type AuthenticatedUser verification example}]
-    if (handler is HandlerMethod &&
-        handler.methodParameters.any {
-            it.parameterType == AuthenticatedUser::class.java
-        }
-    )
-    \end{lstlisting}
-\end{center}
+\subsubsection*{Pipeline}
+The pipeline contains filters and interceptors. Filters intercept requests before they reach the \textit{DispatcherServlet}. They are part of the web server and not the Spring framework. The interceptors are part of the Spring framework and sit between the \textit{DispatcherServlet} and the Controllers. 
 
-The other interceptor is for an \acs{api} key. It checks if the handler contains a custom annotation. If yes, the \acs{api} key is validated; if not, an unauthorized response is sent. This interceptor is useful for the login endpoint. This login endpoint is to be performed in the Web Application and is not meant to be used by end users.
+Three interceptors were implemented: one to validate the API key, another to authenticate the user, and a third to check the user role after authentication.
+
+Since there are API endpoints that require an API key (for example, the login endpoint), an annotation was created to simplify this check. Every endpoint that needs an API key is annotated with \textit{@RequireApiKey}. The interceptor responsible for this check verifies if the request contains the header \textit{X-Api-Key} and validates its value. If the values do not match, an unauthorized error is sent.
+
+The authentication interceptor checks if the handler have a parameter of type \textit{AuthenticatedUser}, which holds a token value and user information. If it does, it extracts the token from the request via header or cookie and validates it by retrieving the user associated with that token from the database. The user is then added to the request as an attribute with a determined name, acting as a key. An argument resolver was implemented to resolve method parameters into argument values. In simple terms, for every handler that contains a parameter of type \textit{AuthenticatedUser}, the parameter is resolved at runtime with the respective value. This resolution is made by getting the attribute by the name acting as a key and returning the value. This value should be the user information previously inserted by the authentication interceptor. If an error occurs during these steps, an unauthorized error is sent.
+
+The last interceptor implemented handles handlers that require a specific role. This is explained in more detail in section~\ref{sec:roles}.
+
+The implemented filter is responsible for request and response logging. 
+
+These tools provided by the Spring Framework are useful for optimizing and simplifying certain tasks.
 
 \subsection*{Service Module}
-The service module performs the necessary checks, using domain classes defined in the Domain module. These classes provide configurations and methods for validating certain data. Configurations in domain classes are provided by a \ac{json} file containing domain restrictions.
+The service module performs the necessary checks using domain classes defined in the Domain module. These classes provide configurations and methods for validating certain data. Configurations in domain classes are provided by a \ac{json} file containing domain restrictions.
 
 \begin{center}
     \begin{lstlisting}[caption={Example of the group entry}]
@@ -67,7 +67,7 @@ The service module performs the necessary checks, using domain classes defined i
     \end{lstlisting}
 \end{center}
 
-This \ac{json} file is converted to a class using Kotlin Serialization~\cite{kotlin-serialization}. This allows an easy way to change specific values without touching the codebase.
+This \ac{json} file is converted to a class using Kotlin Serialization~\cite{kotlin-serialization}. This allows an easy way to change specific values without modifying the codebase.
 
 \subsection*{Repository Module}
 The repository module serves as the data access layer, responsible for managing all communication between the application and the database. This functionality is implemented using \ac{jdbi}~\cite{jdbi}, a lightweight and efficient database access library that provides a clean, declarative \acs{api} for database operations.
@@ -76,11 +76,62 @@ The repository module serves as the data access layer, responsible for managing 
 
 The repository module implements the Repository pattern, which provides a consistent interface for data access operations while abstracting the underlying database implementation details.
 
-\section{Role-Based Access Control System}
-As the introduction (Chapter~\ref{cap:intro}) and database (Chapter~\ref{cap:database}) already introduced what user types the system has as well their possible interaction and roles, an approach is needed to control that interactions to ensure the correct access control to resources. For this a \ac{rbac} approach was implemented to ensure that users have access only to the resources and actions appropriate for their role, coming from the user attribute role in the database. 
+\section{Roles} \label{sec:roles}
+As the introduction (Chapter~\ref{cap:intro}) and database (Chapter~\ref{cap:database}) chapters have already introduced the user types the system has as well as their possible interactions and roles, an approach is needed to control these interactions to ensure proper access control to resources. 
 
-As mentioned before, a user, when authenticated, is assigned a role, such as student, professor, or administrator, which determines their permissions within the platform. The service module is responsible in checking the user's role before allowing access to sensitive operations, such as managing laboratory sessions, accessing administrative features, or modifying user data. 
+As mentioned before, a user, when authenticated, is assigned a role, such as student, professor, or administrator, which determines their permissions within the platform. To perform the needed verifications, an annotation was created to be used in the controllers of the HTTP layer. 
+
+\vspace{3mm}
+\begin{lstlisting}
+annotation class RequireRole(val role: Role)
+\end{lstlisting}
+
+This annotation receives a role in its constructor. For the annotation to be used, an interceptor was implemented that first checks if the handler contains the annotation so that it can ignore the verification, then gets the role and performs the validation. The interceptor needs to be called after the authentication interceptor to be able to get the user from the request and then their respective role. 
+
+Since this is a simple hierarchical system, if a handler contains an annotation with the student role, every user can access it, but if a handler contains an annotation with the teacher role, only a teacher and administrator can access that handler, since the administrator inherits from the teacher role.
+
+The class \textit{Role} provides a method to validate this hierarchy comparing the actual role of the user with the expected role.
+
+\begin{lstlisting}[caption={Require Role Usage Example}]
+    @RequireRole(Role.Teacher)
+\end{lstlisting}
+
+\section{Laboratory Sessions}
+The laboratories allow users belonging to groups associated with them to join and access a remote terminal. A laboratory can have multiple hardware units associated with it, so that a laboratory can accommodate multiple users simultaneously. This approach has two concerns that need to be addressed: what happens if the laboratory has no available hardware for a user joining it, and how a session is handled in the backend. 
+
+This section aims to clarify how these two concerns are addressed.
+
+\subsection{Waiting Queue}
+When describing the system, it was mentioned that a laboratory has a waiting queue. This is intended for laboratories without available hardware. When this happens, the user enters a waiting queue. The API is stateless, meaning that no state should be saved, allowing multiple instances to run.
+
+When a user enters a full laboratory, they are put in a queue. A SseEmitter (Server-Sent Events) is sent back to the user that sends an event when the queue position changes or when they enter the laboratory. These events are sent by the server. 
+
+\begin{figure}[H]
+    \centering
+    \includesvg[inkscapelatex=false, width=0.8\linewidth]{../img/api/SseEmitter.drawio.svg}
+    \caption{Event Source Example}
+    \label{fig:event_source}
+\end{figure}
+
+An event source opens a persistent connection to an HTTP server, which sends events in text/event-stream format. The connection remains open until closed by calling \textit{EventSource.close()}. 
+
+Since the API is stateless, the state is saved in the database and a pub/sub mechanism is used to notify the user about changes in the queue position or if they can enter the laboratory. Kotlin coroutines were also used to handle the server-side events, since the server takes the initiative.
+
+For the Pub/Sub mechanism, Redis was used. The Spring Framework provides support for Redis and can be deployed as a separate service, allowing multiple API instances to connect to it.
+
+\begin{figure}[H]
+    \centering
+    \includesvg[inkscapelatex=false, width=0.8\linewidth]{../img/api/lab_waiting_queue.drawio.svg}
+    \caption{Lab Waiting Queue Scheme}
+    \label{fig:lab_waiting_queue}
+\end{figure}
+
+Figure~\ref{fig:lab_waiting_queue} illustrates how the waiting queue was implemented. When a user joins the laboratory, there are two paths the execution can follow: they can join the laboratory, or they can be put in the queue. 
+
+When the laboratory's waiting queue is empty, a query is made to get the available hardware associated with that laboratory. The fast-path occurs when there is available hardware, allowing the user to join the laboratory. The wait-path occurs when there is no available hardware. In this case, a query is made to the database, inserting the user id in the waiting queue and a coroutine is created, and the user subscribes to a channel with the format \textit{"lab:labId:queue:userId"} where \textit{labId} is the id of the laboratory and \textit{userId} is the id of the user trying to join it. Redis allows subscribing to channels that do not yet exist, creating them at the moment of subscription. Inside the coroutine, a suspension point is created, waiting for a message in the subscribed channel. This format of the channel is very important for the notification phase. This is the wait-path.
+
+On the other hand, if the waiting queue is not empty, it means that the laboratory is probably occupied and there is no available hardware. To be sure, it is checked if there is available hardware associated with the laboratory. If there is, the waiting queue is popped, returning the id of the user in the first position since the waiting queue is FIFO (First-In-First-Out). Having the lab id and the user id, a message is published to the channel following the format mentioned before. This is the reason that the format must be followed. The user waiting for a message receives it and checks its content. If the message is an empty string, a session is created. If it is the string \textit{keepInQueue}, it means that the user must stay in the queue and update their position by sending an event with the new queue position. This whole step is performed for every available hardware unit encountered. If there is no available hardware, the user is put in the queue and performs the wait-path mentioned before.
 
 \section{Conclusion}
 
-Since the \acs{api} is expected to be public in future work, the documentation is published in Postman~\cite{postman}. The public API documentation~\cite{public-api-documentation} and the private API documentation~\cite{private-api-documentation} are hosted as public websites in postman. This provides an easy-to-use documentation builder. When the API reaches a stable version and is made public, users will have to generate an authorization token via the website. 
+Since the \acs{api} is expected to be public in future work, the documentation is published on Postman~\cite{postman}. The public API documentation~\cite{public-api-documentation} and the private API documentation~\cite{private-api-documentation} are hosted as public websites on Postman. This provides an easy-to-use documentation builder. When the API reaches a stable version and is made public, users will have to generate an authorization token via the website.
