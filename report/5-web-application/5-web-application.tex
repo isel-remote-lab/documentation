@@ -58,17 +58,19 @@ This section presents a comprehensive overview of the web application's user int
 
 \subsection{Authentication and Initial Access}
 
+The application implements a secure authentication system that automatically redirects unauthenticated users to the login screen whenever they attempt to access any protected page. This ensures that only authorized users can access the platform's features and resources. When a user tries to navigate to any page without being logged in, they are immediately redirected to the authentication interface, maintaining the security and integrity of the system.
+
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\linewidth]{../img/website-screenshots/1-tela-inicial.png}
-    \caption{Initial landing page of the Remote Lab platform, providing access to the main application features.}
-    \label{fig:initial-screen}
+    \includegraphics[width=0.8\linewidth]{../img/website-screenshots/1-tela-login.png}
+    \caption{Login screen. Users are automatically redirected to this screen when accessing any page without authentication.}
+    \label{fig:login-screen}
 \end{figure}
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\linewidth]{../img/website-screenshots/2-login-microsoft-oauth.png}
-    \caption{Microsoft OAuth login page, allowing users to authenticate using their university credentials.}
+    \caption{Microsoft OAuth login page. Allows users to authenticate using their university credentials.}
     \label{fig:microsoft-oauth-login}
 \end{figure}
 
@@ -81,9 +83,9 @@ This section presents a comprehensive overview of the web application's user int
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\linewidth]{../img/website-screenshots/4-tela-login.png}
-    \caption{Login screen showing the authentication flow and user interface elements.}
-    \label{fig:login-screen}
+    \includegraphics[width=0.8\linewidth]{../img/website-screenshots/4-tela-inicial.png}
+    \caption{Initial landing page of the Remote Lab platform, providing access to the main application features.}
+    \label{fig:initial-screen}
 \end{figure}
 
 \subsection{Role-Based Interface and Navigation}
@@ -113,74 +115,85 @@ This section presents a comprehensive overview of the web application's user int
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\linewidth]{../img/website-screenshots/8-criar-lab-tela-cheia.png}
+    \includegraphics[width=0.8\linewidth]{../img/website-screenshots/8-movimentar-redimensionar-modal-validacao-input.png}
+    \caption{Interactive modal with input validation, demonstrating the responsive and user-friendly form design with real-time feedback.}
+    \label{fig:modal-validation}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\linewidth]{../img/website-screenshots/9-criar-lab-tela-cheia.png}
     \caption{Full-screen laboratory creation interface providing comprehensive configuration options.}
     \label{fig:create-lab-fullscreen}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\linewidth]{../img/website-screenshots/9-mensagem-na-criacao.png}
+    \includegraphics[width=0.8\linewidth]{../img/website-screenshots/10-mensagem-na-criacao.png}
     \caption{Success message displayed after successful laboratory creation, confirming the operation completion.}
     \label{fig:creation-success-message}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\linewidth]{../img/website-screenshots/10-editar-lab.png}
+    \includegraphics[width=0.8\linewidth]{../img/website-screenshots/11-editar-lab.png}
     \caption{Laboratory editing interface allowing professors to modify existing laboratory configurations.}
     \label{fig:edit-lab}
 \end{figure}
 
 \subsection{Group Management}
 
+Group management in the application can be performed in two ways: specifically within a laboratory context or generally through the dedicated management interface. Users can access group management either through the laboratory-specific settings or through the general group management icon located in the upper right corner of the interface, providing flexibility in how they organize and manage student groups.
+
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\linewidth]{../img/website-screenshots/11-gerir-grupos-lab.png}
-    \caption{Group management interface for laboratories, showing existing groups and management options.}
+    \includegraphics[width=0.8\linewidth]{../img/website-screenshots/12-gerir-grupos-lab.png}
+    \caption{Group management interface for laboratories, showing existing groups and management options. This can be accessed both within specific laboratories and through the general management interface.}
     \label{fig:manage-lab-groups}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\linewidth]{../img/website-screenshots/12-criar-grupo-lab.png}
+    \includegraphics[width=0.8\linewidth]{../img/website-screenshots/13-criar-grupo-lab.png}
     \caption{Group creation form within a laboratory, allowing professors to organize students into groups.}
     \label{fig:create-lab-group}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\linewidth]{../img/website-screenshots/13-grupo-criado.png}
+    \includegraphics[width=0.8\linewidth]{../img/website-screenshots/14-grupo-criado.png}
     \caption{Confirmation screen showing a successfully created group with its details and member information.}
     \label{fig:group-created}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\linewidth]{../img/website-screenshots/14-gerir-utilizadores-grupo.png}
+    \includegraphics[width=0.8\linewidth]{../img/website-screenshots/15-gerir-utilizadores-grupo.png}
     \caption{User management interface within a group, allowing professors to add, remove, and manage group members.}
     \label{fig:manage-group-users}
 \end{figure}
 
 \subsection{Hardware Management}
 
+Hardware management functionality is available both within specific laboratory contexts and through a general management interface. Users can manage equipment either through laboratory-specific settings or by accessing the dedicated hardware management icon in the upper right corner of the interface. This dual approach allows for both targeted hardware configuration for specific laboratories and broader system-wide hardware administration.
+
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\linewidth]{../img/website-screenshots/15-gerir-hardware-lab.png}
-    \caption{Hardware management interface for laboratories, showing available equipment and configuration options.}
+    \includegraphics[width=0.8\linewidth]{../img/website-screenshots/16-gerir-hardware-lab.png}
+    \caption{Hardware management interface for laboratories, showing available equipment and configuration options. This can be accessed both within specific laboratories and through the general management interface.}
     \label{fig:manage-lab-hardware}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\linewidth]{../img/website-screenshots/16-hardware-adicionado-ao-lab.png}
+    \includegraphics[width=0.8\linewidth]{../img/website-screenshots/17-hardware-adicionado-ao-lab.png}
     \caption{Confirmation screen showing hardware successfully added to a laboratory with detailed equipment information.}
     \label{fig:hardware-added-to-lab}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\linewidth]{../img/website-screenshots/17-editar-hardware.png}
+    \includegraphics[width=0.8\linewidth]{../img/website-screenshots/18-editar-hardware.png}
     \caption{Hardware editing interface allowing administrators to modify equipment configurations and settings.}
     \label{fig:edit-hardware}
 \end{figure}
@@ -189,21 +202,21 @@ This section presents a comprehensive overview of the web application's user int
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\linewidth]{../img/website-screenshots/18-inicio-sessao-lab.png}
+    \includegraphics[width=0.8\linewidth]{../img/website-screenshots/19-inicio-sessao-lab.png}
     \caption{Laboratory session initiation screen, showing the process of starting a remote laboratory session.}
     \label{fig:lab-session-start}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\linewidth]{../img/website-screenshots/19-final-sessao-lab.png}
+    \includegraphics[width=0.8\linewidth]{../img/website-screenshots/20-final-sessao-lab.png}
     \caption{Laboratory session termination screen, confirming the end of a remote laboratory session.}
     \label{fig:lab-session-end}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\linewidth]{../img/website-screenshots/20-tela-fila-de-espera.png}
+    \includegraphics[width=0.8\linewidth]{../img/website-screenshots/21-tela-fila-de-espera.png}
     \caption{Waiting queue interface, showing students waiting for their turn to access laboratory resources.}
     \label{fig:waiting-queue}
 \end{figure}
@@ -212,32 +225,23 @@ This section presents a comprehensive overview of the web application's user int
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\linewidth]{../img/website-screenshots/21-dropdown-conta.png}
+    \includegraphics[width=0.8\linewidth]{../img/website-screenshots/22-dropdown-conta.png}
     \caption{Account dropdown menu providing access to user profile, settings, and logout options.}
     \label{fig:account-dropdown}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\linewidth]{../img/website-screenshots/22-detalhes-propria-conta.png}
+    \includegraphics[width=0.8\linewidth]{../img/website-screenshots/23-detalhes-propria-conta.png}
     \caption{User account details page showing personal information, role, and account settings.}
     \label{fig:account-details}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\linewidth]{../img/website-screenshots/23-dropdown-mudanca-papel-administrador.png}
+    \includegraphics[width=0.8\linewidth]{../img/website-screenshots/24-dropdown-mudanca-papel-administrador.png}
     \caption{Administrator role change dropdown, demonstrating the role-switching functionality for testing and support.}
     \label{fig:admin-role-change}
-\end{figure}
-
-\subsection{User Experience Features}
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.8\linewidth]{../img/website-screenshots/5-movimentar-redimensionar-modal-validacao-input.png}
-    \caption{Interactive modal with input validation, demonstrating the responsive and user-friendly form design with real-time feedback.}
-    \label{fig:modal-validation}
 \end{figure}
 
 \section{Summary}
