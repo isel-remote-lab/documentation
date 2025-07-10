@@ -15,15 +15,6 @@ A key architectural choice is the retrieval of domain configuration in \ac{json}
 
 The application leverages Next.js to achieve a clear separation between client-side and server-side logic. All sensitive operations and data exchanges with the backend API are performed server-side, enhancing security and control over data flow~\cite{nextjs-server-client-components,nextjs-data-fetching}. This architecture enables efficient server-side rendering, improved performance, and a better user experience. For more details on using Next.js to perform API requests from the server, see~\cite{auth0-nextjs-server-actions}.
 
-For security reasons, users do not have direct access to these API requests performed by the Next.js server; they cannot view or intercept them from their browser. This encapsulates sensitive operations away from the client and is illustrated in Figure~\ref{fig:next-server-api-calls}.
-
-\begin{figure}[H]
-    \centering
-    \includesvg[inkscapelatex=false, width=0.9\linewidth]{../img/NextServerCalls.drawio.svg}
-    \caption{API requests performed by the Next.js server during the rendering and data fetching process.}
-    \label{fig:next-server-api-calls}
-\end{figure}
-
 To optimize performance and user experience, the frontend performs input validation before sending requests to the API. This approach reduces the number of unnecessary API calls by catching invalid data early, providing immediate feedback to users, and minimizing server load. Importantly, the validation rules on the frontend are kept synchronized with the backend by leveraging the domain configuration JSON retrieved from the API. This ensures that both the client and server enforce consistent validation logic, reducing the risk of discrepancies and improving the reliability of the application.
 
 \section{Main Features}
@@ -38,7 +29,15 @@ To optimize performance and user experience, the frontend performs input validat
 
 An additional usability feature implemented in the frontend is the ability for users with higher roles to switch their view to that of a lower role. For example, an administrator can choose to view the application as a professor, and a professor can view it as a student. This functionality is particularly useful for testing, support, and understanding the user experience from different perspectives, ensuring that features and permissions are correctly enforced for each role.
 
-To enhance the user experience and make the application feel as much like a single-page application with multiple menus as possible, the frontend leverages Next.js modals using parallel and intercepting routes~\cite{nextjs-app-router}. This approach allows users to open dialogs, forms, or detailed views as overlays without leaving the current page context, providing smooth navigation and reducing full page reloads. By utilizing these advanced routing features, the application maintains a cohesive and interactive interface, improving usability and workflow efficiency.
+To enhance the user experience and make the application feel as much like a single-page application with multiple menus as possible, the frontend leverages Next.js modals using parallel and intercepting routes~\cite{nextjs-app-router}. This approach allows users to open dialogs, forms, or detailed views as overlays without leaving the current page context, providing smooth navigation and reducing full page reloads. 
+
+The modal implementation is designed with flexibility and accessibility in mind. Modal information and configurations are stored in external files, which are then imported and used by Next.js to generate both modal overlays and complete standalone pages. This architecture enables users to access modal content directly through URIs, providing complete pages when accessed directly while maintaining the modal overlay experience when navigated to from within the application.
+
+Additionally, the modals feature enhanced user interaction capabilities, including the ability to resize and move them around the screen. This resizable and movable functionality allows users to customize their workspace layout, making it easier to work with multiple modals simultaneously or to position them according to their preferences. These features contribute to a more flexible and user-friendly interface that adapts to different user workflows and screen configurations.
+
+The application follows a philosophy of enabling users to perform all operations within the same page context while maintaining the flexibility to access different pages directly through URI input. This approach is supported by a comprehensive breadcrumb navigation system that provides clear context about the user's current location within the application hierarchy. The breadcrumb component displays the navigation path and allows users to quickly navigate back to previous levels, enhancing the overall navigation experience while maintaining the single-page application feel.
+
+By utilizing these advanced routing features and interactive capabilities, the application maintains a cohesive and interactive interface, improving usability and workflow efficiency.
 
 \section{Authentication with NextAuth}
 
