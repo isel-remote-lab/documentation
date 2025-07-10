@@ -19,6 +19,8 @@ The application leverages Next.js to achieve a clear separation between client-s
 
 To optimize performance and user experience, the frontend performs input validation before sending requests to the API. This approach reduces the number of unnecessary API calls by catching invalid data early, providing immediate feedback to users, and minimizing server load. Importantly, the validation rules on the frontend are kept synchronized with the backend by leveraging the domain configuration JSON retrieved from the API. This ensures that both the client and server enforce consistent validation logic, reducing the risk of discrepancies and improving the reliability of the application.
 
+The application implements a dynamic form system where the required fields, validation rules, and component types are determined by the domain configuration retrieved from the backend API. This configuration-driven approach ensures that forms automatically adapt to changes in business rules without requiring frontend code modifications. The domain configuration specifies field restrictions such as minimum and maximum values, optional/required status, and appropriate input components (text areas, number inputs, select dropdowns, etc.). This architecture provides flexibility and maintainability, as all form behavior is centrally managed through the backend domain configuration.
+
 The application implements a comprehensive notification system that provides real-time feedback to users during various operations. Notifications are displayed for both successful and failed operations, ensuring users are always informed about the status of their actions. This includes notifications for laboratory creation, group management, hardware configuration, user operations, and session management. The notification system enhances user experience by providing immediate feedback, reducing uncertainty, and helping users understand the outcome of their interactions with the platform.
 
 \section{Main Features}
@@ -74,15 +76,8 @@ The application implements a secure authentication system that automatically red
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\linewidth]{../img/website-screenshots/2-login-microsoft-oauth.png}
-    \caption{Microsoft OAuth login page. Allows users to authenticate using their university credentials.}
+    \caption{After the login screen, the user is redirected to the Microsoft OAuth login page. Allows users to authenticate using their university credentials.}
     \label{fig:microsoft-oauth-login}
-\end{figure}
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.8\linewidth]{../img/website-screenshots/3-login-isel.png}
-    \caption{ISEL-specific login interface, customized for the institution's branding and requirements.}
-    \label{fig:isel-login}
 \end{figure}
 
 \begin{figure}[H]
@@ -141,7 +136,7 @@ The application implements a secure authentication system that automatically red
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\linewidth]{../img/website-screenshots/11-editar-lab.png}
-    \caption{Laboratory editing interface allowing professors to modify existing laboratory configurations.}
+    \caption{Laboratory editing interface allowing professors to modify existing laboratory configurations or delete it.}
     \label{fig:edit-lab}
 \end{figure}
 
@@ -207,21 +202,21 @@ Hardware management functionality is available both within specific laboratory c
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\linewidth]{../img/website-screenshots/19-inicio-sessao-lab.png}
-    \caption{Laboratory session initiation screen, showing the process of starting a remote laboratory session.}
+    \caption{Laboratory session initiation screen, showing the process of starting a remote laboratory session. This screen appears when the user clicks on a laboratory in the dashboard.}
     \label{fig:lab-session-start}
 \end{figure}
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\linewidth]{../img/website-screenshots/20-final-sessao-lab.png}
-    \caption{Laboratory session termination screen, confirming the end of a remote laboratory session.}
+    \caption{Laboratory session countdown, received by the api through the websocket connection. }
     \label{fig:lab-session-end}
 \end{figure}
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\linewidth]{../img/website-screenshots/21-tela-fila-de-espera.png}
-    \caption{Waiting queue interface, showing students waiting for their turn to access laboratory resources.}
+    \caption{Waiting queue interface, showing students waiting for their turn to access laboratory resources. When the the queue ends, the user is redirected to the laboratory session screen. }
     \label{fig:waiting-queue}
 \end{figure}
 
@@ -244,7 +239,7 @@ Hardware management functionality is available both within specific laboratory c
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\linewidth]{../img/website-screenshots/24-dropdown-mudanca-papel-administrador.png}
-    \caption{Administrator role change dropdown, demonstrating the role-switching functionality for testing and support.}
+    \caption{Role change dropdown, only available if the current user is administrator. }
     \label{fig:admin-role-change}
 \end{figure}
 
