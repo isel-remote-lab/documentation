@@ -36,6 +36,18 @@ The application implements a comprehensive notification system that provides rea
 
 An additional usability feature implemented in the frontend is the ability for users with higher roles to switch their view to that of a lower role. For example, an administrator can choose to view the application as a professor, and a professor can view it as a student. This functionality is particularly useful for testing, support, and understanding the user experience from different perspectives, ensuring that features and permissions are correctly enforced for each role.
 
+This temporary role switching functionality is implemented using React Context API through a dedicated \texttt{TempRoleContext}. The context provides a centralized state management solution that allows any component in the application to access and modify the current temporary role. The implementation includes several key features:
+
+\begin{itemize}
+    \item \textbf{Role Hierarchy Validation:} The context enforces role hierarchy rules, ensuring users can only switch to roles they have permission to access. Teachers can switch to student view, and administrators can switch to any role.
+    \item \textbf{Persistence:} The temporary role is stored in the browser's localStorage, allowing the user's role preference to persist across browser sessions and page refreshes.
+    \item \textbf{Cross-Tab Synchronization:} The context listens for localStorage changes across browser tabs, ensuring that role changes are synchronized when the user has multiple tabs open.
+    \item \textbf{Automatic Fallback:} If a user's real role changes (e.g., through admin action), the temporary role automatically reverts to the user's actual role to maintain security.
+    \item \textbf{Error Handling:} Invalid role assignments are prevented, and users are redirected to an error page if they attempt to access unauthorized roles.
+\end{itemize}
+
+The context is integrated into the application's root layout, wrapping all components and providing the temporary role state throughout the component tree. Components can access the current temporary role using the \texttt{useTempRole} hook, which returns both the current temporary role and a function to update it. This design ensures that the role switching functionality is available consistently across all application screens while maintaining proper security boundaries.
+
 To enhance the user experience and make the application feel as much like a single-page application with multiple menus as possible, the frontend leverages Next.js modals using parallel and intercepting routes~\cite{nextjs-app-router}. This approach allows users to open dialogs, forms, or detailed views as overlays without leaving the current page context, providing smooth navigation and reducing full page reloads. 
 
 The modal implementation is designed with flexibility and accessibility in mind. Modal information and configurations are stored in external files, which are then imported and used by Next.js to generate both modal overlays and complete standalone pages. This architecture enables users to access modal content directly through URIs, providing complete pages when accessed directly while maintaining the modal overlay experience when navigated to from within the application.
