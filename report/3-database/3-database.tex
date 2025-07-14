@@ -1,36 +1,22 @@
 \chapter{Database} \label{cap:database}
 The database serves as the foundational component of the system architecture. PostgreSQL~\cite{postgresql} was selected as the database management system due to its open-source nature and robust support for relational data models. This choice aligns with previous project implementations and provides the consistency and performance required for the system's operational needs.
 
-This chapter presents an overview of the \ac{er model} and critical implementation details. Complete technical documentation is provided in the accompanying appendix.
+This chapter presents an overview of the \ac{er model} and critical implementation details. Complete technical documentation is provided in the accompanying appendix~\ref{cap:database_documentation}.
 
 The database design follows a normalized relational structure that supports user authentication, secure session management, and the remaining system functionalities. The \acs{er model} encompasses the core entities required for system functionality while maintaining data integrity and scalability.
 
-\begin{landscape}
-    \begin{figure}
-        \centering
-        \includesvg[inkscapelatex=false, width=1\linewidth]{../img/DB-diagrams/ERDiagramRL.drawio.svg}
-        \caption{Entity-Relationship Model (ER Model)}
-        \label{fig:er_model}
-    \end{figure}
-\end{landscape}
+\subsection*{Core Entities}
+
+The \textbf{USER} entity represents a user in the system, as depicted in figure~\ref{fig:user_entity}. The \textit{name} and \textit{email} attributes are provided by the authentication system. The \textit{role} serves as a discriminator attribute to identify whether the user is an Administrator, Teacher, or Student, as described in section~\ref{sec:user_role}
 
 \begin{figure}[H]
     \centering
-    \includesvg[inkscapelatex=false, width=0.5\linewidth]{../img/DB-diagrams/User.drawio.svg}
+    \includesvg[inkscapelatex=false, width=0.42\linewidth]{../img/DB-diagrams/User.drawio.svg}
     \caption{User Entity}
     \label{fig:user_entity}
 \end{figure}
 
-The \textbf{USER} entity represents a user in the system. The name and email attributes are provided by the authentication system. The role serves as a discriminator attribute to identify whether the user is an administrator, professor, or student.
-
-\begin{figure}[H]
-    \centering
-    \includesvg[inkscapelatex=false, width=0.6\linewidth]{../img/DB-diagrams/Token.drawio.svg}
-    \caption{Token Entity}
-    \label{fig:token_entity}
-\end{figure}
-
-A user can create \textit{N} tokens. The \textbf{TOKEN} is a weak entity because it cannot be uniquely identified by its attributes alone and therefore requires a user, which is a strong entity, to be identified. A token, being unique, is created by only one user.
+A user can create \textit{N} tokens. The \textbf{TOKEN}, as depicted in figure~\ref{fig:token_entity}, is a weak entity because it cannot be uniquely identified by its attributes alone and therefore requires a user, which is a strong entity, to be identified. A token, being unique, is created by only one user.
 
 This is a useful entity for authentication purposes. It was designed to hold a hash value in the \textit{token\_validation} attribute.
 
@@ -46,12 +32,23 @@ The \textit{last\_used\_at} and the \textit{created\_at} are useful for determin
 
 \begin{figure}[H]
     \centering
-    \includesvg[inkscapelatex=false, width=0.55\linewidth]{../img/DB-diagrams/Laboratory.drawio.svg}
+    \includesvg[inkscapelatex=false, width=0.48\linewidth]{../img/DB-diagrams/Token.drawio.svg}
+    \caption{Token Entity}
+    \label{fig:token_entity}
+\end{figure}
+
+A user, as an Administrator or Teacher, can create \textit{N} laboratories. When creating a \textbf{LABORATORY}, depicted in figure~\ref{fig:laboratory_entity}, the user can define the \textit{name} and \textit{description}. They can also define the \textit{duration} of a laboratory session and its \textit{queue\_limit}.
+
+\begin{figure}[H]
+    \centering
+    \includesvg[inkscapelatex=false, width=0.43\linewidth]{../img/DB-diagrams/Laboratory.drawio.svg}
     \caption{Laboratory Entity}
     \label{fig:laboratory_entity}
 \end{figure}
 
-A user, as an administrator or professor, can create \textit{N} laboratories. When creating a \textbf{LABORATORY}, the user can define the name (\textit{name}) and description (\textit{description}). They can also define the duration of a laboratory session (\textit{duration}) and its queue limit (\textit{queue\_limit}).
+Upon successful laboratory creation, the user can associate \textbf{HARDWARE}, depicted in figure~\ref{fig} to it, which must be created separately.
+
+For the creation, it requires a name (\textit{name}), \ac{ip} (\textit{ip\_address}) and \ac{mac} (\textit{mac\_address}) addresses (which can be null depending on the hardware), a status (\textit{status}) to indicate whether the hardware is under maintenance, occupied, or available, and a serial number (\textit{serial\_num}) to uniquely identify the hardware. Although it has an identifier, the serial number helps physically identify the hardware.
 
 \begin{figure}[H]
     \centering
@@ -60,9 +57,11 @@ A user, as an administrator or professor, can create \textit{N} laboratories. Wh
     \label{fig:hardware_entity}
 \end{figure}
 
-Upon successful laboratory creation, the user can associate \textbf{HARDWARE} to it, which must be created separately.
 
-For the creation, it requires a name (\textit{name}), \ac{ip} (\textit{ip\_address}) and \ac{mac} (\textit{mac\_address}) addresses (which can be null depending on the hardware), a status (\textit{status}) to indicate whether the hardware is under maintenance, occupied, or available, and a serial number (\textit{serial\_num}) to uniquely identify the hardware. Although it has an identifier, the serial number helps physically identify the hardware.
+
+For a student to access a laboratory, they must be in a group that is associated with that laboratory. A professor can create a \textbf{GROUP} and associate users to it.
+
+When creating a group, the user needs to name it (\textit{name}) and, optionally, add a description (\textit{description}) to it.
 
 \begin{figure}[H]
     \centering
@@ -71,10 +70,6 @@ For the creation, it requires a name (\textit{name}), \ac{ip} (\textit{ip\_addre
     \label{fig:group_entity}
 \end{figure}
 
-For a student to access a laboratory, they must be in a group that is associated with that laboratory. A professor can create a \textbf{GROUP} and associate users to it.
-
-When creating a group, the user needs to name it (\textit{name}) and, optionally, add a description (\textit{description}) to it.
-
 \vspace{5mm}
 
 Besides the normal relationships between the entities described before and illustrated in the \acs{er model}, there are two that need an overview. The first is the \textit{waiting\_queue}. Although it was said that a user must be in a group associated with a laboratory to be able to join it, it is not possible, at least in a simple way, to illustrate that. So this relationship acts as a waiting queue for a specific laboratory.
@@ -82,3 +77,12 @@ Besides the normal relationships between the entities described before and illus
 The second one is the relationship \textit{session}. This is an important relationship to manage laboratory sessions and statistics. When a user successfully joins a laboratory, a session is created. With this relationship it is possible to control the sessions a user has in a laboratory.
 
 Although PostgreSQL~\cite{postgresql} is being used for its functionalities, it was decided that all logic and verifications are implemented in the Web \ac{api}, so that no triggers or complex constraints are implemented on the database side.
+
+\begin{landscape}
+    \begin{figure}
+        \centering
+        \includesvg[inkscapelatex=false, width=1\linewidth]{../img/DB-diagrams/ERDiagramRL.drawio.svg}
+        \caption{Entity-Relationship Model (ER Model)}
+        \label{fig:er_model}
+    \end{figure}
+\end{landscape}

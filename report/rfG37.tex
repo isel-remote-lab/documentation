@@ -8,6 +8,8 @@
 \addto{\captionsenglish}{\renewcommand{\contentsname}{Contents}}
 \addto{\captionsenglish}{\renewcommand{\appendixname}{Appendix}}
 
+\usepackage{tikz}
+\usepackage{enumitem}
 \usepackage{pdflscape}
 \usepackage{lipsum} % gerador de texto
 \usepackage{graphicx}
@@ -25,6 +27,9 @@
 \usepackage{svg}
 \renewcommand{\algorithmicrequire}{\textbf{Dados: }}
 \renewcommand{\algorithmicensure}{\textbf{Resultado: }}
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+    \node[shape=circle,draw,line width=0.8pt,inner sep=1.5pt,minimum size=1.2em] (char) {#1};}
+}
 
 % Definições das dimensões das páginas
 \setlength{\textheight}{24.00cm}
@@ -186,7 +191,7 @@
     \begin{minipage}[l]{\textwidth}
         \hspace{-15mm}\resizebox{85mm}{!}{\includegraphics{../../img/figures/logoISELnew2.png}}\\
     \end{minipage}\\[10mm]
-    {\large \textbf{Department of Electronical Engineering, Telecommunications and Computers}\\[1.5cm]}
+    {\large \textbf{Department of Computer Science and Engineering}\\[1.5cm]}
     {\Huge \textbf{Remote Lab}\\[2cm]}    
     {\large \begin{tabular}{l}
       50565: Ângelo Filipe Maia Azevedo \href{mailto:a50565@alunos.isel.pt}{(a50565@alunos.isel.pt)}\\
@@ -197,7 +202,7 @@
     of Computer Science and Computer Engineering \acs{bsc}\\[3cm]}
     {\large Advisor: Prof. Pedro Miguens Matutino}   
     \vfill
-    {\large \textbf{June 2025}}   
+    {\large \textbf{July 2025}}   
   \end{center}
 \end{titlepage}
 
@@ -225,7 +230,7 @@
       & \rule{75mm}{0.5pt}\\[5mm]
 \end{tabular}\\[5cm]
 {\large Report for Project and Seminar Class of Computer Science and Computer Engineering \acs{bsc}\\[3cm]}
-June 2025\\
+July 2025\\
 \end{center}
 
 % Página de resumo em Inglês
@@ -234,17 +239,17 @@ June 2025\\
 The design, development, implementation, and validation of digital systems require, in addition 
 to simulators, the use of hardware for verification of their implementation in real devices. 
 However, access to these real devices is sometimes restricted, not being available 24h/7. 
-In the current teaching paradigm where face-to-face time is reduced and remote and autonomous work 
+In the current teaching paradigm where face-to-face time tends to reduce remote and autonomous work 
 is increased, it is necessary to create alternatives to the usual model.
 
-The Remote Lab project aims to provide an online laboratory with access to remote hardware.
-This remote workbench consists of a web application running on an embedded system. The web application, accessed through a website, 
-aims to provide a dashboard where users can join a laboratory. This
-is where users can control the remote hardware. A hierarchy system will be implemented to
+The Remote Lab project aims to provide an online laboratories platform, with access to remote hardware.
+This remote workbench consists of a web application, accessed through a website and
+provides a dashboard where users can join a laboratory. This
+is where users can control the remote hardware through a remote terminal. A hierarchy system is implemented to
 provide different roles, each with their own permissions relative to how users can browse the
 information provided by the web application.
 
-This project will implement the infrastructure to support the configuration, manipulation and visualization
+This project implements the infrastructure to support the configuration, manipulation and visualization
 of remote hardware. Based on an architecture with back-end (database and Web \acs{api}) and front-end (Web App, with a dashboard). 
 
 \cleardoublepage
@@ -252,18 +257,17 @@ of remote hardware. Based on an architecture with back-end (database and Web \ac
 A conceção, desenvolvimento, implementação, e por fim a validação de sistemas digitais 
 requerem para além dos simuladores, a utilização de hardware para uma verificação da sua 
 concretização em dispositivos reais. No entanto, o acesso a esses dispositivos reais é por 
-vezes restrito, não estando acessíveis 24h/7. No atual paradigma de ensino em que se reduz 
-o tempo de contacto presencial, aumentando-se o trabalho remoto e autónomo, é necessário criar alternativas 
+vezes restrito, não estando acessíveis 24h/7. No atual paradigma de ensino em que o tempo de contacto visual tende a reduzir, aumentando-se o trabalho remoto e autónomo, é necessário criar alternativas 
 ao modelo habitual. 
 
-O projeto Remote Lab tem como objetivo fornecer um laboratório online com acesso a hardware remoto.
-Este laboratório consiste numa aplicação web executada num sistema embebido. A aplicação web, acedida 
-através de um website, visa fornecer um painel de controlo onde os utilizadores podem aderir a um laboratório. 
-Os utilizadores podem controlar o hardware remoto. Será implementado um sistema hierárquico para 
+O projeto Remote Lab tem como objetivo fornecer laboratórios online com acesso a hardware remoto.
+Este meio remoto consiste numa aplicação web acedida 
+através de um website, que visa fornecer um painel de controlo onde os utilizadores podem aderir a um laboratório. 
+Os utilizadores podem controlar o hardware remoto através de um terminal. Um sistema hierárquico foi implementado para 
 fornecer diferentes funções, cada uma com as suas próprias permissões relativamente à forma como os utilizadores 
 podem navegar pela informação fornecida pela aplicação web.
 
-Este projeto implementará a infraestrutura de suporte à configuração, manipulação e visualização de hardware remoto. 
+Este projeto implementa a infraestrutura de suporte à configuração, manipulação e visualização de hardware remoto. 
 Baseado numa arquitetura com back-end (base de dados e Web \acs{api}) e front-end (Web App, com um dashboard).
 
 %{\bf Palavras-chave:} lista de palavras-chave separadas por ;.
@@ -330,7 +334,7 @@ Baseado numa arquitetura com back-end (base de dados e Web \acs{api}) e front-en
 % Apêndices
 \appendix
 
-\chapter{Database Documentation}
+\chapter{Database Documentation}\label{cap:database_documentation}
 \input{../database/database-content}
 
 \end{document}
