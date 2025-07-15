@@ -5,7 +5,7 @@ This chapter presents an overview of the \ac{er model} and critical implementati
 
 The database design follows a normalized relational structure that supports user authentication, secure session management, and the remaining system functionalities. The \acs{er model} encompasses the core entities required for system functionality while maintaining data integrity and scalability.
 
-\subsection*{Core Entities}
+\subsection{Core Entities}
 
 The \textbf{USER} entity represents a user in the system, as depicted in figure~\ref{fig:user_entity}. The \textit{name} and \textit{email} attributes are provided by the authentication system. The \textit{role} serves as a discriminator attribute to identify whether the user is an Administrator, Teacher, or Student, as described in section~\ref{sec:user_role}
 
@@ -46,37 +46,38 @@ A user, as an Administrator or Teacher, can create \textit{N} laboratories. When
     \label{fig:laboratory_entity}
 \end{figure}
 
-Upon successful laboratory creation, the user can associate \textbf{HARDWARE}, depicted in figure~\ref{fig} to it, which must be created separately.
+Upon successful laboratory creation, the user can associate \textbf{HARDWARE}, depicted in figure~\ref{fig:hardware_entity} to it, which must be created separately.
 
-For the creation, it requires a name (\textit{name}), \ac{ip} (\textit{ip\_address}) and \ac{mac} (\textit{mac\_address}) addresses (which can be null depending on the hardware), a status (\textit{status}) to indicate whether the hardware is under maintenance, occupied, or available, and a serial number (\textit{serial\_num}) to uniquely identify the hardware. Although it has an identifier, the serial number helps physically identify the hardware.
+For the creation, it requires a \textit{name}, \textit{\ac{ip} address} and \textit{\ac{mac} address}, which can be null depending on the hardware, a \textit{status} to indicate whether the hardware is under maintenance, occupied, or available, and a serial number (\textit{serial\_num}) to uniquely identify the hardware. Although it has an identifier, the serial number helps physically identify the hardware.
 
 \begin{figure}[H]
     \centering
-    \includesvg[inkscapelatex=false, width=0.55\linewidth]{../img/DB-diagrams/Hardware.drawio.svg}
+    \includesvg[inkscapelatex=false, width=0.45\linewidth]{../img/DB-diagrams/Hardware.drawio.svg}
     \caption{Hardware Entity}
     \label{fig:hardware_entity}
 \end{figure}
 
+For a student to access a laboratory, they must be in a group that is associated with that laboratory. A professor can create a \textbf{GROUP}, depecited in figure~\ref{fig:group_entity} and associate users to it.
 
-
-For a student to access a laboratory, they must be in a group that is associated with that laboratory. A professor can create a \textbf{GROUP} and associate users to it.
-
-When creating a group, the user needs to name it (\textit{name}) and, optionally, add a description (\textit{description}) to it.
+When creating a group, the user needs to \textit{name} it and, optionally, add a \textit{description} to it.
 
 \begin{figure}[H]
     \centering
-    \includesvg[inkscapelatex=false, width=0.5\linewidth]{../img/DB-diagrams/Group.drawio.svg}
+    \includesvg[inkscapelatex=false, width=0.45\linewidth]{../img/DB-diagrams/Group.drawio.svg}
     \caption{Group Entity}
     \label{fig:group_entity}
 \end{figure}
 
 \vspace{5mm}
 
-Besides the normal relationships between the entities described before and illustrated in the \acs{er model}, there are two that need an overview. The first is the \textit{waiting\_queue}. Although it was said that a user must be in a group associated with a laboratory to be able to join it, it is not possible, at least in a simple way, to illustrate that. So this relationship acts as a waiting queue for a specific laboratory.
+Besides the standard relationships between the entities described previously, there are two that require a detailed overview. The first is the \textit{waiting\_queue} relationship between the User and the Laboratory. Although it was established that a user must be part of a group associated with a laboratory to be able to join it, this constraint is not easily illustrated in a straightforward manner. Therefore, this relationship serves as a waiting queue for a specific laboratory.
 
-The second one is the relationship \textit{session}. This is an important relationship to manage laboratory sessions and statistics. When a user successfully joins a laboratory, a session is created. With this relationship it is possible to control the sessions a user has in a laboratory.
+The second relationship is the \textit{session} relationship between the User, Laboratory, and Hardware. This is a crucial relationship for managing laboratory sessions and statistics. When a user successfully joins a laboratory, a session is created. Through this relationship, it becomes possible to control and track the sessions a user has within a laboratory.
 
-Although PostgreSQL~\cite{postgresql} is being used for its functionalities, it was decided that all logic and verifications are implemented in the Web \ac{api}, so that no triggers or complex constraints are implemented on the database side.
+\subsection{Summary}
+Although PostgreSQL~\cite{postgresql} is being utilized for its functionalities, it was decided that all logic and verifications would be implemented in the Web \ac{api}, ensuring that no triggers or complex constraints are implemented on the database side.
+
+Figure~\ref{fig:er_model} illustrates the \ac{er model}, providing its entities and relationships.
 
 \begin{landscape}
     \begin{figure}
