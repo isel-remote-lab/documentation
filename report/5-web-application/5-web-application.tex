@@ -14,6 +14,7 @@ The decision to use Next.js as the framework was driven by its robust feature se
 A key architectural choice is the retrieval of domain configuration in \ac{json} format from the backend \ac{api}. This ensures that the frontend's domain-related settings are always synchronized with those defined on the backend, centralizing domain management and reducing the risk of inconsistencies.
 
 \section{Architecture and Logic Separation}
+\label{sec:architecture-and-logic-separation}
 
 The application leverages Next.js to achieve a clear separation between client-side and server-side logic. All sensitive operations and data exchanges with the backend API are performed server-side, enhancing security and control over data flow~\cite{nextjs-server-client-components,nextjs-data-fetching}. This architecture enables efficient server-side rendering, improved performance, and a better user experience. For more details on using Next.js to perform API requests from the server, see~\cite{auth0-nextjs-server-actions}.
 
@@ -74,184 +75,171 @@ NextAuth.js~\cite{nextauth} is highly extensible and supports a wide range of au
 
 This section presents a comprehensive overview of the web application's user interface through screenshots that demonstrate the various features and user flows available to different roles within the platform.
 
-\subsection{Authentication and Initial Access}
-
-The application implements a secure authentication system that automatically redirects unauthenticated users to the login screen whenever they attempt to access any protected page. This ensures that only authorized users can access the platform's features and resources. When a user tries to navigate to any page without being logged in, they are immediately redirected to the authentication interface, maintaining the security and integrity of the system.
+Authentication is enforced throughout the application. When the user clicks the login button on the login screen (Figure~\ref{fig:login-sidebyside}a), they are redirected to the Microsoft OAuth login page (Figure~\ref{fig:login-sidebyside}b). Upon successful authentication, the user lands on the initial page of the Remote Lab platform, which provides access to the main features (Figure~\ref{fig:initial-screen}).
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=1.0\linewidth]{../img/website-screenshots/1-tela-login.png}
-    \caption{Login screen. Users are automatically redirected to this screen when accessing any page without authentication.}
-    \label{fig:login-screen}
+    \begin{minipage}[t]{0.48\linewidth}
+        \centering
+        % Crop more on all four sides: left, bottom, right, top
+        \includegraphics[trim=600 200 600 200,clip,width=\linewidth]{../img/website-screenshots/1-login-screen.png}
+        (a) Login screen
+    \end{minipage}\hfill
+    \begin{minipage}[t]{0.48\linewidth}
+        \centering
+        \includegraphics[trim=600 200 600 200,clip,width=\linewidth]{../img/website-screenshots/2-login-microsoft-oauth.png}
+        (b) Microsoft OAuth login (after clicking the login button)
+    \end{minipage}
+    \caption{Authentication flow: (a) login screen; (b) Microsoft OAuth login page shown after clicking the login button.}
+    \label{fig:login-sidebyside}
 \end{figure}
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=1.0\linewidth]{../img/website-screenshots/2-login-microsoft-oauth.png}
-    \caption{After the login screen, the user is redirected to the Microsoft OAuth login page. Allows users to authenticate using their university credentials.}
-    \label{fig:microsoft-oauth-login}
-\end{figure}
+The interface dynamically adapts to the user's role. Users with higher permissions can switch their view to lower roles for testing and support purposes (Figure~\ref{fig:role-dropdown}). For example, the professor dashboard displays the main interface and available features for laboratory management (Figure~\ref{fig:professor-dashboard}).
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=1.0\linewidth]{../img/website-screenshots/4-tela-inicial.png}
-    \caption{Initial landing page of the Remote Lab platform, providing access to the main application features.}
-    \label{fig:initial-screen}
-\end{figure}
-
-\subsection{Role-Based Interface and Navigation}
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=1.0\linewidth]{../img/website-screenshots/5-dropdown-escolha-vista-papel.png}
-    \caption{Role selection dropdown allowing users with higher permissions to switch their view to lower roles for testing and support purposes.}
+    \includegraphics[trim=0 500 0 0,clip,width=\linewidth]{../img/website-screenshots/5-role-selection.png}
+    \caption{Role selection dropdown}
     \label{fig:role-dropdown}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=1.0\linewidth]{../img/website-screenshots/6-tela-inicial-professor.png}
-    \caption{Professor dashboard showing the main interface and available features for laboratory management.}
+    \includegraphics[trim=0 500 0 0,clip,width=\linewidth]{../img/website-screenshots/6-professor-dashboard.png}
+    \caption{Professor dashboard}
     \label{fig:professor-dashboard}
 \end{figure}
 
-\subsection{Laboratory Creation and Management}
+Laboratory creation and management are performed through interactive modals, which include real-time input validation and provide a smooth user experience. These modals are both resizable and movable, allowing users to customize their workspace layout. The application is designed to behave as a single-page application, with most operations performed in overlays. However, if a user accesses the \ac{uri} of a modal directly, the same content is displayed as a full-page view, ensuring that all features remain accessible and consistent regardless of navigation method (Figure~\ref{fig:create-lab-modal}).
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=1.0\linewidth]{../img/website-screenshots/7-modal-criar-lab.png}
-    \caption{Modal dialog for creating a new laboratory session with form validation and input fields.}
+    \includegraphics[trim=0 400 0 0,clip,width=\linewidth]{../img/website-screenshots/7-create-laboratory-modal.png}
+    \caption{Lab creation modal}
     \label{fig:create-lab-modal}
 \end{figure}
 
+The flexibility of the modal system is illustrated in Figure~\ref{fig:modal-validation}, where the laboratory creation modal has been resized and moved, and input validation is demonstrated. Additionally, Figure~\ref{fig:create-lab-fullscreen} shows the same laboratory creation interface displayed in full screen, as it appears when the \ac{uri} is accessed directly.
+
+The modal form fields, including properties such as whether a field is required or optional, minimum and maximum values, and other validation rules, are dynamically retrieved from the backend API. This ensures that the frontend validation logic is always consistent with the business rules defined on the server, as described in Section~\ref{sec:architecture-and-logic-separation}. The configuration-driven approach allows the modal to automatically adapt to changes in the domain model without requiring frontend code modifications. Validation is performed both on the website (client-side) and on the backend, reducing unnecessary API requests and providing immediate feedback to users.
+
 \begin{figure}[H]
     \centering
-    \includegraphics[width=1.0\linewidth]{../img/website-screenshots/8-movimentar-redimensionar-modal-validacao-input.png}
-    \caption{Interactive modal with input validation, demonstrating the responsive and user-friendly form design with real-time feedback.}
+    \includegraphics[trim=0 400 0 0,clip,width=\linewidth]{../img/website-screenshots/8-moved-and-resized-modal-with-validation.png}
+    \caption{Interactive modal with validation}
     \label{fig:modal-validation}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=1.0\linewidth]{../img/website-screenshots/9-criar-lab-tela-cheia.png}
-    \caption{Full-screen laboratory creation interface providing comprehensive configuration options.}
+    \includegraphics[trim=0 400 0 0,clip,width=\linewidth]{../img/website-screenshots/9-fullscreen-create-laboratory.png}
+    \caption{Full-screen lab creation}
     \label{fig:create-lab-fullscreen}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=1.0\linewidth]{../img/website-screenshots/10-mensagem-na-criacao.png}
-    \caption{Success message displayed after successful laboratory creation, confirming the operation completion.}
+    \includegraphics[trim=0 400 0 0,clip,width=\linewidth]{../img/website-screenshots/10-create-message.png}
+    \caption{Success message after creation}
     \label{fig:creation-success-message}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=1.0\linewidth]{../img/website-screenshots/11-editar-lab.png}
-    \caption{Laboratory editing interface allowing professors to modify existing laboratory configurations or delete it.}
+    \includegraphics[trim=0 400 0 0,clip,width=\linewidth]{../img/website-screenshots/11-laboratory-edition.png}
+    \caption{Lab editing interface}
     \label{fig:edit-lab}
 \end{figure}
 
-\subsection{Group Management}
-
-Group management in the application can be performed in two ways: specifically within a laboratory context or generally through the dedicated management interface. Users can access group management either through the laboratory-specific settings or through the general group management icon located in the upper right corner of the interface, providing flexibility in how they organize and manage student groups.
+Group management can be performed either within a laboratory context or through the general management interface. The interface provides options for managing groups (Figure~\ref{fig:manage-lab-groups}), creating new groups (Figure~\ref{fig:create-lab-group}), confirming group creation (Figure~\ref{fig:group-created}), and managing group members (Figure~\ref{fig:manage-group-users}).
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=1.0\linewidth]{../img/website-screenshots/12-gerir-grupos-lab.png}
-    \caption{Group management interface for laboratories, showing existing groups and management options. This can be accessed both within specific laboratories and through the general management interface.}
+    \includegraphics[trim=0 400 0 0,clip,width=\linewidth]{../img/website-screenshots/12-group-management.png}
+    \caption{Lab group management}
     \label{fig:manage-lab-groups}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=1.0\linewidth]{../img/website-screenshots/13-criar-grupo-lab.png}
-    \caption{Group creation form within a laboratory, allowing professors to organize students into groups.}
+    \includegraphics[trim=0 400 0 0,clip,width=\linewidth]{../img/website-screenshots/13-group-creation.png}
+    \caption{Group creation form}
     \label{fig:create-lab-group}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=1.0\linewidth]{../img/website-screenshots/14-grupo-criado.png}
-    \caption{Confirmation screen showing a successfully created group with its details and member information.}
+    \includegraphics[trim=0 400 0 0,clip,width=\linewidth]{../img/website-screenshots/14-group-created-confirmation.png}
+    \caption{Group created confirmation}
     \label{fig:group-created}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=1.0\linewidth]{../img/website-screenshots/15-gerir-utilizadores-grupo.png}
-    \caption{User management interface within a group, allowing professors to add, remove, and manage group members.}
+    \includegraphics[trim=0 300 0 0,clip,width=\linewidth]{../img/website-screenshots/15-group-users-management.png}
+    \caption{Group user management}
     \label{fig:manage-group-users}
 \end{figure}
 
-\subsection{Hardware Management}
-
-Hardware management functionality is available both within specific laboratory contexts and through a general management interface. Users can manage equipment either through laboratory-specific settings or by accessing the dedicated hardware management icon in the upper right corner of the interface. This dual approach allows for both targeted hardware configuration for specific laboratories and broader system-wide hardware administration.
+Hardware management is available both within specific laboratory contexts and through a general management interface. Users can configure available equipment (Figure~\ref{fig:manage-lab-hardware}), add hardware to labs (Figure~\ref{fig:hardware-added-to-lab}), and edit equipment settings (Figure~\ref{fig:edit-hardware}).
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=1.0\linewidth]{../img/website-screenshots/16-gerir-hardware-lab.png}
-    \caption{Hardware management interface for laboratories, showing available equipment and configuration options. This can be accessed both within specific laboratories and through the general management interface.}
+    \includegraphics[trim=0 300 0 0,clip,width=\linewidth]{../img/website-screenshots/16-hardware-management.png}
+    \caption{Lab hardware management}
     \label{fig:manage-lab-hardware}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=1.0\linewidth]{../img/website-screenshots/17-hardware-adicionado-ao-lab.png}
-    \caption{Confirmation screen showing hardware successfully added to a laboratory with detailed equipment information.}
+    \includegraphics[trim=0 300 0 0,clip,width=\linewidth]{../img/website-screenshots/17-hardware-added-confirmation.png}
+    \caption{Hardware added to lab}
     \label{fig:hardware-added-to-lab}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=1.0\linewidth]{../img/website-screenshots/18-editar-hardware.png}
-    \caption{Hardware editing interface allowing administrators to modify equipment configurations and settings.}
+    \includegraphics[trim=0 300 0 0,clip,width=\linewidth]{../img/website-screenshots/18-hardware-edition-screen.png}
+    \caption{Hardware editing interface}
     \label{fig:edit-hardware}
 \end{figure}
 
-\subsection{Laboratory Sessions and User Experience}
+During laboratory sessions, users can start a remote session (Figure~\ref{fig:lab-session-start}) and, if necessary, wait in a queue until they gain access to the lab (Figure~\ref{fig:waiting-queue}).
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=1.0\linewidth]{../img/website-screenshots/19-inicio-sessao-lab.png}
-    \caption{Laboratory session initiation screen, showing the process of starting a remote laboratory session. This screen appears when the user clicks on a laboratory in the dashboard.}
+    \includegraphics[trim=0 200 0 0,clip,width=\linewidth]{../img/website-screenshots/19-laboratory-session.png}
+    \caption{Lab session start}
     \label{fig:lab-session-start}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=1.0\linewidth]{../img/website-screenshots/20-final-sessao-lab.png}
-    \caption{Laboratory session countdown, received by the api through the websocket connection. }
-    \label{fig:lab-session-end}
-\end{figure}
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=1.0\linewidth]{../img/website-screenshots/21-tela-fila-de-espera.png}
-    \caption{Waiting queue interface, showing students waiting for their turn to access laboratory resources. When the the queue ends, the user is redirected to the laboratory session screen. }
+    \includegraphics[trim=0 600 0 0,clip,width=\linewidth]{../img/website-screenshots/21-tela-fila-de-espera.png}
+    \caption{Waiting queue}
     \label{fig:waiting-queue}
 \end{figure}
 
-\subsection{User Account and Settings}
+The user account area provides a quick access menu to the profile, settings, and logout (Figure~\ref{fig:account-dropdown}), as well as a detailed account page (Figure~\ref{fig:account-details}). The dropdown menu allows users to quickly navigate to their account details, shown below.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=1.0\linewidth]{../img/website-screenshots/22-dropdown-conta.png}
-    \caption{Account dropdown menu providing access to user profile, settings, and logout options.}
+    \includegraphics[trim=1500 900 0 0,clip,width=0.3\linewidth]{../img/website-screenshots/21-account-dropdown.png}
+    \caption{Account dropdown menu for quick access to profile, settings, and logout.}
     \label{fig:account-dropdown}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=1.0\linewidth]{../img/website-screenshots/23-detalhes-propria-conta.png}
-    \caption{User account details page showing personal information, role, and account settings.}
+    \includegraphics[trim=0 200 0 0,clip,width=\linewidth]{../img/website-screenshots/22-profile-details.png}
+    \caption{Detailed account information.}
     \label{fig:account-details}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=1.0\linewidth]{../img/website-screenshots/24-dropdown-mudanca-papel-administrador.png}
-    \caption{Role change dropdown, only available if the current user is administrator. }
+    \includegraphics[trim=0 100 0 0,clip,width=\linewidth]{../img/website-screenshots/23-change-user-role-dropdown.png}
+    \caption{Role change dropdown (admin)}
     \label{fig:admin-role-change}
 \end{figure}
 
