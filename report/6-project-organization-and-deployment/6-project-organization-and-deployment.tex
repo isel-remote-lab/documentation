@@ -61,12 +61,19 @@ Sensitive configuration files and environment variables are managed in the \text
 
 \subsection{Automation with start.sh} \label{subsec:automation_startsh}
 
-To streamline deployment, the platform provides a \texttt{start.sh} script at the repository root. This script has been improved to:
+To streamline deployment, the platform provides a \texttt{start.sh} script at the repository root. This script offers a flexible and automated way to initialize and manage the entire environment, supporting a variety of deployment scenarios through command-line flags. Its main features include:
 \begin{itemize}
-    \item Automatically switch branches in submodules (e.g., \texttt{website}) according to the main branch.
-    \item Load environment variables from \texttt{private/shared/secrets/.env}.
-    \item Support flags for partial deployment (e.g., API only), environment (dev/prod), and Cloudflare Tunnel.
+    \item Selection of environment: development (\texttt{-dev} or \texttt{-d}) or production (\texttt{-prod} or \texttt{-p}).
+    \item API-only mode (\texttt{-api} or \texttt{-a}) to start only the backend service for development or testing.
+    \item Demo mode (\texttt{-demo} or \texttt{-dm}) to enable demonstration features, including the hardware simulation service.
+    \item Cloudflare tunnel integration (\texttt{-cloudflare} or \texttt{-c}) for secure remote access.
+    \item Branch switching (\texttt{-switch} or \texttt{-s}) to automatically check out the appropriate branch (e.g., \texttt{main}, \texttt{develop}, or \texttt{demo}) in submodules.
+    \item Log viewing (\texttt{-logs} or \texttt{-l}) to display container logs without restarting services.
 \end{itemize}
+
+The script automatically loads environment variables and secrets from \texttt{private/shared/secrets/.env}, and, in production, from \texttt{private/frontend/.env}. It dynamically selects Docker Compose profiles based on the chosen flags, enabling or disabling services such as the frontend, hardware simulation, and Cloudflare tunnel as needed. The script also supports combinations of flags for highly customizable deployments, such as running the full stack in demo mode with remote access, or starting only the API for local development.
+
+This automation ensures that all required services, secrets, and configurations are correctly initialized, significantly reducing manual setup and the risk of misconfiguration.
 
 \subsection{Cloudflare Tunneling} \label{subsec:cloudflare_tunneling}
 
