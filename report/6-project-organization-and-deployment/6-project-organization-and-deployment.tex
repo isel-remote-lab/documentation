@@ -1,7 +1,10 @@
 \chapter{Project Organization and Deployment} \label{cap:project_org_deployment}
 
 % Project public repository and deployment access
-The Remote Lab project is publicly available at \url{https://github.com/isel-remote-lab/remote-lab}. Detailed deployment instructions and further documentation can also be found in the project's GitHub Wiki~\cite{github-wiki}. To run the application with the full configuration, access to the \texttt{private/} submodule is required, as it contains essential API keys and secret files. This submodule is private for security reasons; therefore, contributors must request access to the ``Remote Lab'' GitHub organization or directly to the private repository to obtain the necessary credentials and configuration files. Both the backend (\texttt{api/}) and frontend (\texttt{website/}) repositories maintain separate \texttt{main} and \texttt{develop} branches to support stable releases and ongoing development, respectively. This branching strategy facilitates collaborative development and continuous integration while ensuring production stability.
+\begin{sloppypar}
+The Remote Lab project is publicly available at \url{https://github.com/isel-remote-lab/remote-lab}. Detailed deployment instructions and further documentation can also be found in the project's GitHub Wiki~\cite{github-wiki}.
+\end{sloppypar}
+To run the application with the full configuration, access to the \texttt{private/} submodule is required, as it contains essential API keys and secret files. This submodule is private for security reasons; therefore, contributors must request access to the ``Remote Lab'' GitHub organization or directly to the private repository to obtain the necessary credentials and configuration files. Both the backend (\texttt{api/}) and frontend (\texttt{website/}) repositories maintain separate \texttt{main} and \texttt{develop} branches to support stable releases and ongoing development, respectively. This branching strategy facilitates collaborative development and continuous integration while ensuring production stability.
 
 \section{Project Structure}
 
@@ -42,6 +45,8 @@ To run the hardware service as part of the platform, ensure the following steps:
 \end{enumerate}
 
 This modular approach allows the platform to be extended with real or simulated hardware, supporting both educational and research scenarios.
+
+At this stage, WebSocket connections are used in the website (frontend) to communicate with the API, enabling real-time, bidirectional features such as live updates and interactive laboratory sessions. The hardware service can also use WebSocket to interact with the backend for device integration and simulation.
 
 It is also possible to run the hardware service outside of Docker by executing the JavaScript code directly on the intended hardware device. This approach provides flexibility for real-world deployments, allowing the integration of physical laboratory equipment without requiring containerization, and enabling the service to run natively on devices such as single-board computers or embedded systems.
 
