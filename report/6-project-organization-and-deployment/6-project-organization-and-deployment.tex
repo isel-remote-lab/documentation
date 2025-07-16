@@ -92,15 +92,15 @@ NGINX acts as a reverse proxy to route \ac{http} requests to both the frontend (
     \item \textbf{Access the Platform:} Once all containers are running, the platform can be accessed via the configured web address. NGINX is used as a reverse proxy to route traffic securely to the appropriate services~\cite{nginx-docs}.
 \end{enumerate}
 
-\section{Build and CI/CD} \label{sec:build_cicd}
+\section{Build and \acf{cicd}} \label{sec:build_cicd}
 
 \begin{itemize}
     \item \textbf{Gradle:} Used for building and managing backend dependencies.
     \item \textbf{pnpm:} Used for frontend dependency management and builds, replacing npm for greater speed and reliability.
     \item \textbf{Dockerfiles:} Multi-stage builds are used for both backend and frontend to optimize image size and security with Docker. The frontend provides separate Dockerfiles for dev/prod.
-    \item \textbf{GitHub Actions:} The frontend provides CI/CD pipelines for the \texttt{main} and \texttt{develop} branches, performing lint, format, check, build, and automatically committing lint/format fixes. The backend is built via Gradle and Docker and can be easily integrated into CI/CD pipelines.
+    \item \textbf{GitHub Actions:} The frontend provides \ac{cicd} pipelines for the \texttt{main} and \texttt{develop} branches, performing lint, format, check, build, and automatically committing lint/format fixes. The backend is built via Gradle and Docker and can be easily integrated into \ac{cicd} pipelines.
 \end{itemize}
 
 \section{Summary}
 
-The implemented infrastructure leverages modern web technologies, containerization, and modular design to provide a robust, scalable, and maintainable platform for remote laboratory access~\cite{nextjs-docs,docker-docs}. The deployment process is automated, secure, and ready for future growth, ensuring that the platform can evolve to meet new requirements and increased demand. Recent improvements in automation, environment management, and CI/CD pipelines further strengthen the project's readiness for collaborative development and production deployment.
+The implemented infrastructure leverages modern web technologies, containerization, and modular design to provide a robust, scalable, and maintainable platform for remote laboratory access~\cite{nextjs-docs,docker-docs}. The deployment process is automated, secure, and ready for future growth, ensuring that the platform can evolve to meet new requirements and increased demand. Recent improvements in automation, environment management, and \ac{cicd} pipelines further strengthen the project's readiness for collaborative development and production deployment.
