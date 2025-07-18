@@ -11,16 +11,17 @@ This chapter serves as the main documentation for the @Web (Next.js) application
 \section{Overview}
 The web application serves as the main point of interaction, integrating seamlessly with backend services via RESTful \ac{api}s. It supports multiple user roles, each with tailored access and features according to their permissions. The interface dynamically adapts to the user's role, ensuring that each user only sees the features and data relevant to them.
 
-The decision to use Next.js as the framework was driven by its robust feature set and alignment with modern web development best practices. Next.js, built on top of React, offers built-in solutions for routing, server-side rendering, \ac{api} integration, and more~\cite{nextjs-app-router,nextjs-server-client-components,nextjs-data-fetching,nextjs-api-routes}. This allowed the team to leverage existing knowledge while accelerating development and ensuring scalability and maintainability.
+The decision to use Next.js as the framework was motivated by its comprehensive set of features and its alignment with modern web development best practices. Next.js, which is built on top of React, provides integrated solutions for several critical aspects of web application development. For example, it offers a powerful page routing system that simplifies navigation and organization of the application~\cite{nextjs-app-router}. Server-side rendering (SSR) is natively supported, enabling faster page loads and improved SEO by generating HTML on the server before sending it to the client~\cite{nextjs-server-client-components}. Next.js also streamlines data fetching through built-in mechanisms that allow developers to retrieve and pre-render data efficiently, both on the server and client sides~\cite{nextjs-data-fetching}. Furthermore, it facilitates seamless integration with backend APIs by supporting API routes directly within the application structure~\cite{nextjs-api-routes}. These features enabled the development team to leverage their existing React expertise, accelerate the implementation process, and ensure that the application remains scalable and maintainable over time.
 
 A key architectural choice is the retrieval of domain configuration in \ac{json} format from the backend \ac{api}. This ensures that the frontend's domain-related settings are always synchronized with those defined on the backend, centralizing domain management and reducing the risk of inconsistencies.
 
 \section{Architecture and Logic Separation}
 \label{sec:architecture-and-logic-separation}
 
-The application leverages Next.js to achieve a clear separation between client-side and server-side logic. All sensitive operations and data exchanges with the backend API are performed server-side, enhancing security and control over data flow~\cite{nextjs-server-client-components,nextjs-data-fetching}. This architecture enables efficient server-side rendering, improved performance, and a better user experience. For more details on using Next.js to perform API requests from the server, see~\cite{auth0-nextjs-server-actions}.
+The application leverages Next.js to achieve a clear separation between client-side and server-side logic. All sensitive operations and data exchanges with the backend API are performed server-side, enhancing security and control over data flow~\cite{nextjs-server-client-components,nextjs-data-fetching,auth0-nextjs-server-actions}. This architecture enables efficient server-side rendering, improved performance, and a better user experience.
 
-To optimize performance and user experience, the frontend performs input validation before sending requests to the API. This approach reduces the number of unnecessary API calls by catching invalid data early, providing immediate feedback to users, and minimizing server load. Importantly, the validation rules on the frontend are kept synchronized with the backend by leveraging the domain configuration JSON retrieved from the API. This ensures that both the client and server enforce consistent validation logic, reducing the risk of discrepancies and improving the reliability of the application.
+\subparagraph{Synchronization of Validation Rules}
+A key aspect of the application's architecture is the strict synchronization of validation rules between the frontend and the backend. To optimize both performance and user experience, the frontend performs input validation before any requests are sent to the API. This proactive validation approach significantly reduces unnecessary API calls by catching invalid data early, which not only provides immediate feedback to users but also minimizes server load. What truly sets this system apart is that the validation rules enforced on the frontend are not hardcoded or maintained separately; instead, they are dynamically retrieved from the backend as part of the domain configuration in JSON format. By leveraging this configuration, the application ensures that both the client and the server always apply the same validation logic. This centralized and consistent enforcement of business rules greatly reduces the risk of discrepancies between the frontend and backend, thereby improving the overall reliability, maintainability, and trustworthiness of the application.
 
 The application implements a dynamic form system where the required fields, validation rules, and component types are determined by the domain configuration retrieved from the backend API. This configuration-driven approach ensures that forms automatically adapt to changes in business rules without requiring frontend code modifications. The domain configuration specifies field restrictions such as minimum and maximum values, optional/required status, and appropriate input components (text areas, number inputs, select dropdowns, etc.). This architecture provides flexibility and maintainability, as all form behavior is centrally managed through the backend domain configuration.
 
@@ -77,7 +78,7 @@ NextAuth.js~\cite{nextauth} is highly extensible and supports a wide range of au
 
 This section presents a comprehensive overview of the web application's user interface through screenshots that demonstrate the various features and user flows available to different roles within the platform.
 
-Authentication is enforced throughout the application. When the user clicks the login button on the login screen (Figure~\ref{fig:login-sidebyside}a), they are redirected to the Microsoft OAuth login page (Figure~\ref{fig:login-sidebyside}b). Upon successful authentication, the user lands on the initial page of the Remote Lab platform, which provides access to the main features (Figure~\ref{fig:initial-screen}).
+Authentication is enforced throughout the application. When the user clicks the login button on the login screen (Figure~\ref{fig:login-sidebyside}a), they are redirected to the Microsoft OAuth login page (Figure~\ref{fig:login-sidebyside}b). Upon successful authentication, the user lands on the initial page of the Remote Lab platform, which provides access to the main features.
 
 \begin{figure}[H]
     \centering
@@ -92,7 +93,7 @@ Authentication is enforced throughout the application. When the user clicks the 
         \includegraphics[trim=600 200 600 200,clip,width=\linewidth]{../img/website-screenshots/2-login-microsoft-oauth.png}
         (b) Microsoft OAuth login (after clicking the login button)
     \end{minipage}
-    \caption{Authentication flow: (a) login screen; (b) Microsoft OAuth login page shown after clicking the login button.}
+    \caption{Authentication}
     \label{fig:login-sidebyside}
 \end{figure}
 
@@ -226,7 +227,7 @@ The user account area provides a quick access menu to the profile, settings, and
 
 \begin{figure}[H]
     \centering
-    \includegraphics[trim=1600 1100 0 0,clip,width=0.3\linewidth]{../img/website-screenshots/21-account-dropdown.png}
+    \includegraphics[trim=1600 1100 0 0,clip,width=0.5\linewidth]{../img/website-screenshots/21-account-dropdown.png}
     \caption{Account dropdown menu for quick access to profile, settings, and logout.}
     \label{fig:account-dropdown}
 \end{figure}
@@ -247,4 +248,4 @@ The user account area provides a quick access menu to the profile, settings, and
 
 \section{Summary}
 
-The web application leverages the power and flexibility of Next.js to deliver a secure, scalable, and user-centric platform for remote laboratory access. Its architecture ensures clear separation of concerns, robust authentication, and a responsive user experience, while its integration with modern deployment practices guarantees maintainability and future growth. For further details on the features and implementation of the web application, this chapter should be used as the main reference, in conjunction with the official Next.js documentation~\cite{nextjs-docs}. 
+The web application uses Next.js to provide a secure, scalable, and user-friendly platform for remote laboratory access. Its architecture ensures clear separation of concerns, robust authentication, and responsive design. For more details, see this chapter and the official Next.js documentation~\cite{nextjs-docs}. 
