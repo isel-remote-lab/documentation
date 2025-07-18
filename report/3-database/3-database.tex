@@ -7,7 +7,7 @@ The database design follows a normalized relational structure that supports user
 
 \subsection{Core Entities}
 
-The \textbf{USER} entity represents a user in the system, as depicted in figure~\ref{fig:user_entity}. The \textit{name} and \textit{email} attributes are provided by the authentication system. The \textit{role} serves as a discriminator attribute to identify whether the user is an Administrator, Teacher, or Student, as described in section~\ref{sec:user_role}
+The \textbf{USER} entity represents a user in the system, as depicted in Figure~\ref{fig:user_entity}. The \textit{name} and \textit{email} attributes are provided by the authentication system. The \textit{role} serves as a discriminator attribute to identify whether the user is an Administrator, Teacher, or Student, as described in Section~\ref{sec:user_role}
 
 \begin{figure}[H]
     \centering
@@ -16,15 +16,15 @@ The \textbf{USER} entity represents a user in the system, as depicted in figure~
     \label{fig:user_entity}
 \end{figure}
 
-A user can create \textit{N} tokens. The \textbf{TOKEN}, as depicted in figure~\ref{fig:token_entity}, is a weak entity because it cannot be uniquely identified by its attributes alone and therefore requires a user, which is a strong entity, to be identified. A token, being unique, is created by only one user.
+A user can create \textit{N} tokens. The \textbf{TOKEN}, as depicted in Figure~\ref{fig:token_entity}, is a weak entity because it cannot be uniquely identified by its attributes alone and therefore requires a user, which is a strong entity, to be identified. A token, being unique, is created by only one user.
 
 This is a useful entity for authentication purposes. It was designed to hold a hash value in the \textit{token\_validation} attribute.
 
 Authentication workflow:
 
 \begin{enumerate}
-    \item Upon successful user login, a unique token is created with cryptographically secure values and stored in the database.
-    \item For subsequent authenticated operations, the system queries the database to verify the client-provided token against stored values.
+    \item Upon successful user login, a unique token is created with cryptographically secure values and stored in the database;
+    \item For subsequent authenticated operations, the system queries the database to verify the client-provided token against stored values;
     \item Valid tokens enable secure user identification without transmitting unique identifiers.
 \end{enumerate}
 
@@ -37,7 +37,7 @@ The \textit{last\_used\_at} and the \textit{created\_at} are useful for determin
     \label{fig:token_entity}
 \end{figure}
 
-A user, as an Administrator or Teacher, can create \textit{N} laboratories. When creating a \textbf{LABORATORY}, depicted in figure~\ref{fig:laboratory_entity}, the user can define the \textit{name} and \textit{description}. They can also define the \textit{duration} of a laboratory session and its \textit{queue\_limit}.
+A user, as an Administrator or Teacher, can create \textit{N} laboratories. When creating a \textbf{LABORATORY}, depicted in Figure~\ref{fig:laboratory_entity}, the user can define the \textit{name} and \textit{description}. They can also define the \textit{duration} of a laboratory session and its \textit{queue\_limit}.
 
 \begin{figure}[H]
     \centering
@@ -46,7 +46,7 @@ A user, as an Administrator or Teacher, can create \textit{N} laboratories. When
     \label{fig:laboratory_entity}
 \end{figure}
 
-Upon successful laboratory creation, the user can associate \textbf{HARDWARE}, depicted in figure~\ref{fig:hardware_entity} to it, which must be created separately.
+Upon successful laboratory creation, the user can associate \textbf{HARDWARE}, depicted in Figure~\ref{fig:hardware_entity} to it, which must be created separately.
 
 For the creation, it requires a \textit{name}, \textit{\ac{ip} address} and \textit{\ac{mac} address}, which can be null depending on the hardware, a \textit{status} to indicate whether the hardware is under maintenance, occupied, or available, and a serial number (\textit{serial\_num}) to uniquely identify the hardware. Although it has an identifier, the serial number helps physically identify the hardware.
 
@@ -57,7 +57,7 @@ For the creation, it requires a \textit{name}, \textit{\ac{ip} address} and \tex
     \label{fig:hardware_entity}
 \end{figure}
 
-For a student to access a laboratory, they must be in a group that is associated with that laboratory. A professor can create a \textbf{GROUP}, depecited in figure~\ref{fig:group_entity} and associate users to it.
+For a student to access a laboratory, they must be in a group that is associated with that laboratory. A professor can create a \textbf{GROUP}, depicted in Figure~\ref{fig:group_entity} and associate users to it.
 
 When creating a group, the user needs to \textit{name} it and, optionally, add a \textit{description} to it.
 
@@ -77,7 +77,7 @@ The second relationship is the \textit{session} relationship between the User, L
 \subsection{Summary}
 Although PostgreSQL~\cite{postgresql} is being utilized for its functionalities, it was decided that all logic and verifications would be implemented in the Web \ac{api}, ensuring that no triggers or complex constraints are implemented on the database side.
 
-Figure~\ref{fig:er_model} illustrates the \ac{er model}, providing its entities and relationships.
+In Figure~\ref{fig:er_model} is depicted the entire \ac{er model}, illustrating its entities and relationships.
 
 \begin{landscape}
     \begin{figure}

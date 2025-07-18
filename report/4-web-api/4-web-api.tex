@@ -11,7 +11,7 @@ The Strategy pattern allowed us to have greater control over specific implementa
 
 \section{API Architecture}
 
-Figure \ref{fig:api_architecture} provides a comprehensive overview of the implemented \acs{api} architecture. The \textbf{\ac{http}} module (Controller layer) is responsible for exposing the endpoints and handling incoming requests and responses. When a request is made, the \textbf{\acs{http}} module receives the request and passes it to the \textbf{Service} module. This is where the business logic and data validations are performed. Since it is necessary to fetch and persist data, a \textbf{Repository} module is required. The repository module is responsible for abstracting and managing all communication with the database layer.
+A provides a comprehensive overview of the implemented \acs{api} architecture is detailed in Figure \ref{fig:api_architecture}. The \textbf{\ac{http}} module (Controller layer) is responsible for exposing the endpoints and handling incoming requests and responses. When a request is made, the \textbf{\acs{http}} module receives the request and transfer it to the \textbf{Service} module. This is where the business logic and data validations are performed. Since it is necessary to fetch and persist data from \textbf{Database}, a \textbf{Repository} module is required, in order to maintain abstraction. The repository module is responsible for abstracting and managing all communication with the database layer.
 
 \begin{figure}[H]
     \centering
@@ -22,40 +22,38 @@ Figure \ref{fig:api_architecture} provides a comprehensive overview of the imple
 
 This three-tier architecture promotes separation of concerns, making the system more modular, testable, and maintainable. Each layer has a specific responsibility and communicates only with adjacent layers, reducing coupling and improving overall system design.
 
-\vspace{3mm}
-
-\begin{figure}[H]
-    \centering
-    \includesvg[inkscapelatex=false, width=0.8\linewidth]{../img/api/detailed_architecture.drawio.svg}
-    \caption{API Detailed Architecture}
-    \label{fig:detailed_api_architecture}
-\end{figure}
-
-\subsection*{HTTP Module}
-The \acs{http} module contains the controllers~\cite{controller}, each with their respective functions and the request processing pipeline. The controllers are responsible for handling incoming requests, extracting and validating information, converting them into domain objects, and passing them to the next layer (Service Module). This layer also handles response formatting and HTTP status code management.
+\subsection{HTTP Module}
+The \acs{http} module contains the controllers~\cite{controller}, as depicted in Figure~\ref{fig:detailed_api_architecture}, each with their respective functions and the request processing pipeline. The controllers are responsible for handling incoming requests, extracting and validating information, converting them into domain objects, and passing them to the next layer (Service Module). This layer also handles response formatting and HTTP status code management.
 
 The pipeline contains filters~\cite{filter} and interceptors~\cite{interceptor} that implement cross-cutting concerns such as authentication, authorization, and logging. As the figure~\ref{fig:filters_vs_interceptors} depictes, filters intercept requests before they reach the \textit{DispatcherServlet}~\cite{dispatcher-servlet}. They are part of the web server infrastructure and not the Spring framework itself. The interceptors are part of the Spring framework and operate between the \textit{DispatcherServlet} and the controllers, providing more sophisticated request processing capabilities.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=1\textwidth]{../img/api/filters_vs_interceptors.jpg}
-    \caption{Comparison between filters and interceptors. Source: Baeldung~\cite{baeldung_interceptor_filter}.}
-    \label{fig:filters_vs_interceptors}
+    \includesvg[inkscapelatex=false, width=0.75\linewidth]{../img/api/detailed_architecture.drawio.svg}
+    \caption{API Detailed Architecture}
+    \label{fig:detailed_api_architecture}
 \end{figure}
 
 Three custom interceptors were implemented: one to validate the \acs{api} key, another to authenticate the user, and a third to verify the user role after authentication. This layered approach ensures that security concerns are handled systematically and consistently across all endpoints.
+
+\begin{figure}[H]
+    \centering
+    \includesvg[inkscapelatex=false, width=1\linewidth]{../img/api/filters_vs_interceptors.drawio.svg}
+    \caption{Comparison between filters and interceptors. Source: Baeldung~\cite{baeldung_interceptor_filter}.}
+    \label{fig:filters_vs_interceptors}
+\end{figure}
 
 Since there are \acs{api} endpoints that require an \acs{api} key (for example, the login endpoint), a custom annotation was created to simplify this validation process. Every endpoint that needs an \acs{api} key is annotated with \textit{@RequireApiKey}. The interceptor responsible for this validation first verifies if the handler contains the annotation and, if present, verifies that the request contains the header \textit{X-Api-Key} and validates its value against the configured API key. If the values do not match, an unauthorized error response is sent immediately.
 
 The authentication interceptor checks if the handler has a parameter of type \textit{AuthenticatedUser}, which encapsulates a token value and user information. If it does, it extracts the token from the request via header or cookie and validates it by retrieving the user associated with that token from the database. The user information is then added to the request as an attribute with a predetermined name, acting as a key for later retrieval. An argument resolver was implemented to resolve method parameters into argument values at runtime. In simple terms, for every handler that contains a parameter of type \textit{AuthenticatedUser}, the parameter is resolved at runtime with the respective value. This resolution is accomplished by retrieving the attribute by the designated name and returning the corresponding value. This value should be the user information previously inserted by the authentication interceptor. If an error occurs during any of these steps, an unauthorized error response is sent.
 
-The final interceptor implemented handles handlers that require a specific user role. This authorization mechanism is explained in more detail in Section~\ref{sec:roles}.
+The final interceptor implemented handles handlers that require a specific user role. This authorization mechanism is explained with more detail in Section~\ref{sec:roles}.
 
 The implemented filter is responsible for comprehensive request and response logging, providing valuable debugging information and audit trails for API usage.
 
 These tools provided by the Spring Framework are invaluable for optimizing and simplifying cross-cutting concerns while maintaining clean separation of business logic.
 
-\subsection*{Service Module}
+\subsection{Service Module}
 The service module performs the necessary business logic validations using domain classes defined in the Domain module. These classes provide configurations and methods for validating specific data types and business rules. Configurations in domain classes are provided by a \ac{json}~\cite{json} file containing domain restrictions and validation rules. Listing~\ref{lst:group_domain_example} shows an example of the group domain and it's configurations.
 
 \begin{center}
@@ -79,11 +77,11 @@ The service module performs the necessary business logic validations using domai
     \end{lstlisting}\label{lst:group_domain_example}
     \end{center}
 
-This \ac{json} configuration file, provided in the appendix~\ref{cap:domain_configs}, is converted to strongly-typed classes using Kotlin Serialization~\cite{kotlin-serialization}. This approach allows for easy modification of specific validation rules without requiring codebase changes, promoting configuration-driven development and reducing deployment complexity.
+This \ac{json} configuration file, provided in the Appendix~\ref{cap:domain_configs}, is converted to strongly-typed classes using Kotlin Serialization~\cite{kotlin-serialization}. This approach allows for easy modification of specific validation rules without requiring codebase changes, promoting configuration-driven development and reducing deployment complexity.
 
 The service layer also implements business logic such as user group management, laboratory session coordination, and complex validation rules that span multiple domain entities. This centralization of business logic ensures consistency and makes the system easier to maintain and extend.
 
-\subsection*{Repository Module}
+\subsection{Repository Module}
 The repository module serves as the data access layer, responsible for managing all communication between the application and the database. This functionality is implemented using \ac{jdbi}~\cite{jdbi}, a lightweight and efficient database access library that provides a clean, declarative \acs{api} for database operations.
 
 \ac{jdbi} offers several advantages for database interaction through its declarative approach. It enables the use of interfaces, annotations, and custom mappers to perform database access operations without requiring extensive boilerplate code. The library is built on top of \ac{jdbc}~\cite{jdbc}, leveraging the standard Java database connectivity framework while providing a more intuitive and developer-friendly interface. This design philosophy results in a natural programming idiom that integrates seamlessly with both Java and Kotlin codebases.
@@ -95,7 +93,7 @@ Additionally, the repository layer implements connection pooling, transaction ma
 \section{Roles} \label{sec:roles}
 As mention, in Chapter~\ref{cap:intro} and Chapter~\ref{cap:database}, the user types in the system that supports the interactions and roles, a robust approach is needed to control these interactions to ensure proper access control to resources and maintain system security.
 
-As mentioned previously, an user, when authenticated, is assigned a role, such as student, teacher, or administrator, which determines their permissions within the platform. To perform the necessary verifications, a custom annotation was created to be used in the controllers of the \acs{http} layer.
+As mentioned previously, a user, when authenticated, is assigned a role, such as student, teacher, or administrator, which determines their permissions within the platform. To perform the necessary verifications, a custom annotation was created to be used in the controllers of the \acs{http} layer.
 
 This annotation receives a role specification in its constructor. For the annotation to function properly, an interceptor was implemented that first checks if the handler contains the annotation so that it can bypass the verification for public endpoints, then extracts the required role and performs the authorization validation. The interceptor must be called after the authentication interceptor to be able to retrieve the user from the request and then access their respective role information.
 
@@ -113,7 +111,7 @@ This section aims to clarify how these two concerns are addressed through queuin
 \subsection{Waiting Queue}
 When describing the system architecture, it was mentioned that a laboratory implements a waiting queue mechanism. This is specifically designed for laboratories without immediately available hardware resources. When this situation occurs, the user enters a waiting queue that manages fair access to laboratory resources. The \acs{api} maintains a stateless design, meaning that no persistent state is stored in memory, allowing multiple instances to run concurrently for improved scalability and reliability.
 
-When a user attempts to enter a laboratory that has reached capacity, they are placed in a queue. A SseEmitter (Server-Sent Events)~\cite{sse-emitter,server-sent-events} is returned to the user that sends real-time events when the queue position changes or when they successfully enter the laboratory. These events are initiated and managed by the server, providing a responsive user experience, as illustrated in figure~\ref{fig:event_source}.
+When a user attempts to enter a laboratory that has reached capacity, they are placed in a queue. A SseEmitter (Server-Sent Events)~\cite{sse-emitter,server-sent-events} is returned to the user that sends real-time events when the queue position changes or when they successfully enter the laboratory. These events are initiated and managed by the server, providing a responsive user experience, as illustrated in Figure~\ref{fig:event_source}.
 
 \begin{figure}[H]
     \centering
@@ -122,11 +120,13 @@ When a user attempts to enter a laboratory that has reached capacity, they are p
     \label{fig:event_source}
 \end{figure}
 
-An event source opens a persistent connection to an \acs{http} server, which sends events in \textit{text/event-stream} format. The connection remains open until explicitly closed by calling \textit{EventSource.close()} or when the session completes. This persistent connection model enables real-time communication without the overhead of continuous polling.
+An event source opens a persistent connection to a \acs{http} server, which sends events in \textit{text/event-stream} format. The connection remains open until explicitly closed or when the session completes. This persistent connection model enables real-time communication without the overhead of continuous polling.
 
 Since the \acs{api} maintains a stateless architecture, the queue state is persisted in the database and a Pub/Sub mechanism is used to notify users about changes in the queue position or when they can enter the laboratory. Kotlin coroutines~\cite{kotlin-coroutines} were also utilized to handle the server-side events efficiently, since the server takes the initiative in communication and needs to manage multiple concurrent connections.
 
 For the Pub/Sub mechanism, Redis~\cite{redis} was selected as the message broker. The Spring Framework provides comprehensive support for Redis, through Spring Data Redis~\cite{spring-redis-support}, and can be deployed as a separate service, allowing multiple \acs{api} instances to connect to it and share real-time state information seamlessly.
+
+The complete workflow of the waiting queue operation, as depicted in Figure~\ref{fig:lab_waiting_queue}, demonstrates that when a user attempts to join a laboratory, there are two possible execution paths: they can either immediately join the laboratory or be placed in the waiting queue.
 
 \begin{figure}[H]
     \centering
@@ -135,9 +135,7 @@ For the Pub/Sub mechanism, Redis~\cite{redis} was selected as the message broker
     \label{fig:lab_waiting_queue}
 \end{figure}
 
-The complete workflow of the waiting queue operation, as depicted in Figure~\ref{fig:lab_waiting_queue}, demonstrates that when a user attempts to join a laboratory, there are two possible execution paths: they can either immediately join the laboratory or be placed in the waiting queue.
-
-When the laboratory's waiting queue is empty, a query is executed to retrieve the available hardware associated with that laboratory. The fast-path occurs when hardware is available, allowing the user to immediately join the laboratory and begin their session. The wait-path occurs when no hardware is available. In this case, a database query is executed to insert the user ID into the waiting queue to maintain state, and a coroutine is created. Kotlin coroutines provide an optimal mechanism for executing code in parallel. Within the coroutine, the user subscribes to a channel through the Pub/Sub service (Redis), using the format \textit{"lab:labId:queue:userId"}, where \textit{labId} is the laboratory identifier and \textit{userId} is the identifier of the user attempting to join. Redis supports subscribing to channels that do not yet exist, creating them at the moment of subscription. A suspension point is established, waiting for a message in the subscribed channel. This specific channel format is crucial for the notification phase and ensures message routing accuracy.
+When the laboratory's waiting queue is empty, a query is executed to retrieve the available hardware associated with that laboratory. The fast-path occurs when hardware is available, allowing the user to immediately join the laboratory and begin a session. The wait-path occurs when no hardware is available. In this case, a database query is executed to insert the user ID into the waiting queue to maintain state, and a coroutine is created. Kotlin coroutines provide an optimal mechanism for executing code in parallel. Within the coroutine, the user subscribes to a channel through the Pub/Sub service (Redis), using the format \textit{"lab:labId:queue:userId"}, where \textit{labId} is the laboratory identifier and \textit{userId} is the identifier of the user attempting to join. Redis supports subscribing to channels that do not yet exist, creating them at the moment of subscription. A suspension point is established, waiting for a message in the subscribed channel. This specific channel format is crucial for the notification phase and ensures message routing accuracy.
 
 As Figure~\ref{fig:wait-path-scheme} illustrates, there are two completely separate execution contexts: the normal execution flow, where information extraction occurs from the request and is passed to the services, and the coroutine context. It is important to note that the SseEmitter creation occurs in the normal execution flow and not within the coroutine itself, but is provided to the coroutine. This allows the user to receive events produced by the coroutine.
 
@@ -148,9 +146,11 @@ As Figure~\ref{fig:wait-path-scheme} illustrates, there are two completely separ
     \label{fig:wait-path-scheme}
 \end{figure}
 
-Conversely, if the waiting queue is not empty, it indicates that the laboratory is likely at capacity and no hardware is available. To ensure accuracy, the system verifies whether hardware is available for the laboratory. This can occur if hardware was associated with the laboratory in the meantime, or if hardware that was under maintenance became available. The waiting queue is processed using FIFO (First-In-First-Out) logic, returning the ID of the user in the first position. With both the \textit{lab ID} and the \textit{user ID}, a message is published to the channel following the previously mentioned format. This is why the channel format must be strictly adhered to. The user waiting for a message receives it and processes its content. If the message is an empty string, a session is created immediately. If it contains the string \textit{keepInQueue}, it means that the user must remain in the queue and update their position by sending an event with the new queue position. This entire process is performed for every available hardware unit discovered, allowing multiple waiting users to join the laboratory. If no hardware is available, the user is placed in the queue and follows the wait-path mentioned previously.
+Conversely, if the waiting queue is not empty, it indicates that the laboratory is likely at capacity and no hardware is available. In this case, the user is placed in the queue and follows the wait-path mentioned previously.
 
-When a session ends, verifications are performed to allow waiting users to enter the laboratory. This queuing mechanism ensures fair access to laboratory resources while maintaining system responsiveness and providing users with real-time feedback about their position and expected wait times.
+When a session ends, or a new hardware is associated to the laboratory, verifications are performed to allow waiting users to enter the laboratory. The waiting queue is processed using FIFO (First-In-First-Out) logic, returning the ID of the user in the first position. With both the \textit{lab ID} and the \textit{user ID}, a message is published to the channel following the previously mentioned format (\textit{"lab:labId:queue:userId"}). This is why the channel format must be strictly adhered to. The user waiting for a message receives it and processes its content. If the message is an empty string, a session is created immediately. If it contains the string \textit{keepInQueue}, it means that the user must remain in the queue and update their position by sending an event with the new queue position.
+
+This queuing mechanism ensures fair access to laboratory resources while maintaining system responsiveness and providing users with real-time feedback about their position and expected wait times.
 
 \subsection{Session}
 As previously mentioned, coroutines are utilized to send events through the SseEmitter and handle them efficiently. A laboratory session has a configured duration limit, which is communicated to users via events by sending periodic updates with the current state and remaining time.
