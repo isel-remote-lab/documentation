@@ -58,7 +58,7 @@ The deployment process for the Remote Lab platform is designed to be straightfor
 
 All major components—including the backend (\ac{api}), frontend (website), and database—are containerized using Docker~\cite{docker-docs}. Docker Compose orchestrates multi-container deployments, manages networking between services, and handles environment-specific configurations. Recent updates introduced profiles in \texttt{docker-compose.yml} (\texttt{api}, \texttt{full}, \texttt{prod}, \texttt{dev}, \texttt{cloudflare}, \texttt{demo}), allowing flexible deployments adapted to different scenarios. The \texttt{hardware-example} service was added to simulate real hardware in demonstration environments.
 
-The frontend now provides separate Dockerfiles for development and production (\texttt{Dockerfile.dev}, \texttt{Dockerfile.prod}), optimizing builds and facilitating debugging.
+The frontend now provides separate Dockerfiles for development (\texttt{Dockerfile.dev}) and production (\texttt{Dockerfile.prod}), optimizing builds and facilitating debugging.
 
 \subsection{Environment Configuration and Secrets} \label{subsec:env_config}
 
@@ -76,7 +76,7 @@ To streamline deployment, the platform provides a \texttt{start.sh} script at th
     \item Log viewing (\texttt{-logs} or \texttt{-l}) to display container logs without restarting services.
 \end{itemize}
 
-The script automatically loads environment variables and secrets from \texttt{private/shared/secrets/.env}, and, in production, from \texttt{private/frontend/.env}. It dynamically selects Docker Compose profiles based on the chosen flags, enabling or disabling services such as the frontend, hardware simulation, and Cloudflare tunnel as needed. The script also supports combinations of flags for highly customizable deployments, such as running the full stack in demo mode with remote access, or starting only the API for local development.
+The script automatically loads environment variables and secrets in development, and, in production, from \texttt{private/shared/secrets/.env} and \texttt{private/frontend/.env}, respectively. It dynamically selects Docker Compose profiles based on the chosen flags, enabling or disabling services such as the frontend, hardware simulation, and Cloudflare tunnel as needed. The script also supports combinations of flags for highly customizable deployments, such as running the full stack in demo mode with remote access, or starting only the API for local development.
 
 This automation ensures that all required services, secrets, and configurations are correctly initialized, significantly reducing manual setup and the risk of misconfiguration.
 

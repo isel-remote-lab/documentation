@@ -2,7 +2,7 @@
 
 The web application is the primary interface for users to interact with the Remote Lab platform. Built with Next.js (React), it provides a modern, responsive, and user-friendly experience for students, professors, and administrators~\cite{nextjs-docs}. The application enables users to access, schedule, and manage laboratory resources remotely, supporting a wide range of devices and ensuring accessibility for all user roles.
 
-The user interface is built using Ant Design~\cite{antdesign}, a comprehensive \ac{ui} design language and React component library that provides a rich set of pre-built components. This choice ensures consistency in design, rapid development, and a professional appearance across all application screens. Ant Design components are used throughout the application for forms, tables, modals, navigation elements, and other interactive components, providing a cohesive and intuitive user experience.
+The \acf{ui} is built using Ant Design~\cite{antdesign}, a comprehensive \ac{ui} design language and React component library that provides a rich set of pre-built components. This choice ensures consistency in design, rapid development, and a professional appearance across all application screens (see Figures~\ref{fig:role-dropdown} and~\ref{fig:professor-dashboard}).
 
 This chapter serves as the main documentation for the @Web (Next.js) application, providing a comprehensive overview of its architecture, features, authentication mechanisms, and integration strategies. It is intended as the primary reference for understanding the design and implementation choices made in the development of the web application, and should be consulted for any details regarding the frontend of the Remote Lab platform~\cite{nextjs-docs}.
 
@@ -33,7 +33,7 @@ The application implements a comprehensive notification system that provides rea
     \item \textbf{Laboratory Management:} Professors and administrators can create, edit, and manage laboratory sessions, equipment, and participant lists.
     \item \textbf{Role-Based Access:} The interface adapts to the user's role, showing only the features and data relevant to their permissions. Users with higher roles can view and interact with the platform as if they had a lower role for testing and support purposes (\ac{rbac}).
     \item \textbf{Responsive Design:} Optimized for desktops, tablets, and mobile devices, ensuring accessibility and usability across platforms.
-    \item \textbf{Loading UI:} The application uses loading states and skeleton screens to provide feedback during data fetching, improving perceived performance~\cite{nextjs-loading-ui}.
+    \item \textbf{Loading \ac{ui}:} The application uses loading states and skeleton screens to provide feedback during data fetching, improving perceived performance~\cite{nextjs-loading-ui}.
     \item \textbf{Terminal Integration:} The application integrates xterm.js~\cite{xtermjs} for real-time terminal access to hardware devices. This terminal component establishes WebSocket~\cite{websocket} connections with the backend API, enabling direct communication with laboratory hardware. Users can interact with hardware devices through a full-featured terminal interface, providing a seamless remote laboratory experience with real-time command execution and response display.
 \end{itemize}
 
@@ -96,7 +96,7 @@ Authentication is enforced throughout the application. When the user clicks the 
     \label{fig:login-sidebyside}
 \end{figure}
 
-The interface dynamically adapts to the user's role. Users with higher permissions can switch their view to lower roles for testing and support purposes (Figure~\ref{fig:role-dropdown}). For example, the professor dashboard displays the main interface and available features for laboratory management (Figure~\ref{fig:professor-dashboard}).
+The interface dynamically adapts to the user's role (see Figures~\ref{fig:role-dropdown} and~\ref{fig:professor-dashboard}). Users with higher permissions can switch their view to lower roles for testing and support purposes (see Figure~\ref{fig:role-dropdown}). For example, the professor dashboard displays the main interface and available features for laboratory management (see Figure~\ref{fig:professor-dashboard}).
 
 \begin{figure}[H]
     \centering
@@ -244,6 +244,8 @@ The user account area provides a quick access menu to the profile, settings, and
     \caption{Role change dropdown (admin)}
     \label{fig:admin-role-change}
 \end{figure}
+
+Administrators can change user roles directly from the interface (see Figure~\ref{fig:admin-role-change}).
 
 \section{Summary}
 
