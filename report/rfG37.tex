@@ -428,5 +428,43 @@ Baseado numa arquitetura com \textit{back-end} (base de dados e Web \acs{api}) e
   \end{lstlisting}
   \end{center}
 
+\chapter{Postman}\label{cap:postman}
+The \acs{api} documentation is available through Postman's public website, including both \href{https://documenter.getpostman.com/view/31383926/2sB2cVgNBA}{Public} and \href{https://documenter.getpostman.com/view/31383926/2sB2qUm4cA}{Private} documentation, as depicted in Figure~\ref{fig:public_api_documentation}.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.9\linewidth]{../img/public_api.png}
+  \caption{Example of the Public API documentation}
+  \label{fig:public_api_documentation}
+\end{figure}
+
+\chapter{Authentication Configuration}
+As previously mentioned, authentication is implemented using Microsoft Entra ID~\cite{microsoft-entra-id}, formerly known as Azure Active Directory. To achieve this, an application was configured within a tenant, as depicted in Figure~\ref{fig:application_microsoft}.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.9\linewidth]{../img/app_microsoft_entra.png}
+  \caption{Application in Microsoft Entra admin center}
+  \label{fig:application_microsoft}
+\end{figure}
+
+After creating the application, several configurations are required for authentication to function properly. First, a \acs{uri} callback is needed, as shown in Figure~\ref{fig:uris_callbacks}.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.9\linewidth]{../img/auth_callbacks_microsoft_entra.png}
+  \caption{URI Callbacks}
+  \label{fig:uris_callbacks}
+\end{figure}
+
+Additionally, a client secret is required to authenticate the requests, as illustrated in Figure~\ref{fig:secret_microsoft_entra}.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.9\linewidth]{../img/secret_microsoft_entra.png}
+  \caption{Client Secret Configuration}
+  \label{fig:secret_microsoft_entra}
+\end{figure}
+
 
 \end{document}
