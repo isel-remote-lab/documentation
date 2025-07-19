@@ -25,7 +25,7 @@ This three-tier architecture promotes separation of concerns, making the system 
 \subsection{HTTP Module}
 The \acs{http} module contains the controllers~\cite{controller}, as depicted in Figure~\ref{fig:detailed_api_architecture}, each with their respective functions and the request processing pipeline. The controllers are responsible for handling incoming requests, extracting and validating information, converting them into domain objects, and passing them to the next layer (Service Module). This layer also handles response formatting and HTTP status code management.
 
-The pipeline contains filters~\cite{filter} and interceptors~\cite{interceptor} that implement cross-cutting concerns such as authentication, authorization, and logging. As the figure~\ref{fig:filters_vs_interceptors} depictes, filters intercept requests before they reach the \textit{DispatcherServlet}~\cite{dispatcher-servlet}. They are part of the web server infrastructure and not the Spring framework itself. The interceptors are part of the Spring framework and operate between the \textit{DispatcherServlet} and the controllers, providing more sophisticated request processing capabilities.
+The pipeline contains filters~\cite{filter} and interceptors~\cite{interceptor} that implement cross-cutting concerns such as authentication, authorization, and logging. As the Figure~\ref{fig:filters_vs_interceptors} depictes, filters intercept requests before they reach the \textit{DispatcherServlet}~\cite{dispatcher-servlet}. They are part of the web server infrastructure and not the Spring framework itself. The interceptors are part of the Spring framework and operate between the \textit{DispatcherServlet} and the controllers, providing more sophisticated request processing capabilities.
 
 \begin{figure}[H]
     \centering
@@ -39,13 +39,13 @@ Three custom interceptors were implemented: one to validate the \acs{api} key, a
 \begin{figure}[H]
     \centering
     \includesvg[inkscapelatex=false, width=1\linewidth]{../img/api/filters_vs_interceptors.drawio.svg}
-    \caption{Comparison between filters and interceptors. Source: Baeldung~\cite{baeldung_interceptor_filter}.}
+    \caption{Implemented filters and interceptors.}
     \label{fig:filters_vs_interceptors}
 \end{figure}
 
 Since there are \acs{api} endpoints that require an \acs{api} key (for example, the login endpoint), a custom annotation was created to simplify this validation process. Every endpoint that needs an \acs{api} key is annotated with \textit{@RequireApiKey}. The interceptor responsible for this validation first verifies if the handler contains the annotation and, if present, verifies that the request contains the header \textit{X-Api-Key} and validates its value against the configured API key. If the values do not match, an unauthorized error response is sent immediately.
 
-The authentication interceptor checks if the handler has a parameter of type \textit{AuthenticatedUser}, which encapsulates a token value and user information. If it does, it extracts the token from the request via header or cookie and validates it by retrieving the user associated with that token from the database. The user information is then added to the request as an attribute with a predetermined name, acting as a key for later retrieval. An argument resolver was implemented to resolve method parameters into argument values at runtime. In simple terms, for every handler that contains a parameter of type \textit{AuthenticatedUser}, the parameter is resolved at runtime with the respective value. This resolution is accomplished by retrieving the attribute by the designated name and returning the corresponding value. This value should be the user information previously inserted by the authentication interceptor. If an error occurs during any of these steps, an unauthorized error response is sent.
+The authentication interceptor checks if the handler have a parameter of type \textit{AuthenticatedUser}, which encapsulates a token value and user information. If it does, it extracts the token from the request via header or cookie and validates it by retrieving the user associated with that token from the database. The user information is then added to the request as an attribute with a predetermined name, acting as a key for later retrieval. An argument resolver was implemented to resolve method parameters into argument values at runtime. In simple terms, for every handler that contains a parameter of type \textit{AuthenticatedUser}, the parameter is resolved at runtime with the respective value. This resolution is accomplished by retrieving the attribute by the designated name and returning the corresponding value. This value should be the user information previously inserted by the authentication interceptor. If an error occurs during any of these steps, an unauthorized error response is sent.
 
 The final interceptor implemented handles handlers that require a specific user role. This authorization mechanism is explained with more detail in Section~\ref{sec:roles}.
 
@@ -130,7 +130,7 @@ The complete workflow of the waiting queue operation, as depicted in Figure~\ref
 
 \begin{figure}[H]
     \centering
-    \includesvg[inkscapelatex=false, width=0.8\linewidth]{../img/api/lab_waiting_queue.drawio.svg}
+    \includesvg[inkscapelatex=false, width=0.70\linewidth]{../img/api/lab_waiting_queue.drawio.svg}
     \caption{Laboratory Waiting Queue Scheme}
     \label{fig:lab_waiting_queue}
 \end{figure}

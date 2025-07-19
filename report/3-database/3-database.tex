@@ -1,7 +1,7 @@
 \chapter{Database} \label{cap:database}
 The database serves as the foundational component of the system architecture. PostgreSQL~\cite{postgresql} was selected as the database management system due to its open-source nature and robust support for relational data models. This choice aligns with previous project implementations and provides the consistency and performance required for the system's operational needs.
 
-This chapter presents an overview of the \ac{er model} and critical implementation details. Complete technical documentation is provided in the accompanying appendix~\ref{cap:database_documentation}.
+This chapter presents an overview of the \ac{er model} and critical implementation details. Complete technical documentation is provided in the accompanying Appendix~\ref{cap:database_documentation}.
 
 The database design follows a normalized relational structure that supports user authentication, secure session management, and the remaining system functionalities. The \acs{er model} encompasses the core entities required for system functionality while maintaining data integrity and scalability.
 
@@ -63,12 +63,12 @@ When creating a group, the user needs to \textit{name} it and, optionally, add a
 
 \begin{figure}[H]
     \centering
-    \includesvg[inkscapelatex=false, width=0.45\linewidth]{../img/DB-diagrams/Group.drawio.svg}
+    \includesvg[inkscapelatex=false, width=0.38\linewidth]{../img/DB-diagrams/Group.drawio.svg}
     \caption{Group Entity}
     \label{fig:group_entity}
 \end{figure}
 
-\vspace{5mm}
+\vspace{-0,2cm}
 
 Besides the standard relationships between the entities described previously, there are two that require a detailed overview. The first is the \textit{waiting\_queue} relationship between the User and the Laboratory. Although it was established that a user must be part of a group associated with a laboratory to be able to join it, this constraint is not easily illustrated in a straightforward manner. Therefore, this relationship serves as a waiting queue for a specific laboratory.
 
