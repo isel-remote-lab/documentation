@@ -6,8 +6,6 @@ The \acf{ui} is built using Ant Design~\cite{antdesign}, a comprehensive \ac{ui}
 
 This chapter serves as the main documentation for the @Web (Next.js) application, providing a comprehensive overview of its architecture, features, authentication mechanisms, and integration strategies. It is intended as the primary reference for understanding the design and implementation choices made in the development of the web application, and should be consulted for any details regarding the frontend of the Remote Lab platform~\cite{nextjs-docs}.
 
-\let\cleardoublepage\clearpage
-
 \section{Overview}
 The web application serves as the main point of interaction, integrating seamlessly with backend services via RESTful \ac{api}s. It supports multiple user roles, each with tailored access and features according to their permissions. The interface dynamically adapts to the user's role, ensuring that each user only sees the features and data relevant to them.
 
@@ -84,7 +82,7 @@ Authentication is enforced throughout the application. When the user clicks the 
     \begin{minipage}[t]{0.48\linewidth}
         \centering
         % Crop more on all four sides: left, bottom, right, top
-        \includegraphics[trim=600 200 600 200,clip,width=\linewidth]{../img/website-screenshots/1-login-screen.png}
+        \includegraphics[trim=800 410 800 410,clip,width=\linewidth]{../img/website-screenshots/1-login-screen.png}
         (a) Login screen
     \end{minipage}\hfill
     \begin{minipage}[t]{0.48\linewidth}
@@ -100,14 +98,14 @@ The interface dynamically adapts to the user's role (see Figures~\ref{fig:role-d
 
 \begin{figure}[H]
     \centering
-    \includegraphics[trim=0 500 0 0,clip,width=\linewidth]{../img/website-screenshots/5-role-selection.png}
+    \includegraphics[trim=0 0 2 1,clip,width=\linewidth]{../img/website-screenshots/5-role-selection.png}
     \caption{Role selection dropdown}
     \label{fig:role-dropdown}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[trim=0 500 0 0,clip,width=\linewidth]{../img/website-screenshots/6-professor-dashboard.png}
+    \includegraphics[trim=18 38 18 149,clip,width=\linewidth]{../img/website-screenshots/6-professor-dashboard.png}
     \caption{Professor dashboard}
     \label{fig:professor-dashboard}
 \end{figure}
@@ -116,7 +114,7 @@ Laboratory creation and management are performed through interactive modals, whi
 
 \begin{figure}[H]
     \centering
-    \includegraphics[trim=0 400 0 0,clip,width=\linewidth]{../img/website-screenshots/7-create-laboratory-modal.png}
+    \includegraphics[trim=18 38 18 149,clip,width=\linewidth]{../img/website-screenshots/7-create-laboratory-modal.png}
     \caption{Lab creation modal}
     \label{fig:create-lab-modal}
 \end{figure}
@@ -127,28 +125,28 @@ The modal form fields, including properties such as whether a field is required 
 
 \begin{figure}[H]
     \centering
-    \includegraphics[trim=0 400 0 0,clip,width=\linewidth]{../img/website-screenshots/8-moved-and-resized-modal-with-validation.png}
+    \includegraphics[trim=18 38 18 149,clip,width=\linewidth]{../img/website-screenshots/8-moved-and-resized-modal-with-validation.png}
     \caption{Interactive modal with validation}
     \label{fig:modal-validation}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[trim=0 600 0 0,clip,width=\linewidth]{../img/website-screenshots/9-fullscreen-create-laboratory.png}
+    \includegraphics[trim=18 60 18 149,clip,width=\linewidth]{../img/website-screenshots/9-fullscreen-create-laboratory.png}
     \caption{Full-screen lab creation}
     \label{fig:create-lab-fullscreen}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[trim=0 400 0 0,clip,width=\linewidth]{../img/website-screenshots/10-create-message.png}
+    \includegraphics[trim=0 25 0 2,clip,width=\linewidth]{../img/website-screenshots/10-create-message.png}
     \caption{Success message after creation}
     \label{fig:creation-success-message}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[trim=0 400 0 0,clip,width=\linewidth]{../img/website-screenshots/11-laboratory-edition.png}
+    \includegraphics[trim=18 50 18 149,clip,width=\linewidth]{../img/website-screenshots/11-laboratory-edition.png}
     \caption{Lab editing interface}
     \label{fig:edit-lab}
 \end{figure}
@@ -157,28 +155,28 @@ Group management can be performed either within a laboratory context or through 
 
 \begin{figure}[H]
     \centering
-    \includegraphics[trim=0 400 0 0,clip,width=\linewidth]{../img/website-screenshots/12-group-management.png}
+    \includegraphics[trim=18 38 18 149,clip,width=\linewidth]{../img/website-screenshots/12-group-management.png}
     \caption{Lab group management}
     \label{fig:manage-lab-groups}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[trim=0 400 0 0,clip,width=\linewidth]{../img/website-screenshots/13-group-creation.png}
+    \includegraphics[trim=18 38 18 149,clip,width=\linewidth]{../img/website-screenshots/13-group-creation.png}
     \caption{Group creation form}
     \label{fig:create-lab-group}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[trim=0 400 0 0,clip,width=\linewidth]{../img/website-screenshots/14-group-created-confirmation.png}
+    \includegraphics[trim=0 2 10 2,clip,width=\linewidth]{../img/website-screenshots/14-group-created-confirmation.png}
     \caption{Group created confirmation}
     \label{fig:group-created}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[trim=0 600 0 0,clip,width=\linewidth]{../img/website-screenshots/15-group-users-management.png}
+    \includegraphics[trim=18 38 18 149,clip,width=\linewidth]{../img/website-screenshots/15-group-users-management.png}
     \caption{Group user management}
     \label{fig:manage-group-users}
 \end{figure}
@@ -187,21 +185,21 @@ Hardware management is available both within specific laboratory contexts and th
 
 \begin{figure}[H]
     \centering
-    \includegraphics[trim=0 300 0 0,clip,width=\linewidth]{../img/website-screenshots/16-hardware-management.png}
+    \includegraphics[trim=2 0 0 0,clip,width=\linewidth]{../img/website-screenshots/16-hardware-management.png}
     \caption{Lab hardware management}
     \label{fig:manage-lab-hardware}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[trim=0 300 0 0,clip,width=\linewidth]{../img/website-screenshots/17-hardware-added-confirmation.png}
+    \includegraphics[trim=0 0 0 3,clip,width=\linewidth]{../img/website-screenshots/17-hardware-added-confirmation.png}
     \caption{Hardware added to lab}
     \label{fig:hardware-added-to-lab}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[trim=0 600 0 0,clip,width=\linewidth]{../img/website-screenshots/18-hardware-edition-screen.png}
+    \includegraphics[trim=18 38 18 149,clip,width=\linewidth]{../img/website-screenshots/18-hardware-edition-screen.png}
     \caption{Hardware editing interface}
     \label{fig:edit-hardware}
 \end{figure}
@@ -210,14 +208,14 @@ During laboratory sessions, users can start a remote session (Figure~\ref{fig:la
 
 \begin{figure}[H]
     \centering
-    \includegraphics[trim=0 400 0 0,clip,width=\linewidth]{../img/website-screenshots/19-laboratory-session.png}
+    \includegraphics[trim=0 0 0 0,clip,width=\linewidth]{../img/website-screenshots/19-laboratory-session.png}
     \caption{Lab session start}
     \label{fig:lab-session-start}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[trim=0 700 0 0,clip,width=\linewidth]{../img/website-screenshots/21-tela-fila-de-espera.png}
+    \includegraphics[trim=18 300 18 149,clip,width=\linewidth]{../img/website-screenshots/21-tela-fila-de-espera.png}
     \caption{Waiting queue}
     \label{fig:waiting-queue}
 \end{figure}
@@ -226,21 +224,21 @@ The user account area provides a quick access menu to the profile, settings, and
 
 \begin{figure}[H]
     \centering
-    \includegraphics[trim=1600 1100 0 0,clip,width=0.5\linewidth]{../img/website-screenshots/21-account-dropdown.png}
+    \includegraphics[trim=1125 375 0 3,clip,width=0.45\linewidth]{../img/website-screenshots/21-account-dropdown.png}
     \caption{Account dropdown menu for quick access to profile, settings, and logout.}
     \label{fig:account-dropdown}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[trim=0 300 0 0,clip,width=\linewidth]{../img/website-screenshots/22-profile-details.png}
+    \includegraphics[trim=18 50 18 149,clip,width=\linewidth]{../img/website-screenshots/22-profile-details.png}
     \caption{Detailed account information.}
     \label{fig:account-details}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[trim=0 200 0 0,clip,width=\linewidth]{../img/website-screenshots/23-change-user-role-dropdown.png}
+    \includegraphics[trim=0 0 0 0,clip,width=\linewidth]{../img/website-screenshots/23-change-user-role-dropdown.png}
     \caption{Role change dropdown (admin)}
     \label{fig:admin-role-change}
 \end{figure}
