@@ -11,7 +11,7 @@ The web application serves as the main point of interaction, integrating seamles
 
 The decision to use Next.js as the framework was motivated by its comprehensive set of features and its alignment with modern web development best practices. Next.js, which is built on top of React, provides integrated solutions for several critical aspects of web application development. For example, it offers a powerful page routing system that simplifies navigation and organization of the application~\cite{nextjs-app-router}. Server-side rendering (SSR) is natively supported, enabling faster page loads and improved SEO by generating HTML on the server before sending it to the client~\cite{nextjs-server-client-components}. Next.js also streamlines data fetching through built-in mechanisms that allow developers to retrieve and pre-render data efficiently, both on the server and client sides~\cite{nextjs-data-fetching}. Furthermore, it facilitates seamless integration with backend APIs by supporting API routes directly within the application structure~\cite{nextjs-api-routes}. These features enabled the development team to leverage their existing React expertise, accelerate the implementation process, and ensure that the application remains scalable and maintainable over time.
 
-A key architectural choice is the retrieval of domain configuration in \ac{json} format from the backend \ac{api}. This ensures that the frontend's domain-related settings are always synchronized with those defined on the backend, centralizing domain management and reducing the risk of inconsistencies.
+A key architectural choice is the retrieval of domain configuration in \ac{json} format from the backend \ac{api}. This ensures that the frontend's domain-related settings are always synchronized with those defined on the backend, centralizing domain management and reducing the risk of inconsistencies (see Section~\ref{sec:service_module} in Chapter~\ref{cap:web_api}).
 
 \section{Architecture and Logic Separation}
 \label{sec:architecture-and-logic-separation}
@@ -26,13 +26,17 @@ The application implements a comprehensive notification system that provides rea
 
 \section{Main Features}
 \begin{itemize}
-    \item \textbf{Authentication:} Secure login using Microsoft \ac{oauth} (NextAuth), supporting university credentials and automatic role assignment~\cite{nextjs-authentication}.
-    \item \textbf{Dashboard:} Personalized dashboard displaying relevant information, upcoming sessions, and quick access to key features.
-    \item \textbf{Laboratory Management:} Professors and administrators can create, edit, and manage laboratory sessions, equipment, and participant lists.
-    \item \textbf{Role-Based Access:} The interface adapts to the user's role, showing only the features and data relevant to their permissions. Users with higher roles can view and interact with the platform as if they had a lower role for testing and support purposes (\ac{rbac}).
+    \item \textbf{Authentication:} Secure login using Microsoft \ac{oauth} (NextAuth), supporting university credentials and automatic role assignment~\cite{nextjs-authentication}. See Figures~\ref{fig:login-sidebyside}.
+    \item \textbf{Dashboard:} Personalized dashboard displaying relevant information, upcoming sessions, and quick access to key features. See Figure~\ref{fig:professor-dashboard}.
+    \item \textbf{Laboratory Management:} Professors and administrators can create, edit, and manage laboratory sessions, equipment, and participant lists. See Figures~\ref{fig:create-lab-modal}, \ref{fig:modal-validation}, \ref{fig:create-lab-fullscreen}, \ref{fig:edit-lab}.
+    \item \textbf{Role-Based Access:} The interface adapts to the user's role, showing only the features and data relevant to their permissions. Users with higher roles can view and interact with the platform as if they had a lower role for testing and support purposes (\ac{rbac}). See Figures~\ref{fig:role-dropdown}, \ref{fig:admin-role-change}.
     \item \textbf{Responsive Design:} Optimized for desktops, tablets, and mobile devices, ensuring accessibility and usability across platforms.
     \item \textbf{Loading \ac{ui}:} The application uses loading states and skeleton screens to provide feedback during data fetching, improving perceived performance~\cite{nextjs-loading-ui}.
-    \item \textbf{Terminal Integration:} The application integrates xterm.js~\cite{xtermjs} for real-time terminal access to hardware devices. This terminal component establishes WebSocket~\cite{websocket} connections with the backend API, enabling direct communication with laboratory hardware. Users can interact with hardware devices through a full-featured terminal interface, providing a seamless remote laboratory experience with real-time command execution and response display.
+    \item \textbf{Terminal Integration:} The application integrates xterm.js~\cite{xtermjs} for real-time terminal access to hardware devices. This terminal component establishes WebSocket~\cite{websocket} connections, previously received by the \ac{api} with the corresponding hardware, enabling direct communication with laboratory hardware. Users can interact with hardware devices through a full-featured terminal interface, providing a seamless remote laboratory experience with real-time command execution and response display.
+    \item \textbf{Group Management:} Manage groups and group members. See Figures~\ref{fig:manage-lab-groups}, \ref{fig:create-lab-group}, \ref{fig:group-created}, \ref{fig:manage-group-users}.
+    \item \textbf{Hardware Management:} Configure and manage laboratory hardware. See Figures~\ref{fig:manage-lab-hardware}, \ref{fig:hardware-added-to-lab}, \ref{fig:edit-hardware}.
+    \item \textbf{Laboratory Sessions:} Start and manage remote sessions, including waiting queue. See Figures~\ref{fig:lab-session-start}, \ref{fig:waiting-queue}.
+    \item \textbf{User Account Area:} Access profile, settings, and role management. See Figures~\ref{fig:account-dropdown}, \ref{fig:account-details}.
 \end{itemize}
 
 An additional usability feature implemented in the frontend is the ability for users with higher roles to switch their view to that of a lower role. For example, an administrator can choose to view the application as a professor, and a professor can view it as a student. This functionality is particularly useful for testing, support, and understanding the user experience from different perspectives, ensuring that features and permissions are correctly enforced for each role.
@@ -49,7 +53,9 @@ This temporary role switching functionality is implemented using React Context A
 
 The context is integrated into the application's root layout, wrapping all components and providing the temporary role state throughout the component tree. Components can access the current temporary role using the \texttt{useTempRole} hook, which returns both the current temporary role and a function to update it. This design ensures that the role switching functionality is available consistently across all application screens while maintaining proper security boundaries.
 
-To enhance the user experience and make the application feel as much like a single-page application with multiple menus as possible, the frontend leverages Next.js modals using parallel and intercepting routes~\cite{nextjs-app-router}. This approach allows users to open dialogs, forms, or detailed views as overlays without leaving the current page context, providing smooth navigation and reducing full page reloads. 
+To enhance the user experience and make the application feel as much like a single-page application with multiple menus as possible, the frontend leverages Next.js modals using parallel and intercepting routes~\cite{nextjs-app-router}. This approach allows users to open dialogs, forms, or detailed views as overlays without leaving the current page context, providing smooth navigation and reducing full page reloads. The modal implementation is illustrated in Figure~\ref{fig:create-lab-modal}, while the resizable and movable modal is shown in Figure~\ref{fig:modal-validation}. The full-page version of the modal, as accessed directly via URI, is depicted in Figure~\ref{fig:create-lab-fullscreen}.
+
+A comprehensive breadcrumb navigation system is also provided, as shown at the top of Figures~\ref{fig:professor-dashboard} and~\ref{fig:create-lab-modal}, giving users clear context about their current location within the application hierarchy.
 
 The modal implementation is designed with flexibility and accessibility in mind. Modal information and configurations are stored in external files, which are then imported and used by Next.js to generate both modal overlays and complete standalone pages. This architecture enables users to access modal content directly through URIs, providing complete pages when accessed directly while maintaining the modal overlay experience when navigated to from within the application.
 
@@ -63,7 +69,7 @@ By utilizing these advanced routing features and interactive capabilities, the a
 
 Authentication is implemented using NextAuth.js~\cite{nextauth}, a flexible authentication solution for Next.js applications. NextAuth is integrated to provide secure, seamless login experiences using Microsoft \ac{oauth}, allowing users to authenticate with their university credentials~\cite{nextjs-authentication}.
 
-When a user attempts to log in, they are redirected to the Microsoft login page. Upon successful authentication, NextAuth handles the \ac{oauth} flow, retrieves the user's profile information, and establishes a session.
+When a user attempts to log in, they are redirected to the Microsoft login page (see Figure~\ref{fig:login-sidebyside}). Upon successful authentication, NextAuth handles the OAuth flow, retrieves the user’s profile information, and establishes a session.
 
 NextAuth manages user sessions securely, storing authentication tokens and session data in \ac{http}-only cookies to prevent unauthorized access from the client side. The authentication state is accessible throughout the application, enabling role-based access control and dynamic adaptation of the user interface according to the user's permissions.
 
@@ -75,7 +81,7 @@ NextAuth.js~\cite{nextauth} is highly extensible and supports a wide range of au
 
 This section presents a comprehensive overview of the web application's user interface through screenshots that demonstrate the various features and user flows available to different roles within the platform.
 
-Authentication is enforced throughout the application. When the user clicks the login button on the login screen (Figure~\ref{fig:login-sidebyside}a), they are redirected to the Microsoft OAuth login page (Figure~\ref{fig:login-sidebyside}b). Upon successful authentication, the user lands on the initial page of the Remote Lab platform, which provides access to the main features.
+Authentication is enforced throughout the application. When the user clicks the login button on the login screen (Figure~\ref{fig:login-sidebyside}a), they are redirected to the Microsoft OAuth login page (Figure~\ref{fig:login-sidebyside}b). Upon successful authentication, the user lands on the initial page of the Remote Lab platform, which provides access to the main features (see Figure~\ref{fig:professor-dashboard}).
 
 \begin{figure}[H]
     \centering
@@ -121,7 +127,7 @@ Laboratory creation and management are performed through interactive modals, whi
 
 The flexibility of the modal system is illustrated in Figure~\ref{fig:modal-validation}, where the laboratory creation modal has been resized and moved, and input validation is demonstrated. Additionally, Figure~\ref{fig:create-lab-fullscreen} shows the same laboratory creation interface displayed in full screen, as it appears when the \ac{uri} is accessed directly.
 
-The modal form fields, including properties such as whether a field is required or optional, minimum and maximum values, and other validation rules, are dynamically retrieved from the backend API. This ensures that the frontend validation logic is always consistent with the business rules defined on the server, as described in Section~\ref{sec:architecture-and-logic-separation}. The configuration-driven approach allows the modal to automatically adapt to changes in the domain model without requiring frontend code modifications. Validation is performed both on the website (client-side) and on the backend, reducing unnecessary API requests and providing immediate feedback to users.
+The modal form fields, including properties such as whether a field is required or optional, minimum and maximum values, and other validation rules, are dynamically retrieved from the backend API. This ensures that the frontend validation logic is always consistent with the business rules defined on the server, as described in Section~\ref{sec:architecture-and-logic-separation}. The configuration-driven approach allows the modal to automatically adapt to changes in the domain model without requiring frontend code modifications (see also Section~\ref{sec:architecture-and-logic-separation} and Section~\ref{sec:service_module} in Chapter~\ref{cap:web_api}).
 
 \begin{figure}[H]
     \centering
@@ -220,7 +226,7 @@ During laboratory sessions, users can start a remote session (Figure~\ref{fig:la
     \label{fig:waiting-queue}
 \end{figure}
 
-The user account area provides a quick access menu to the profile, settings, and logout (Figure~\ref{fig:account-dropdown}), as well as a detailed account page (Figure~\ref{fig:account-details}). The dropdown menu allows users to quickly navigate to their account details, shown below.
+The user account area provides a quick access menu to the profile, settings, and logout (Figure~\ref{fig:account-dropdown}), as well as a detailed account page (Figure~\ref{fig:account-details}). The dropdown menu allows users to quickly navigate to their account details, shown below. Administrators can change user roles directly from the interface (see Figure~\ref{fig:admin-role-change}).
 
 \begin{figure}[H]
     \centering
@@ -242,8 +248,6 @@ The user account area provides a quick access menu to the profile, settings, and
     \caption{Role change dropdown (admin)}
     \label{fig:admin-role-change}
 \end{figure}
-
-Administrators can change user roles directly from the interface (see Figure~\ref{fig:admin-role-change}).
 
 \section{Summary}
 

@@ -11,7 +11,7 @@ The Strategy pattern allowed us to have greater control over specific implementa
 
 \section{API Architecture}
 
-A provides a comprehensive overview of the implemented \acs{api} architecture is detailed in Figure \ref{fig:api_architecture}. The \textbf{\ac{http}} module (Controller layer) is responsible for exposing the endpoints and handling incoming requests and responses. When a request is made, the \textbf{\acs{http}} module receives the request and transfer it to the \textbf{Service} module. This is where the business logic and data validations are performed. Since it is necessary to fetch and persist data from \textbf{Database}, a \textbf{Repository} module is required, in order to maintain abstraction. The repository module is responsible for abstracting and managing all communication with the database layer.
+A provides a comprehensive overview of the implemented \acs{api} architecture is detailed in Figure \ref{fig:api_architecture}. The \textbf{\ac{http}} module (Controller layer) is responsible for exposing the endpoints and handling incoming requests and responses. When a request is made, the \textbf{\acs{http}} module receives the request and transfer it to the \textbf{Service} module. This is where the business logic and data validations are performed. Since it is necessary to fetch and persist data from the \textbf{Database}, a \textbf{Repository} module is required, in order to maintain abstraction. The repository module is responsible for abstracting and managing all communication with the database layer.
 
 \begin{figure}[H]
     \centering
@@ -54,6 +54,7 @@ The implemented filter is responsible for comprehensive request and response log
 These tools provided by the Spring Framework are invaluable for optimizing and simplifying cross-cutting concerns while maintaining clean separation of business logic.
 
 \subsection{Service Module}
+\label{sec:service_module}
 The service module performs the necessary business logic validations using domain classes defined in the Domain module. These classes provide configurations and methods for validating specific data types and business rules. Configurations in domain classes are provided by a \ac{json}~\cite{json} file containing domain restrictions and validation rules. Listing~\ref{lst:group_domain_example} shows an example of the group domain and it's configurations.
 
 \begin{center}
@@ -91,7 +92,7 @@ The repository module implements the Repository pattern, which provides a consis
 Additionally, the repository layer implements connection pooling, transaction management, and query optimization strategies to ensure optimal database performance under varying load conditions.
 
 \section{Roles} \label{sec:roles}
-As mention, in Chapter~\ref{cap:intro} and Chapter~\ref{cap:database}, the user types in the system that supports the interactions and roles, a robust approach is needed to control these interactions to ensure proper access control to resources and maintain system security.
+As mentioned in Chapter~\ref{cap:intro} and Chapter~\ref{cap:database}, for the user types in the system that supports the interactions and roles a robust approach is needed to control these interactions to ensure proper access control to resources and maintain system security.
 
 As mentioned previously, a user, when authenticated, is assigned a role, such as student, teacher, or administrator, which determines their permissions within the platform. To perform the necessary verifications, a custom annotation was created to be used in the controllers of the \acs{http} layer.
 

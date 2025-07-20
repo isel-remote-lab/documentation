@@ -1,8 +1,7 @@
 \chapter{Project Organization and Deployment} \label{cap:project_org_deployment}
 \let\cleardoublepage\clearpage
 
-% Project public repository and deployment access
-Project repository is available at~\cite{remote-lab-github}.
+The project repository is available at~\cite{remote-lab-github}.
 Detailed deployment instructions and further documentation can also be found in the project's GitHub Wiki~\cite{github-wiki}.
 To run the application with the full configuration, access to the \texttt{private/} submodule is required, as it contains essential API keys and secret files. This submodule is private for security reasons; therefore, contributors must request access to the ``Remote Lab'' GitHub organization or directly to the private repository to obtain the necessary credentials and configuration files. Both the backend (\texttt{api/}) and frontend (\texttt{website/}) repositories maintain separate \texttt{main} and \texttt{develop} branches to support stable releases and ongoing development, respectively. This branching strategy facilitates collaborative development and continuous integration while ensuring production stability.
 
@@ -31,22 +30,25 @@ This structure allows for independent development, testing, and deployment of ea
 
 The \textbf{hardware/} directory contains code and configuration for simulating or integrating real hardware devices with the Remote Lab platform. This component enables the platform to interact with physical laboratory equipment or to provide a mock hardware service for development and demonstration purposes.
 
-A dedicated Dockerfile is provided in \texttt{hardware/} to containerize the hardware service. The \texttt{docker-compose.yml} file includes a \texttt{hardware-example} service, which can be started as part of a demonstration or integration scenario. This service communicates with the backend API using secure API keys and environment variables defined in the \texttt{private/} submodule.
+A dedicated Dockerfile is provided in \texttt{hardware/} to containerize the hardware service. The \texttt{docker-compose.yml} file includes a \texttt{hardware-example} service, which can be started as part of a demonstration or integration scenario.
 
-To run the hardware service as part of the platform, ensure the following steps:
+To run the hardware service as part of the platform, the recommended approach is to use the \texttt{start.sh} script, as it automatically loads all required environment variables and secrets, ensuring correct integration and security. The steps are:
 \begin{enumerate}
     \item Ensure the \texttt{private/} submodule is initialized and contains the required API keys and secrets.
-    \item Use Docker Compose with the appropriate profile (e.g., \texttt{demo}) to start the hardware service alongside the other components:
+    \item Use the \texttt{start.sh} script with the appropriate flags (e.g., \texttt{-demo}) to start the hardware service alongside the other components. For example:
+    \begin{verbatim}
+    ./start.sh -demo
+    \end{verbatim}
+    \item Alternatively, advanced users may use Docker Compose directly with the appropriate profile (e.g., \texttt{demo}), but must ensure that all required environment variables and secrets are correctly loaded, as this is not handled automatically like with the \texttt{start.sh} script:
     \begin{verbatim}
     docker compose --profile demo up --build
     \end{verbatim}
-    \item Alternatively, use the \texttt{start.sh} script with the correct flags to include the hardware service in the deployment.
     \item The hardware service will be accessible and integrated with the backend, allowing for remote interaction, testing, or demonstration of hardware-related features.
 \end{enumerate}
 
 This modular approach allows the platform to be extended with real or simulated hardware, supporting both educational and research scenarios.
 
-At this stage, WebSocket connections are used in the website (frontend) to communicate with the API, enabling real-time, bidirectional features such as live updates and interactive laboratory sessions. The hardware service can also use WebSocket to interact with the backend for device integration and simulation.
+At this stage, WebSocket connections are used in the website (frontend) to communicate with the hardware, enabling real-time, bidirectional features such as live updates and interactive laboratory sessions.
 
 It is also possible to run the hardware service outside of Docker by executing the JavaScript code directly on the intended hardware device. This approach provides flexibility for real-world deployments, allowing the integration of physical laboratory equipment without requiring containerization, and enabling the service to run natively on devices such as single-board computers or embedded systems.
 
@@ -80,13 +82,19 @@ The script automatically loads environment variables and secrets in development,
 
 This automation ensures that all required services, secrets, and configurations are correctly initialized, significantly reducing manual setup and the risk of misconfiguration.
 
+After starting the services, the \texttt{start.sh} script automatically displays the logs of all running services, separating each one by color. This makes it easier to monitor the startup process and to identify logs from different services quickly.
+
 \subsection{Cloudflare Tunneling} \label{subsec:cloudflare_tunneling}
 
-Cloudflare Tunnel is integrated into the automation workflow via \texttt{start.sh} and Docker Compose. The \texttt{cloudflared} service can be activated via profile, making secure remote access simpler and more automated. This allows development or demonstration environments to be securely exposed to the internet without the need to open firewall ports.
+Cloudflare Tunnel (formerly known as Argo Tunnel) allows you to securely expose local services to the internet without opening firewall ports or configuring complex NAT rules. It establishes an encrypted tunnel between your local infrastructure and Cloudflare's global network, protecting services from direct attacks and simplifying secure remote access. This is especially useful for development, demonstration, or production environments that require temporary or permanent external access without compromising internal network security.
+
+Cloudflare Tunnel is integrated into the automation workflow via \texttt{start.sh} and Docker Compose. The \texttt{cloudflared} service can be activated by profile, making secure remote access simpler and more automated. This enables development or demonstration environments to be safely exposed to the internet without the need to open firewall ports.
+
+For more information, see the official documentation~\cite{cloudflare-tunnel-docs}.
 
 \subsection{Nginx as Reverse Proxy} \label{subsec:nginx_reverse_proxy}
 
-NGINX acts as a reverse proxy to route \ac{http} requests to both the frontend (website) and backend (\ac{api}) services~\cite{nginx-docs}. The configuration files now distinguish between development and production, allowing security and performance to be optimized according to the context. NGINX is automatically included in the Docker Compose setup.
+NGINX acts as a reverse proxy to route \ac{http} requests to both the frontend (website) and backend (\ac{api}) services~\cite{nginx-docs}. The configuration files distinguish between development and production, allowing security and performance to be optimized according to the context. NGINX is automatically included in the Docker Compose setup.
 
 \subsection{Deployment Steps} \label{subsec:deployment_steps}
 
