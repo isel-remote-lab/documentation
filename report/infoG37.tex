@@ -1,0 +1,91 @@
+% Classe do documento e parâmetros gerais.
+\documentclass[a4paper,11pt]{report}
+
+% Packages essenciais
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{graphicx}
+
+\begin{document}
+
+\begin{titlepage}
+    \begin{center}
+      \begin{minipage}[l]{\textwidth}
+          \hspace{-15mm}\resizebox{85mm}{!}{\includegraphics{../../img/figures/logoISELnew2.png}}\\
+      \end{minipage}\\[10mm]
+      {\large \textbf{Department of Computer Science and Engineering}\\[1.5cm]}
+      {\Huge \textbf{Remote Lab: Orgazination Description}\\[2cm]}    
+      {\large \begin{tabular}{l}
+        50565: Ângelo Filipe Maia Azevedo \href{mailto:a50565@alunos.isel.pt}{(a50565@alunos.isel.pt)}\\
+        50539: António Miguel Alves \href{mailto:a50539@alunos.isel.pt}{(a50539@alunos.isel.pt)}\\
+      \end{tabular}\\[3cm] }
+      {\large Advisor: Prof. Pedro Miguens Matutino}   
+      \vfill
+      {\large \textbf{July 2025}}   
+    \end{center}
+\end{titlepage}
+
+\section*{Project Structure}
+
+The Remote Lab project is organized into several main directories, most of which are managed as GitHub submodules. This modular approach enables independent development, versioning, and access control for each core component, supporting both scalability and security. Submodules also facilitate collaboration among different teams and ensure that sensitive information is handled appropriately.
+
+The main submodules and directories are:
+
+\begin{itemize}
+    \item \textbf{api/} – Contains the backend source code (Kotlin, Spring Boot). Responsible for business logic, user management, and laboratory session control.
+    \item \textbf{db/} – Includes database scripts and documentation, supporting the system's persistence layer.
+    \item \textbf{website/} – Holds the frontend web application (Next.js, React). Provides the user interface for laboratory access, scheduling, and management.
+    \item \textbf{docker/} – Contains Docker-related scripts and files for deployment and automation.
+    \item \textbf{nginx/} – Provides NGINX configuration files for reverse proxying, with separate configs for development and production (\texttt{default.dev.conf}, \texttt{default.prod.conf}).
+    \item \textbf{docs/} – Stores project documentation, including technical reports, user guides, and architectural diagrams.
+    \item \textbf{img/} – Contains project images, such as diagrams, screenshots, and other visual assets.
+    \item \textbf{private/} – Dedicated to sensitive files and configurations, such as environment variables and secrets. This submodule is not included directly in the main repository, ensuring that only authorized members have access to confidential information like API (Application Programming Interface) keys and external service credentials. Shared secrets are located in \texttt{private/shared/secrets/.env}.
+    \item \textbf{wiki/} – Stores the GitHub Wiki pages, including project documentation, deployment instructions, and other relevant information.
+    \item \textbf{hardware/} – Contains code and configuration for integrating and simulating hardware devices, enabling interaction with real or mock laboratory equipment.
+\end{itemize}
+
+This structure allows for independent development, testing, and deployment of each component. The addition of the \texttt{docker/} directory and the clear separation of NGINX configs reflect the evolution towards more robust DevOps and automation practices.
+
+\section*{Repository Access}
+
+The project repository is available \href{https://github.com/isel-remote-lab/remote-lab}{here}.
+
+To run the application with the full configuration, access to the \texttt{private/} submodule is required, as it contains essential API keys and secret files. This submodule is private for security reasons; therefore, contributors must request access to the ``Remote Lab'' GitHub organization or directly to the private repository to obtain the necessary credentials and configuration files.
+
+Both the backend (\texttt{api/}) and frontend (\texttt{website/}) repositories maintain separate \texttt{main} and \texttt{develop} branches to support stable releases and ongoing development, respectively. This branching strategy facilitates collaborative development and continuous integration while ensuring production stability.
+
+\section*{How to Run the Project}
+
+To run the Remote Lab platform, simply use the provided \texttt{start.sh} script at the project root. This script automatically loads all required environment variables and secrets from the \texttt{private/} submodule, ensuring a correct and secure configuration for all services.
+
+\begin{enumerate}
+    \item \textbf{Clone the Repository and Submodules:}  \\
+    Clone the main repository and initialize all submodules, including \texttt{private/}, to ensure all components and configurations are available.
+    \begin{lstlisting}[language=bash]
+    git clone --recurse-submodules 
+    https://github.com/isel-remote-lab/remote-lab.git
+    cd remote-lab
+    \end{lstlisting}
+
+    \item \textbf{Run the Platform:}  \\
+    Start all services using the automation script:
+    \begin{lstlisting}[language=bash]
+    ./start.sh -dev
+    \end{lstlisting}
+    The script will build and start all necessary containers, and automatically load environment variables and secrets from \texttt{private/}.
+
+    \item \textbf{Access the Platform:}  \\
+    By default, the platform will be accessible at \texttt{http://localhost:80}.
+    \\If the Cloudflare Tunnel option is enabled (using the appropriate flag in \texttt{start.sh}), remote access will also be available via the Cloudflare-provided public URL.
+\end{enumerate}
+
+\textbf{Notes:}
+\begin{itemize}
+    \item The \texttt{private/} submodule is required for full configuration, as it contains essential API keys and secret files.
+    \item The \texttt{start.sh} script supports several flags for different deployment scenarios (development, production, demo, cloudflare, etc.).
+    \item For secure remote access, use the Cloudflare Tunnel option in \texttt{start.sh}.
+    \item \textbf{For more information about available options and usage examples, run \texttt{./start.sh} without arguments. The script will display detailed instructions and usage examples.}
+\end{itemize}
+\end{document}

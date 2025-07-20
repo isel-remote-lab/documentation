@@ -1,4 +1,4 @@
-  % Classe do documento e parâmetros gerais.
+% Classe do documento e parâmetros gerais.
 \documentclass[a4paper,openright,twoside,11pt]{report}
 
 % Packages utilizadas e respetivos parâmetros.
@@ -284,10 +284,10 @@ Baseado numa arquitetura com \textit{back-end} (base de dados e Web \acs{api}) e
 
 %{\bf Palavras-chave:} lista de palavras-chave separadas por ;.
 
-%% Página de agradecimentos
-%\cleardoublepage
-%\chapter*{Agradecimentos}
-%Texto dos agradecimentos. É opcional.\\
+% Página de agradecimentos
+\cleardoublepage
+\chapter*{Acknowledgements}
+We would like to express our sincere gratitude to our advisor, Prof. Pedro Miguens Matutino, for his continuous support, guidance, and encouragement throughout the development of this project. His expertise, insightful feedback, and dedication were invaluable to our progress and learning experience. We are truly grateful for his commitment and for always being available to help us overcome challenges and achieve our goals.\\
 
 % Geração do índice de conteúdos
 \tableofcontents 
@@ -439,10 +439,6 @@ The \acs{api} documentation is available through Postman's public website, inclu
 \end{figure}
 
 \chapter{Authentication Configuration}
-% Referências
-\bibliographystyle{unsrt}
-\bibliography{references}
-\addcontentsline{toc}{chapter}{References}
 As previously mentioned, authentication is implemented using Microsoft Entra ID~\cite{microsof-entra-id}, formerly known as Azure Active Directory. To achieve this, an application was configured within a tenant, as depicted in Figure~\ref{fig:application_microsoft}.
 
 \begin{figure}[H]
@@ -469,6 +465,5 @@ Additionally, a client secret is required to authenticate the requests, as illus
   \caption{Client Secret Configuration}
   \label{fig:secret_microsoft_entra}
 \end{figure}
-
 
 \end{document}
