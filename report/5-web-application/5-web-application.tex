@@ -1,8 +1,8 @@
 \chapter{Web Application} \label{cap:web_app}
 
-The web application is the primary interface for users to interact with the Remote Lab platform. Built with Next.js (React), it provides a modern, responsive, and user-friendly experience for students, professors, and administrators~\cite{nextjs-docs}. The application enables users to access, schedule, and manage laboratory resources remotely, supporting a wide range of devices and ensuring accessibility for all user roles.
+The web application is the primary interface for users to interact with the Remote Lab platform. Built with Next.js (React), it provides a modern, responsive, and user-friendly experience for students, teachers, and administrators~\cite{nextjs-docs}. The application enables users to access, schedule, and manage laboratory resources remotely, supporting a wide range of devices and ensuring accessibility for all user roles.
 
-The \acf{ui} is built using Ant Design~\cite{antdesign}, a comprehensive \ac{ui} design language and React component library that provides a rich set of pre-built components. This choice ensures consistency in design, rapid development, and a professional appearance across all application screens (see Figures~\ref{fig:role-dropdown} and~\ref{fig:professor-dashboard}).
+The \acf{ui} is built using Ant Design~\cite{antdesign}, a comprehensive \ac{ui} design language and React component library that provides a rich set of pre-built components. This choice ensures consistency in design, rapid development, and a professional appearance across all application screens (see Figures~\ref{fig:role-dropdown} and~\ref{fig:teacher-dashboard}).
 
 This chapter serves as the main documentation for the @Web (Next.js) application, providing a comprehensive overview of its architecture, features, authentication mechanisms, and integration strategies. It is intended as the primary reference for understanding the design and implementation choices made in the development of the web application, and should be consulted for any details regarding the frontend of the Remote Lab platform~\cite{nextjs-docs}.
 
@@ -27,8 +27,8 @@ The application implements a comprehensive notification system that provides rea
 \section{Main Features}
 \begin{itemize}
     \item \textbf{Authentication:} Secure login using Microsoft \ac{oauth} (NextAuth), supporting university credentials and automatic role assignment~\cite{nextjs-authentication}. See Figures~\ref{fig:login-sidebyside}.
-    \item \textbf{Dashboard:} Personalized dashboard displaying relevant information, upcoming sessions, and quick access to key features. See Figure~\ref{fig:professor-dashboard}.
-    \item \textbf{Laboratory Management:} Professors and administrators can create, edit, and manage laboratory sessions, equipment, and participant lists. See Figures~\ref{fig:create-lab-modal}, \ref{fig:modal-validation}, \ref{fig:create-lab-fullscreen}, \ref{fig:edit-lab}.
+    \item \textbf{Dashboard:} Personalized dashboard displaying relevant information, upcoming sessions, and quick access to key features. See Figure~\ref{fig:teacher-dashboard}.
+    \item \textbf{Laboratory Management:} Teachers and administrators can create, edit, and manage laboratory sessions, equipment, and participant lists. See Figures~\ref{fig:create-lab-modal}, \ref{fig:modal-validation}, \ref{fig:create-lab-fullscreen}, \ref{fig:edit-lab}.
     \item \textbf{Role-Based Access:} The interface adapts to the user's role, showing only the features and data relevant to their permissions. Users with higher roles can view and interact with the platform as if they had a lower role for testing and support purposes (\ac{rbac}). See Figures~\ref{fig:role-dropdown}, \ref{fig:admin-role-change}.
     \item \textbf{Responsive Design:} Optimized for desktops, tablets, and mobile devices, ensuring accessibility and usability across platforms.
     \item \textbf{Loading \ac{ui}:} The application uses loading states and skeleton screens to provide feedback during data fetching, improving perceived performance~\cite{nextjs-loading-ui}.
@@ -39,7 +39,7 @@ The application implements a comprehensive notification system that provides rea
     \item \textbf{User Account Area:} Access profile, settings, and role management. See Figures~\ref{fig:account-dropdown}, \ref{fig:account-details}.
 \end{itemize}
 
-An additional usability feature implemented in the frontend is the ability for users with higher roles to switch their view to that of a lower role. For example, an administrator can choose to view the application as a professor, and a professor can view it as a student. This functionality is particularly useful for testing, support, and understanding the user experience from different perspectives, ensuring that features and permissions are correctly enforced for each role.
+An additional usability feature implemented in the frontend is the ability for users with higher roles to switch their view to that of a lower role. For example, an administrator can choose to view the application as a teacher, and a teacher can view it as a student. This functionality is particularly useful for testing, support, and understanding the user experience from different perspectives, ensuring that features and permissions are correctly enforced for each role.
 
 This temporary role switching functionality is implemented using React Context API through a dedicated \texttt{TempRoleContext}. The context provides a centralized state management solution that allows any component in the application to access and modify the current temporary role. The implementation includes several key features:
 
@@ -55,7 +55,7 @@ The context is integrated into the application's root layout, wrapping all compo
 
 To enhance the user experience and make the application feel as much like a single-page application with multiple menus as possible, the frontend leverages Next.js modals using parallel and intercepting routes~\cite{nextjs-app-router}. This approach allows users to open dialogs, forms, or detailed views as overlays without leaving the current page context, providing smooth navigation and reducing full page reloads. The modal implementation is illustrated in Figure~\ref{fig:create-lab-modal}, while the resizable and movable modal is shown in Figure~\ref{fig:modal-validation}. The full-page version of the modal, as accessed directly via URI, is depicted in Figure~\ref{fig:create-lab-fullscreen}.
 
-A comprehensive breadcrumb navigation system is also provided, as shown at the top of Figures~\ref{fig:professor-dashboard} and~\ref{fig:create-lab-modal}, giving users clear context about their current location within the application hierarchy.
+A comprehensive breadcrumb navigation system is also provided, as shown at the top of Figures~\ref{fig:teacher-dashboard} and~\ref{fig:create-lab-modal}, giving users clear context about their current location within the application hierarchy.
 
 The modal implementation is designed with flexibility and accessibility in mind. Modal information and configurations are stored in external files, which are then imported and used by Next.js to generate both modal overlays and complete standalone pages. This architecture enables users to access modal content directly through URIs, providing complete pages when accessed directly while maintaining the modal overlay experience when navigated to from within the application.
 
@@ -81,7 +81,7 @@ NextAuth.js~\cite{nextauth} is highly extensible and supports a wide range of au
 
 This section presents a comprehensive overview of the web application's user interface through screenshots that demonstrate the various features and user flows available to different roles within the platform.
 
-Authentication is enforced throughout the application. When the user clicks the login button on the login screen (Figure~\ref{fig:login-sidebyside}a), they are redirected to the Microsoft OAuth login page (Figure~\ref{fig:login-sidebyside}b). Upon successful authentication, the user lands on the initial page of the Remote Lab platform, which provides access to the main features (see Figure~\ref{fig:professor-dashboard}).
+Authentication is enforced throughout the application. When the user clicks the login button on the login screen (Figure~\ref{fig:login-sidebyside}a), they are redirected to the Microsoft OAuth login page (Figure~\ref{fig:login-sidebyside}b). Upon successful authentication, the user lands on the initial page of the Remote Lab platform, which provides access to the main features (see Figure~\ref{fig:teacher-dashboard}).
 
 \begin{figure}[H]
     \centering
@@ -100,7 +100,7 @@ Authentication is enforced throughout the application. When the user clicks the 
     \label{fig:login-sidebyside}
 \end{figure}
 
-The interface dynamically adapts to the user's role (see Figures~\ref{fig:role-dropdown} and~\ref{fig:professor-dashboard}). Users with higher permissions can switch their view to lower roles for testing and support purposes (see Figure~\ref{fig:role-dropdown}). For example, the professor dashboard displays the main interface and available features for laboratory management (see Figure~\ref{fig:professor-dashboard}).
+The interface dynamically adapts to the user's role (see Figures~\ref{fig:role-dropdown} and~\ref{fig:teacher-dashboard}). Users with higher permissions can switch their view to lower roles for testing and support purposes (see Figure~\ref{fig:role-dropdown}). For example, the teacher dashboard displays the main interface and available features for laboratory management (see Figure~\ref{fig:teacher-dashboard}).
 
 \begin{figure}[H]
     \centering
@@ -111,9 +111,9 @@ The interface dynamically adapts to the user's role (see Figures~\ref{fig:role-d
 
 \begin{figure}[H]
     \centering
-    \includegraphics[trim=18 38 18 149,clip,width=\linewidth]{../img/website-screenshots/6-professor-dashboard.png}
-    \caption{Professor dashboard}
-    \label{fig:professor-dashboard}
+    \includegraphics[trim=18 38 18 149,clip,width=\linewidth]{../img/website-screenshots/6-teacher-dashboard.png}
+    \caption{Teacher dashboard}
+    \label{fig:teacher-dashboard}
 \end{figure}
 
 Laboratory creation and management are performed through interactive modals, which include real-time input validation and provide a smooth user experience. These modals are both resizable and movable, allowing users to customize their workspace layout. The application is designed to behave as a single-page application, with most operations performed in overlays. However, if a user accesses the \ac{uri} of a modal directly, the same content is displayed as a full-page view, ensuring that all features remain accessible and consistent regardless of navigation method (Figure~\ref{fig:create-lab-modal}).
